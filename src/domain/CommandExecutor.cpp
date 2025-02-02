@@ -7,7 +7,7 @@
 namespace rps::domain
 {
 
-void CommandExecutor::execute_command(entity::ServerCommandType                           command_type,
+void CommandExecutor::execute_command(entity::ServerCommandType                     command_type,
                                       const std::string&                            data,
                                       const std::shared_ptr<interface::UserClient>& user_client)
 {

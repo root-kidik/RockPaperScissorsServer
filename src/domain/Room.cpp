@@ -16,6 +16,10 @@ bool Room::try_add_player(const entity::Uuid&                           player_u
     if (m_players.size() == 6)
         return false;
 
+    std::string message = std::to_string(static_cast<std::uint32_t>(entity::ClientCommandType::AddNewPlayer)) + nickname;
+    for (auto& [uuid, player] : m_players)
+        player.client->send(message);
+
     m_players.emplace(player_uuid, Player{nickname, client});
 
     return true;

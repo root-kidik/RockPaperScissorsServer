@@ -47,7 +47,9 @@ m_server{m_memory_user_storage, m_memory_room_storage}
                                     this,
                                     [client_wrapper]() { client_wrapper->disconnect(); });
 
-                            m_server.on_command(static_cast<domain::entity::ServerCommandType>(command_type), data, client_wrapper);
+                            m_server.on_command(static_cast<domain::entity::ServerCommandType>(command_type),
+                                                data,
+                                                client_wrapper);
                         });
 
                 connect(client_socket, &QTcpSocket::disconnected, client_socket, &QTcpSocket::deleteLater);
