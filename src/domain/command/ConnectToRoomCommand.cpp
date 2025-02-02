@@ -21,7 +21,19 @@ void ConnectToRoomCommand::execute(const std::string& data, const std::shared_pt
     entity::Uuid user_uuid;
     std::string  room_name;
 
-    iss >> user_uuid >> room_name;
+    iss >> user_uuid;
+    if (user_uuid.empty())
+    {
+        user_client->send("Error");
+        return;
+    }
+
+    iss >> room_name;
+    if (room_name.empty())
+    {
+        user_client->send("Error");
+        return;
+    }
 
     auto room = m_room_storage.try_find_room(room_name);
     if (!room)

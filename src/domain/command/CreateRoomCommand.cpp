@@ -18,7 +18,21 @@ void CreateRoomCommand::execute(const std::string& data, const std::shared_ptr<i
     std::string  name;
     entity::Uuid owner_uuid;
 
-    iss >> name >> owner_uuid;
+    iss >> name;
+
+    if (name.empty())
+    {
+        user_client->send("Error");
+        return;
+    }
+
+    iss >> owner_uuid;
+
+    if (owner_uuid.empty())
+    {
+        user_client->send("Error");
+        return;
+    }
 
     if (auto uuid = m_room_storage.try_add_room(name, owner_uuid))
         user_client->send(uuid.value());

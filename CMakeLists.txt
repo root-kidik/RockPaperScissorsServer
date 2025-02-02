@@ -9,3 +9,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 project(RockPaperScissorsServer)
 
 add_subdirectory(src)
+
+if(TRUE)
+    add_subdirectory(tests/unit)
+endif()
