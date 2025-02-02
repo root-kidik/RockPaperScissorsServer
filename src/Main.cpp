@@ -1,5 +1,4 @@
 #include <QCoreApplication>
-#include <QtPlugin>
 
 #include <infrastructure/Server.hpp>
 
