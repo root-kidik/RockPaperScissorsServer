@@ -15,7 +15,7 @@ class CreateRoomCommand final : public interface::Command
 public:
     CreateRoomCommand(interface::RoomStorage& room_storage);
 
-    void execute(const std::string& data, interface::UserClient& user_client) override;
+    void execute(const std::string& data, const std::shared_ptr<interface::UserClient>& user_client) override;
 
 private:
     interface::RoomStorage& m_room_storage;

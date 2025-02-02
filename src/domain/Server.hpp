@@ -1,8 +1,11 @@
 #pragma once
 
+#include <memory>
+
 #include <domain/CommandExecutor.hpp>
-#include <domain/command/RegisterCommand.hpp>
+#include <domain/command/ConnectToRoomCommand.hpp>
 #include <domain/command/CreateRoomCommand.hpp>
+#include <domain/command/RegisterCommand.hpp>
 
 namespace rps::domain::interface
 {
@@ -19,14 +22,17 @@ class Server
 public:
     Server(interface::UserStorage& user_storage, interface::RoomStorage& room_storage);
 
-    void on_command(entity::CommandType command_type, const std::string& data, interface::UserClient& client);
+    void on_command(entity::CommandType                           command_type,
+                    const std::string&                            data,
+                    const std::shared_ptr<interface::UserClient>& client);
 
 private:
     interface::UserStorage& m_user_storage;
     interface::RoomStorage& m_room_storage;
 
-    command::RegisterCommand m_register_command;
-    command::CreateRoomCommand m_create_room_command;
+    command::RegisterCommand      m_register_command;
+    command::CreateRoomCommand    m_create_room_command;
+    command::ConnectToRoomCommand m_connect_to_room_command;
 
     CommandExecutor m_command_executor;
 };

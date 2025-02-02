@@ -22,7 +22,7 @@ std::optional<domain::entity::Uuid> MemoryRoomStorage::try_add_room(const std::s
     return uuid;
 }
 
-std::optional<domain::Room&> MemoryRoomStorage::try_find_room(const std::string& name)
+std::optional<std::reference_wrapper<domain::Room>> MemoryRoomStorage::try_find_room(const std::string& name)
 {
     auto it = m_rooms.find(name);
 

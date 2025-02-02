@@ -10,6 +10,7 @@ class UserClient
 public:
     virtual ~UserClient() = default;
 
+    virtual bool is_connected() const          = 0;
     virtual void send(const std::string& data) = 0;
 };
 

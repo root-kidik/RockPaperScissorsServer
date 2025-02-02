@@ -1,6 +1,7 @@
 #pragma once
 
 #include <functional>
+#include <memory>
 #include <string>
 #include <unordered_map>
 
@@ -18,7 +19,9 @@ namespace rps::domain
 class CommandExecutor
 {
 public:
-    void execute_command(entity::CommandType command_type, const std::string& data, interface::UserClient& user_client);
+    void execute_command(entity::CommandType                           command_type,
+                         const std::string&                            data,
+                         const std::shared_ptr<interface::UserClient>& user_client);
     void register_command(entity::CommandType command_type, interface::Command& command);
 
 private:

@@ -41,7 +41,12 @@ m_server{m_memory_user_storage, m_memory_room_storage}
                             if (!data.empty() && std::isspace(data.front()))
                                 data.erase(0, 1);
 
-                            client::TcpSocketUserClient client_wrapper{client_socket};
+                            auto client_wrapper = std::make_shared<client::TcpSocketUserClient>(client_socket);
+                            connect(client_socket,
+                                    &QTcpSocket::disconnected,
+                                    this,
+                                    [client_wrapper]() { client_wrapper->disconnect(); });
+
                             m_server.on_command(static_cast<domain::entity::CommandType>(command_type), data, client_wrapper);
                         });
 

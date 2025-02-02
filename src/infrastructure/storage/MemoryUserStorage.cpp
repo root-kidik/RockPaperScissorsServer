@@ -1,3 +1,5 @@
+#include "MemoryUserStorage.hpp"
+
 #include <domain/interface/UuidGenerator.hpp>
 
 #include <infrastructure/storage/MemoryUserStorage.hpp>
@@ -17,7 +19,8 @@ std::optional<domain::entity::Uuid> MemoryUserStorage::try_add_user(const std::s
 
     const auto uuid = m_uuid_generator.generate();
 
-    m_users[nickname] = uuid;
+    m_users[nickname]        = uuid;
+    m_uuid_to_nickname[uuid] = nickname;
 
     return uuid;
 }
@@ -27,6 +30,16 @@ std::optional<domain::entity::Uuid> MemoryUserStorage::try_find_user_uuid(const 
     const auto it = m_users.find(nickname);
 
     if (it == m_users.end())
+        return std::nullopt;
+
+    return it->second;
+}
+
+std::optional<std::string> MemoryUserStorage::try_find_user_nickname(const domain::entity::Uuid& uuid) const
+{
+    auto it = m_uuid_to_nickname.find(uuid);
+
+    if (it == m_uuid_to_nickname.end())
         return std::nullopt;
 
     return it->second;

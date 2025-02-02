@@ -21,10 +21,14 @@ public:
 
     std::optional<domain::entity::Uuid> try_find_user_uuid(const std::string& nickname) const override;
 
+    std::optional<std::string> try_find_user_nickname(const domain::entity::Uuid& uuid) const override;
+
 private:
     const domain::interface::UuidGenerator& m_uuid_generator;
 
+    // boost::bimap I miss you
     std::unordered_map<std::string, domain::entity::Uuid> m_users;
+    std::unordered_map<domain::entity::Uuid, std::string> m_uuid_to_nickname;
 };
 
 } // namespace rps::infrastructure::storage
