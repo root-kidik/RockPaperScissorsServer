@@ -1,11 +1,19 @@
+#include <QCoreApplication>
 #include <QtPlugin>
 
-#ifdef __linux__
-Q_IMPORT_PLUGIN(QXcbIntegrationPlugin)
-#elif _WIN32
-Q_IMPORT_PLUGIN(QWindowsIntegrationPlugin)
-#endif
+#include <infrastructure/Server.hpp>
 
 int main(int argc, char* argv[])
 {
+    QCoreApplication a(argc, argv);
+
+    rps::infrastructure::Server server;
+    if (!server.listen(QHostAddress::Any, 1234))
+    {
+        qDebug() << "Server could not start! Choose another port";
+        return 1;
+    }
+    qDebug() << "Server started on port" << server.serverPort();
+
+    return a.exec();
 }

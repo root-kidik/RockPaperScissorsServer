@@ -94,6 +94,10 @@ MaxEmptyLinesToKeep: 2
 # Sorting
 IncludeBlocks: Regroup
 IncludeCategories:
+  - Priority: 101
+    Regex: "^<domain(.+)>$"
+  - Priority: 102
+    Regex: "^<infrastructure(.+)>$"
   - Priority: 99
     Regex: "^<Q(.+)>$"
   - Priority: 100

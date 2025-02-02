@@ -5,10 +5,6 @@
 namespace rps::domain::entity
 {
 
-struct User
-{
-    std::string nickname;
-    std::string uuid;
-};
+using Uuid = std::string;
 
 } // namespace rps::domain::entity

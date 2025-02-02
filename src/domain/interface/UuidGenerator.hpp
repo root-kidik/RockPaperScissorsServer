@@ -5,10 +5,10 @@
 namespace rps::domain::interface
 {
 
-class IUUIDGenerator
+class UuidGenerator
 {
 public:
-    virtual ~IUUIDGenerator() = default;
+    virtual ~UuidGenerator() = default;
 
     virtual std::string generate() const = 0;
 };

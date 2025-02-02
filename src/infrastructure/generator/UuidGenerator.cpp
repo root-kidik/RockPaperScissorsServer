@@ -1,11 +1,11 @@
 #include <QUuid>
 
-#include <infrastructure/generator/UUIDGenerator.hpp>
+#include <infrastructure/generator/UuidGenerator.hpp>
 
 namespace rps::infrastructure::generator
 {
 
-std::string UUIDGenerator::generate() const
+std::string UuidGenerator::generate() const
 {
     return QUuid::createUuid().toString().toStdString();
 }
