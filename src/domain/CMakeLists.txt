@@ -5,7 +5,7 @@ set(SRCROOT ${CMAKE_CURRENT_LIST_DIR})
 
 set(SRC
     ${SRCROOT}/entity/Uuid.hpp
-    ${SRCROOT}/entity/CommandType.hpp
+    ${SRCROOT}/entity/ServerCommandType.hpp
     
     ${SRCROOT}/interface/Command.hpp
     ${SRCROOT}/interface/UserClient.hpp

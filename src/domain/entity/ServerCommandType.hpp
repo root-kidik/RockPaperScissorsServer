@@ -5,7 +5,7 @@
 namespace rps::domain::entity
 {
 
-enum class CommandType : std::uint32_t
+enum class ServerCommandType : std::uint32_t
 {
     Begin,         // just for min value
     Register,      // input: std::string nickname                        | output: std::string uuid || "Error"

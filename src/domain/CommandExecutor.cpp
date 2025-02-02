@@ -7,7 +7,7 @@
 namespace rps::domain
 {
 
-void CommandExecutor::execute_command(entity::CommandType                           command_type,
+void CommandExecutor::execute_command(entity::ServerCommandType                           command_type,
                                       const std::string&                            data,
                                       const std::shared_ptr<interface::UserClient>& user_client)
 {
@@ -18,7 +18,7 @@ void CommandExecutor::execute_command(entity::CommandType                       
     it->second.execute(data, user_client);
 }
 
-void CommandExecutor::register_command(entity::CommandType command_type, interface::Command& command)
+void CommandExecutor::register_command(entity::ServerCommandType command_type, interface::Command& command)
 {
     assert(m_commands.find(command_type) == m_commands.end() && "Already setted command to execute this command_type");
 
