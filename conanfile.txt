@@ -1,0 +1,12 @@
+[requires]
+qt/6.7.3
+
+[generators]
+CMakeDeps
+CMakeToolchain
+
+[layout]
+cmake_layout
+
+[options]
+qt/*:qtgrpc=True

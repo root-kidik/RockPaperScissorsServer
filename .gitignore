@@ -1,0 +1,11 @@
+# Vscode
+.vscode
+
+# Python
+env
+
+# Conan
+CMakeUserPresets.json
+
+# Other
+build*
