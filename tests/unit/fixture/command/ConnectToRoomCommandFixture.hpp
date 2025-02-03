@@ -7,8 +7,7 @@
 class ConnectToRoomCommandFixture : public testing::Test
 {
 public:
-    RoomStorageMock                 room_storage;
-    UserStorageMock                 user_storage;
-    std::shared_ptr<UserClientMock> user_client = std::make_shared<UserClientMock>();
-    command::ConnectToRoomCommand   create_command_room{room_storage, user_storage};
+    RoomStorageMock               room_storage;
+    UserStorageMock               user_storage;
+    command::ConnectToRoomCommand create_command_room{room_storage, user_storage};
 };

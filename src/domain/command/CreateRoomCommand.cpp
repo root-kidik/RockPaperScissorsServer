@@ -34,8 +34,8 @@ void CreateRoomCommand::execute(const std::string& data, const std::shared_ptr<i
         return;
     }
 
-    if (auto uuid = m_room_storage.try_add_room(name, owner_uuid))
-        user_client->send(uuid.value());
+    if (auto status = m_room_storage.try_add_room(name, owner_uuid))
+        user_client->send("Ok");
     else
         user_client->send("Error");
 }

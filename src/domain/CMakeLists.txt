@@ -5,7 +5,10 @@ set(SRCROOT ${CMAKE_CURRENT_LIST_DIR})
 
 set(SRC
     ${SRCROOT}/entity/Uuid.hpp
+    ${SRCROOT}/entity/User.hpp
     ${SRCROOT}/entity/ServerCommandType.hpp
+    ${SRCROOT}/entity/ClientCommandType.hpp
+    ${SRCROOT}/entity/Room.hpp
     
     ${SRCROOT}/interface/Command.hpp
     ${SRCROOT}/interface/UserConnection.hpp
@@ -19,9 +22,6 @@ set(SRC
     ${SRCROOT}/command/CreateRoomCommand.cpp
     ${SRCROOT}/command/ConnectToRoomCommand.hpp
     ${SRCROOT}/command/ConnectToRoomCommand.cpp
-
-    ${SRCROOT}/Room.hpp
-    ${SRCROOT}/Room.cpp
 
     ${SRCROOT}/CommandExecutor.hpp
     ${SRCROOT}/CommandExecutor.cpp

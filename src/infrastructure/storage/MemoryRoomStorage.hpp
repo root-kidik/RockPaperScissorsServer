@@ -2,7 +2,7 @@
 
 #include <unordered_map>
 
-#include <domain/Room.hpp>
+#include <domain/entity/Room.hpp>
 #include <domain/interface/RoomStorage.hpp>
 
 namespace rps::domain::interface
@@ -18,13 +18,13 @@ class MemoryRoomStorage final : public domain::interface::RoomStorage
 public:
     MemoryRoomStorage(const domain::interface::UuidGenerator& uuid_generator);
 
-    std::optional<domain::entity::Uuid> try_add_room(const std::string& name, const domain::entity::Uuid& owner_uuid) override;
-    std::optional<std::reference_wrapper<domain::Room>> try_find_room(const std::string& name) override;
+    bool try_add_room(const std::string& name, const domain::entity::Uuid& owner_uuid) override;
+    std::optional<std::reference_wrapper<domain::entity::Room>> try_find_room(const std::string& name) override;
 
 private:
     const domain::interface::UuidGenerator& m_uuid_generator;
 
-    std::unordered_map<std::string, domain::Room> m_rooms;
+    std::unordered_map<std::string, domain::entity::Room> m_rooms;
 };
 
 } // namespace rps::infrastructure::storage

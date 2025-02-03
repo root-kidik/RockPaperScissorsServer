@@ -25,7 +25,7 @@ void RegisterCommand::execute(const std::string& data, const std::shared_ptr<int
         return;
     }
 
-    if (auto uuid = m_user_storage.try_add_user(nickname))
+    if (auto uuid = m_user_storage.try_add_user(nickname, user_client))
         user_client->send(uuid.value());
     else
         user_client->send("Error");

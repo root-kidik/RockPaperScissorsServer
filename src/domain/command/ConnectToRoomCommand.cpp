@@ -1,6 +1,7 @@
 #include <sstream>
 
 #include <domain/command/ConnectToRoomCommand.hpp>
+#include <domain/entity/ClientCommandType.hpp>
 #include <domain/interface/RoomStorage.hpp>
 #include <domain/interface/UserConnection.hpp>
 #include <domain/interface/UserStorage.hpp>
@@ -42,6 +43,15 @@ void ConnectToRoomCommand::execute(const std::string& data, const std::shared_pt
         return;
     }
 
+    auto& room_ref = room.value().get();
+
+    if (room_ref.players.size() == 6 || (room_ref.players.size() == 5 && user_uuid != room_ref.owner_uuid &&
+                                         room_ref.players.find(room_ref.owner_uuid) == room_ref.players.end()))
+    {
+        user_client->send("Error");
+        return;
+    }
+
     auto user_nickname = m_user_storage.try_find_user_nickname(user_uuid);
     if (!user_nickname)
     {
@@ -49,11 +59,14 @@ void ConnectToRoomCommand::execute(const std::string& data, const std::shared_pt
         return;
     }
 
-    if (!room.value().get().try_add_player(user_uuid, user_nickname.value(), user_client))
-    {
-        user_client->send("Error");
-        return;
-    }
+    std::string message = std::to_string(static_cast<std::uint32_t>(entity::ClientCommandType::AddNewPlayer)) + ' ' +
+                          user_nickname.value();
+
+    for (auto& player_uuid : room_ref.players)
+        if (auto player = m_user_storage.try_find_user(player_uuid))
+            player.value().get().client->send(message);
+
+    room_ref.players.emplace(user_uuid);
 
     user_client->send("Ok");
 }
