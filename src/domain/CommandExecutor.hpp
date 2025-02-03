@@ -19,8 +19,8 @@ namespace rps::domain
 class CommandExecutor
 {
 public:
-    void execute_command(entity::ServerCommandType                     command_type,
-                         const std::string&                            data,
+    void execute_command(entity::ServerCommandType                         command_type,
+                         const std::string&                                data,
                          const std::shared_ptr<interface::UserConnection>& user_client);
     void register_command(entity::ServerCommandType command_type, interface::Command& command);
 

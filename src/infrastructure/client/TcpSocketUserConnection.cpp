@@ -5,7 +5,9 @@
 namespace rps::infrastructure::client
 {
 
-TcpSocketUserConnection::TcpSocketUserConnection(QTcpSocket* tcp_socket) : m_tcp_socket{tcp_socket}, m_is_connected{true}
+TcpSocketUserConnection::TcpSocketUserConnection(QTcpSocket* tcp_socket) :
+m_tcp_socket{tcp_socket},
+m_is_connected{true}
 {
 }
 

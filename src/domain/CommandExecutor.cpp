@@ -7,8 +7,8 @@
 namespace rps::domain
 {
 
-void CommandExecutor::execute_command(entity::ServerCommandType                     command_type,
-                                      const std::string&                            data,
+void CommandExecutor::execute_command(entity::ServerCommandType                         command_type,
+                                      const std::string&                                data,
                                       const std::shared_ptr<interface::UserConnection>& user_client)
 {
     auto it = m_commands.find(command_type);

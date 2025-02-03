@@ -22,8 +22,8 @@ class Server
 public:
     Server(interface::UserStorage& user_storage, interface::RoomStorage& room_storage);
 
-    void on_command(entity::ServerCommandType                     command_type,
-                    const std::string&                            data,
+    void on_command(entity::ServerCommandType                         command_type,
+                    const std::string&                                data,
                     const std::shared_ptr<interface::UserConnection>& client);
 
 private:

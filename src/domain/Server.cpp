@@ -16,8 +16,8 @@ m_connect_to_room_command{m_room_storage, m_user_storage}
     m_command_executor.register_command(entity::ServerCommandType::ConnectToRoom, m_connect_to_room_command);
 }
 
-void Server::on_command(entity::ServerCommandType                     command_type,
-                        const std::string&                            data,
+void Server::on_command(entity::ServerCommandType                         command_type,
+                        const std::string&                                data,
                         const std::shared_ptr<interface::UserConnection>& client)
 {
     m_command_executor.execute_command(command_type, data, std::move(client));
