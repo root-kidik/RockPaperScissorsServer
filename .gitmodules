@@ -1,0 +1,3 @@
+[submodule "libs/RockPaperScissorsProtocol"]
+	path = libs/RockPaperScissorsProtocol
+	url = https://github.com/root-kidik/RockPaperScissorsProtocol.git

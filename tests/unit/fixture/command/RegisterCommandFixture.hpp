@@ -8,5 +8,5 @@ class RegisterCommandFixture : public testing::Test
 public:
     UserStorageMock                 user_storage;
     std::shared_ptr<UserClientMock> user_connection = std::make_shared<UserClientMock>();
-    command::RegisterCommand        register_command{user_storage};
+    domain::command::RegisterCommand        register_command{user_storage};
 };

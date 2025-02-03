@@ -98,6 +98,8 @@ IncludeCategories:
     Regex: "^<domain(.+)>$"
   - Priority: 102
     Regex: "^<infrastructure(.+)>$"
+  - Priority: 104
+    Regex: "^<RockPaperScissorsProtocol(.+)>$"
   - Priority: 103
     Regex: "^<gtest(.+)>$"
   - Priority: 99

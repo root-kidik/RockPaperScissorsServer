@@ -4,20 +4,20 @@
 
 #include <domain/interface/UserStorage.hpp>
 
-using namespace rps::domain;
+using namespace rps;
 
-class UserStorageMock final : public interface::UserStorage
+class UserStorageMock final : public domain::interface::UserStorage
 {
 public:
-    MOCK_METHOD(std::optional<entity::Uuid>,
+    MOCK_METHOD(std::optional<domain::entity::Uuid>,
                 try_add_user,
-                (const std::string& nickname, const std::shared_ptr<interface::UserConnection>& connection),
+                (const std::string& nickname, const std::shared_ptr<domain::interface::UserConnection>& connection),
                 (override));
-    MOCK_METHOD(std::optional<entity::Uuid>, try_find_user_uuid, (const std::string& nickname), (override, const));
-    MOCK_METHOD(std::optional<std::string>, try_find_user_nickname, (const entity::Uuid& uuid), (override, const));
+    MOCK_METHOD(std::optional<domain::entity::Uuid>, try_find_user_uuid, (const std::string& nickname), (override, const));
+    MOCK_METHOD(std::optional<std::string>, try_find_user_nickname, (const domain::entity::Uuid& uuid), (override, const));
 
-    MOCK_METHOD(std::optional<std::reference_wrapper<const entity::User>>,
+    MOCK_METHOD(std::optional<std::reference_wrapper<const domain::entity::User>>,
                 try_find_user,
-                (const entity::Uuid& uuid),
+                (const domain::entity::Uuid& uuid),
                 (override, const));
 };

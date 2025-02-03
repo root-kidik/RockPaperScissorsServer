@@ -28,8 +28,8 @@ m_server{m_memory_user_storage, m_memory_room_storage}
                             std::uint32_t command_type;
                             iss >> command_type;
 
-                            if (command_type < static_cast<std::uint32_t>(domain::entity::ServerCommandType::Begin) + 1 ||
-                                command_type > static_cast<std::uint32_t>(domain::entity::ServerCommandType::End) - 1)
+                            if (command_type < static_cast<std::uint32_t>(protocol::entity::ServerCommandType::Begin) + 1 ||
+                                command_type > static_cast<std::uint32_t>(protocol::entity::ServerCommandType::End) - 1)
                             {
                                 client_socket->write("No such command");
                                 return;
@@ -47,7 +47,7 @@ m_server{m_memory_user_storage, m_memory_room_storage}
                                     this,
                                     [client_wrapper]() { client_wrapper->disconnect(); });
 
-                            m_server.on_command(static_cast<domain::entity::ServerCommandType>(command_type),
+                            m_server.on_command(static_cast<protocol::entity::ServerCommandType>(command_type),
                                                 data,
                                                 client_wrapper);
                         });

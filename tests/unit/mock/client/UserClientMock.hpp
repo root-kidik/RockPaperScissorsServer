@@ -4,9 +4,9 @@
 
 #include <domain/interface/UserConnection.hpp>
 
-using namespace rps::domain;
+using namespace rps;
 
-class UserClientMock final : public interface::UserConnection
+class UserClientMock final : public domain::interface::UserConnection
 {
 public:
     MOCK_METHOD(bool, is_connected, (), (override, const));

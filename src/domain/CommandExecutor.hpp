@@ -5,7 +5,7 @@
 #include <string>
 #include <unordered_map>
 
-#include <domain/entity/ServerCommandType.hpp>
+#include <RockPaperScissorsProtocol/entity/server/ServerCommandType.hpp>
 
 namespace rps::domain::interface
 {
@@ -19,13 +19,13 @@ namespace rps::domain
 class CommandExecutor
 {
 public:
-    void execute_command(entity::ServerCommandType                         command_type,
+    void execute_command(protocol::entity::ServerCommandType               command_type,
                          const std::string&                                data,
                          const std::shared_ptr<interface::UserConnection>& user_connection);
-    void register_command(entity::ServerCommandType command_type, interface::Command& command);
+    void register_command(protocol::entity::ServerCommandType command_type, interface::Command& command);
 
 private:
-    std::unordered_map<entity::ServerCommandType, interface::Command&> m_commands;
+    std::unordered_map<protocol::entity::ServerCommandType, interface::Command&> m_commands;
 };
 
 } // namespace rps::domain

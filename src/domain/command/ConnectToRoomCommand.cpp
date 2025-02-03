@@ -1,10 +1,11 @@
 #include <sstream>
 
 #include <domain/command/ConnectToRoomCommand.hpp>
-#include <domain/entity/ClientCommandType.hpp>
 #include <domain/interface/RoomStorage.hpp>
 #include <domain/interface/UserConnection.hpp>
 #include <domain/interface/UserStorage.hpp>
+
+#include <RockPaperScissorsProtocol/entity/client/ClientCommandType.hpp>
 
 namespace rps::domain::command
 {
@@ -59,8 +60,8 @@ void ConnectToRoomCommand::execute(const std::string& data, const std::shared_pt
         return;
     }
 
-    std::string message = std::to_string(static_cast<std::uint32_t>(entity::ClientCommandType::AddNewPlayer)) + ' ' +
-                          user_nickname.value();
+    std::string message = std::to_string(static_cast<std::uint32_t>(protocol::entity::ClientCommandType::NewPlayerAdded)) +
+                          ' ' + user_nickname.value();
 
     for (auto& player_uuid : room_ref.players)
         if (auto player = m_user_storage.try_find_user(player_uuid))

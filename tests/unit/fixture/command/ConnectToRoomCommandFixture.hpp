@@ -9,5 +9,5 @@ class ConnectToRoomCommandFixture : public testing::Test
 public:
     RoomStorageMock               room_storage;
     UserStorageMock               user_storage;
-    command::ConnectToRoomCommand create_command_room{room_storage, user_storage};
+    domain::command::ConnectToRoomCommand create_command_room{room_storage, user_storage};
 };
