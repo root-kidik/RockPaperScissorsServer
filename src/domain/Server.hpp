@@ -3,9 +3,9 @@
 #include <memory>
 
 #include <domain/CommandExecutor.hpp>
-#include <domain/command/ConnectToRoomCommandHandler.hpp>
-#include <domain/command/CreateRoomCommandHandler.hpp>
-#include <domain/command/RegisterCommandHandler.hpp>
+#include <domain/handler/ConnectToRoomCommandHandler.hpp>
+#include <domain/handler/CreateRoomCommandHandler.hpp>
+#include <domain/handler/RegisterCommandHandler.hpp>
 
 namespace rps::domain::interface
 {
@@ -30,9 +30,9 @@ private:
     interface::UserStorage& m_user_storage;
     interface::RoomStorage& m_room_storage;
 
-    command::RegisterCommandHandler      m_register_command_handler;
-    command::CreateRoomCommandHandler    m_create_room_command_handler;
-    command::ConnectToRoomCommandHandler m_connect_to_room_command_handler;
+    handler::RegisterCommandHandler      m_register_command_handler;
+    handler::CreateRoomCommandHandler    m_create_room_command_handler;
+    handler::ConnectToRoomCommandHandler m_connect_to_room_command_handler;
 
     CommandExecutor m_command_executor;
 };

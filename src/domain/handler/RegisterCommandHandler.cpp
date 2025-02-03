@@ -1,10 +1,10 @@
 #include <sstream>
 
-#include <domain/command/RegisterCommandHandler.hpp>
+#include <domain/handler/RegisterCommandHandler.hpp>
 #include <domain/interface/UserConnection.hpp>
 #include <domain/interface/UserStorage.hpp>
 
-namespace rps::domain::command
+namespace rps::domain::handler
 {
 
 RegisterCommandHandler::RegisterCommandHandler(interface::UserStorage& user_storage) : m_user_storage{user_storage}
@@ -31,4 +31,4 @@ void RegisterCommandHandler::execute(const std::string& data, const std::shared_
         user_connection->send("Error");
 }
 
-} // namespace rps::domain::command
+} // namespace rps::domain::handler

@@ -1,10 +1,10 @@
 #include <sstream>
 
-#include <domain/command/CreateRoomCommandHandler.hpp>
+#include <domain/handler/CreateRoomCommandHandler.hpp>
 #include <domain/interface/RoomStorage.hpp>
 #include <domain/interface/UserConnection.hpp>
 
-namespace rps::domain::command
+namespace rps::domain::handler
 {
 
 CreateRoomCommandHandler::CreateRoomCommandHandler(interface::RoomStorage& room_storage) : m_room_storage{room_storage}
@@ -40,4 +40,4 @@ void CreateRoomCommandHandler::execute(const std::string& data, const std::share
         user_connection->send("Error");
 }
 
-} // namespace rps::domain::command
+} // namespace rps::domain::handler

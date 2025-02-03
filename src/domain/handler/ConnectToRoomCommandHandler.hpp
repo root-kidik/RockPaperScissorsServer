@@ -8,7 +8,7 @@ class RoomStorage;
 class UserStorage;
 } // namespace rps::domain::interface
 
-namespace rps::domain::command
+namespace rps::domain::handler
 {
 
 class ConnectToRoomCommandHandler final : public interface::CommandHandler
@@ -23,4 +23,4 @@ private:
     interface::UserStorage& m_user_storage;
 };
 
-} // namespace rps::domain::command
+} // namespace rps::domain::handler

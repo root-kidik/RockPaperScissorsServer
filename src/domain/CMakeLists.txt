@@ -14,12 +14,12 @@ set(SRC
     ${SRCROOT}/interface/RoomStorage.hpp
     ${SRCROOT}/interface/UuidGenerator.hpp
 
-    ${SRCROOT}/command/RegisterCommandHandler.hpp
-    ${SRCROOT}/command/RegisterCommandHandler.cpp
-    ${SRCROOT}/command/CreateRoomCommandHandler.hpp
-    ${SRCROOT}/command/CreateRoomCommandHandler.cpp
-    ${SRCROOT}/command/ConnectToRoomCommandHandler.hpp
-    ${SRCROOT}/command/ConnectToRoomCommandHandler.cpp
+    ${SRCROOT}/handler/RegisterCommandHandler.hpp
+    ${SRCROOT}/handler/RegisterCommandHandler.cpp
+    ${SRCROOT}/handler/CreateRoomCommandHandler.hpp
+    ${SRCROOT}/handler/CreateRoomCommandHandler.cpp
+    ${SRCROOT}/handler/ConnectToRoomCommandHandler.hpp
+    ${SRCROOT}/handler/ConnectToRoomCommandHandler.cpp
 
     ${SRCROOT}/CommandExecutor.hpp
     ${SRCROOT}/CommandExecutor.cpp

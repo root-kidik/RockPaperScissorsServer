@@ -1,13 +1,13 @@
 #include <sstream>
 
-#include <domain/command/ConnectToRoomCommandHandler.hpp>
+#include <domain/handler/ConnectToRoomCommandHandler.hpp>
 #include <domain/interface/RoomStorage.hpp>
 #include <domain/interface/UserConnection.hpp>
 #include <domain/interface/UserStorage.hpp>
 
 #include <RockPaperScissorsProtocol/entity/client/ClientCommandType.hpp>
 
-namespace rps::domain::command
+namespace rps::domain::handler
 {
 
 ConnectToRoomCommandHandler::ConnectToRoomCommandHandler(interface::RoomStorage& room_storage,
@@ -74,4 +74,4 @@ void ConnectToRoomCommandHandler::execute(const std::string&                    
     user_connection->send("Ok");
 }
 
-} // namespace rps::domain::command
+} // namespace rps::domain::handler

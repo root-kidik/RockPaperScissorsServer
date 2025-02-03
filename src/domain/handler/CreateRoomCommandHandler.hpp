@@ -7,7 +7,7 @@ namespace rps::domain::interface
 class RoomStorage;
 }
 
-namespace rps::domain::command
+namespace rps::domain::handler
 {
 
 class CreateRoomCommandHandler final : public interface::CommandHandler
@@ -21,4 +21,4 @@ private:
     interface::RoomStorage& m_room_storage;
 };
 
-} // namespace rps::domain::command
+} // namespace rps::domain::handler
