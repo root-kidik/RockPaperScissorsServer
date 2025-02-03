@@ -4,8 +4,8 @@
 #include <domain/interface/UserConnection.hpp>
 #include <domain/interface/UserStorage.hpp>
 
-#include <RockPaperScissorsProtocol/utils/Utils.hpp>
 #include <RockPaperScissorsProtocol/entity/server/RegisterCommand.hpp>
+#include <RockPaperScissorsProtocol/utils/Utils.hpp>
 
 namespace rps::domain::handler
 {

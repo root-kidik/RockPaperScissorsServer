@@ -1,3 +1,3 @@
 .PHONY: format
 format:
-	find src -name '*pp' -type f | xargs clang-format -i
+	find src tests -name '*pp' -type f | xargs clang-format -i
