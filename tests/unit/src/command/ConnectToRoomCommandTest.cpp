@@ -98,9 +98,9 @@ TEST_F(ConnectToRoomCommandFixture, user_is_added_then_notifed_after_new_user_ad
         EXPECT_CALL(room_storage, try_find_room(room.name))
             .WillOnce(Return(std::optional<std::reference_wrapper<entity::Room>>{room}));
         EXPECT_CALL(user_storage, try_find_user_nickname(first_user.uuid)).WillOnce(Return(first_user.nickname));
-        EXPECT_CALL(*std::dynamic_pointer_cast<UserClientMock>(first_user.client), send("Ok")).WillOnce(Return());
+        EXPECT_CALL(*std::dynamic_pointer_cast<UserClientMock>(first_user.connection), send("Ok")).WillOnce(Return());
 
-        create_command_room.execute(first_user.uuid + ' ' + room.name, first_user.client);
+        create_command_room.execute(first_user.uuid + ' ' + room.name, first_user.connection);
 
         EXPECT_TRUE(room.players.size() == 1);
         EXPECT_TRUE(room.players.find(first_user.uuid) != room.players.end());
@@ -113,7 +113,7 @@ TEST_F(ConnectToRoomCommandFixture, user_is_added_then_notifed_after_new_user_ad
             EXPECT_CALL(room_storage, try_find_room(room.name))
                 .WillOnce(Return(std::optional<std::reference_wrapper<entity::Room>>{room}));
             EXPECT_CALL(user_storage, try_find_user_nickname(second_user.uuid)).WillOnce(Return(second_user.nickname));
-            EXPECT_CALL(*std::dynamic_pointer_cast<UserClientMock>(second_user.client), send("Ok")).WillOnce(Return());
+            EXPECT_CALL(*std::dynamic_pointer_cast<UserClientMock>(second_user.connection), send("Ok")).WillOnce(Return());
         }
 
         // first user notified
@@ -124,10 +124,10 @@ TEST_F(ConnectToRoomCommandFixture, user_is_added_then_notifed_after_new_user_ad
             std::string message = std::to_string(static_cast<std::uint32_t>(entity::ClientCommandType::AddNewPlayer)) +
                                   ' ' + second_user.nickname;
 
-            EXPECT_CALL(*std::dynamic_pointer_cast<UserClientMock>(first_user.client), send(message)).WillOnce(Return());
+            EXPECT_CALL(*std::dynamic_pointer_cast<UserClientMock>(first_user.connection), send(message)).WillOnce(Return());
         }
 
-        create_command_room.execute(second_user.uuid + ' ' + room.name, second_user.client);
+        create_command_room.execute(second_user.uuid + ' ' + room.name, second_user.connection);
 
         EXPECT_TRUE(room.players.size() == 2);
         EXPECT_TRUE(room.players.find(first_user.uuid) != room.players.end());
@@ -145,9 +145,9 @@ TEST_F(ConnectToRoomCommandFixture, player_number_7_is_not_added)
         EXPECT_CALL(room_storage, try_find_room(room.name))
             .WillOnce(Return(std::optional<std::reference_wrapper<entity::Room>>{room}));
         EXPECT_CALL(user_storage, try_find_user_nickname(owner_user.uuid)).WillOnce(Return(owner_user.nickname));
-        EXPECT_CALL(*std::dynamic_pointer_cast<UserClientMock>(owner_user.client), send("Ok")).WillOnce(Return());
+        EXPECT_CALL(*std::dynamic_pointer_cast<UserClientMock>(owner_user.connection), send("Ok")).WillOnce(Return());
     
-        create_command_room.execute(owner_user.uuid + ' ' + room.name, owner_user.client);
+        create_command_room.execute(owner_user.uuid + ' ' + room.name, owner_user.connection);
     }
 
     std::vector<entity::User> users;
@@ -160,7 +160,7 @@ TEST_F(ConnectToRoomCommandFixture, player_number_7_is_not_added)
         EXPECT_CALL(room_storage, try_find_room(room.name))
             .WillOnce(Return(std::optional<std::reference_wrapper<entity::Room>>{room}));
         EXPECT_CALL(user_storage, try_find_user_nickname(user.uuid)).WillOnce(Return(user.nickname));
-        EXPECT_CALL(*std::dynamic_pointer_cast<UserClientMock>(user.client), send("Ok")).WillOnce(Return());
+        EXPECT_CALL(*std::dynamic_pointer_cast<UserClientMock>(user.connection), send("Ok")).WillOnce(Return());
 
         // owner notified
         {
@@ -170,7 +170,7 @@ TEST_F(ConnectToRoomCommandFixture, player_number_7_is_not_added)
             std::string message = std::to_string(static_cast<std::uint32_t>(entity::ClientCommandType::AddNewPlayer)) +
                                   ' ' + user.nickname;
 
-            EXPECT_CALL(*std::dynamic_pointer_cast<UserClientMock>(owner_user.client), send(message)).WillOnce(Return());
+            EXPECT_CALL(*std::dynamic_pointer_cast<UserClientMock>(owner_user.connection), send(message)).WillOnce(Return());
         }
 
         for (auto& existed_user : users)
@@ -181,10 +181,10 @@ TEST_F(ConnectToRoomCommandFixture, player_number_7_is_not_added)
             std::string message = std::to_string(static_cast<std::uint32_t>(entity::ClientCommandType::AddNewPlayer)) +
                                   ' ' + user.nickname;
 
-            EXPECT_CALL(*std::dynamic_pointer_cast<UserClientMock>(existed_user.client), send(message)).WillOnce(Return());
+            EXPECT_CALL(*std::dynamic_pointer_cast<UserClientMock>(existed_user.connection), send(message)).WillOnce(Return());
         }
 
-        create_command_room.execute(user.uuid + ' ' + room.name, user.client);
+        create_command_room.execute(user.uuid + ' ' + room.name, user.connection);
 
         EXPECT_TRUE(room.players.size() == i + 2);
         EXPECT_TRUE(room.players.find(user.uuid) != room.players.end());
@@ -196,9 +196,9 @@ TEST_F(ConnectToRoomCommandFixture, player_number_7_is_not_added)
     {
         EXPECT_CALL(room_storage, try_find_room(room.name))
             .WillOnce(Return(std::optional<std::reference_wrapper<entity::Room>>{room}));
-        EXPECT_CALL(*std::dynamic_pointer_cast<UserClientMock>(seven_user.client), send("Error")).WillOnce(Return());
+        EXPECT_CALL(*std::dynamic_pointer_cast<UserClientMock>(seven_user.connection), send("Error")).WillOnce(Return());
     
-        create_command_room.execute(seven_user.uuid + ' ' + room.name, seven_user.client);
+        create_command_room.execute(seven_user.uuid + ' ' + room.name, seven_user.connection);
     }
 }
 
@@ -216,7 +216,7 @@ TEST_F(ConnectToRoomCommandFixture, player_numer_6_is_not_added_because_owner_is
         EXPECT_CALL(room_storage, try_find_room(room.name))
             .WillOnce(Return(std::optional<std::reference_wrapper<entity::Room>>{room}));
         EXPECT_CALL(user_storage, try_find_user_nickname(user.uuid)).WillOnce(Return(user.nickname));
-        EXPECT_CALL(*std::dynamic_pointer_cast<UserClientMock>(user.client), send("Ok")).WillOnce(Return());
+        EXPECT_CALL(*std::dynamic_pointer_cast<UserClientMock>(user.connection), send("Ok")).WillOnce(Return());
 
         for (auto& existed_user : users)
         {
@@ -226,10 +226,10 @@ TEST_F(ConnectToRoomCommandFixture, player_numer_6_is_not_added_because_owner_is
             std::string message = std::to_string(static_cast<std::uint32_t>(entity::ClientCommandType::AddNewPlayer)) +
                                   ' ' + user.nickname;
 
-            EXPECT_CALL(*std::dynamic_pointer_cast<UserClientMock>(existed_user.client), send(message)).WillOnce(Return());
+            EXPECT_CALL(*std::dynamic_pointer_cast<UserClientMock>(existed_user.connection), send(message)).WillOnce(Return());
         }
 
-        create_command_room.execute(user.uuid + ' ' + room.name, user.client);
+        create_command_room.execute(user.uuid + ' ' + room.name, user.connection);
 
         EXPECT_TRUE(room.players.size() == i + 1);
         EXPECT_TRUE(room.players.find(user.uuid) != room.players.end());
@@ -241,8 +241,8 @@ TEST_F(ConnectToRoomCommandFixture, player_numer_6_is_not_added_because_owner_is
     {
         EXPECT_CALL(room_storage, try_find_room(room.name))
             .WillOnce(Return(std::optional<std::reference_wrapper<entity::Room>>{room}));
-        EXPECT_CALL(*std::dynamic_pointer_cast<UserClientMock>(seven_user.client), send("Error")).WillOnce(Return());
+        EXPECT_CALL(*std::dynamic_pointer_cast<UserClientMock>(seven_user.connection), send("Error")).WillOnce(Return());
     
-        create_command_room.execute(seven_user.uuid + ' ' + room.name, seven_user.client);
+        create_command_room.execute(seven_user.uuid + ' ' + room.name, seven_user.connection);
     }
 }
