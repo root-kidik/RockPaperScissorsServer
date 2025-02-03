@@ -11,7 +11,7 @@ RegisterCommand::RegisterCommand(interface::UserStorage& user_storage) : m_user_
 {
 }
 
-void RegisterCommand::execute(const std::string& data, const std::shared_ptr<interface::UserConnection>& user_client)
+void RegisterCommand::execute(const std::string& data, const std::shared_ptr<interface::UserConnection>& user_connection)
 {
     std::istringstream iss{data};
 
@@ -21,14 +21,14 @@ void RegisterCommand::execute(const std::string& data, const std::shared_ptr<int
 
     if (nickname.empty())
     {
-        user_client->send("Error");
+        user_connection->send("Error");
         return;
     }
 
-    if (auto uuid = m_user_storage.try_add_user(nickname, user_client))
-        user_client->send(uuid.value());
+    if (auto uuid = m_user_storage.try_add_user(nickname, user_connection))
+        user_connection->send(uuid.value());
     else
-        user_client->send("Error");
+        user_connection->send("Error");
 }
 
 } // namespace rps::domain::command

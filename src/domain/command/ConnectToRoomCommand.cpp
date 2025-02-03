@@ -15,7 +15,7 @@ m_user_storage{user_storage}
 {
 }
 
-void ConnectToRoomCommand::execute(const std::string& data, const std::shared_ptr<interface::UserConnection>& user_client)
+void ConnectToRoomCommand::execute(const std::string& data, const std::shared_ptr<interface::UserConnection>& user_connection)
 {
     std::istringstream iss{data};
 
@@ -25,21 +25,21 @@ void ConnectToRoomCommand::execute(const std::string& data, const std::shared_pt
     iss >> user_uuid;
     if (user_uuid.empty())
     {
-        user_client->send("Error");
+        user_connection->send("Error");
         return;
     }
 
     iss >> room_name;
     if (room_name.empty())
     {
-        user_client->send("Error");
+        user_connection->send("Error");
         return;
     }
 
     auto room = m_room_storage.try_find_room(room_name);
     if (!room)
     {
-        user_client->send("Error");
+        user_connection->send("Error");
         return;
     }
 
@@ -48,14 +48,14 @@ void ConnectToRoomCommand::execute(const std::string& data, const std::shared_pt
     if (room_ref.players.size() == 6 || (room_ref.players.size() == 5 && user_uuid != room_ref.owner_uuid &&
                                          room_ref.players.find(room_ref.owner_uuid) == room_ref.players.end()))
     {
-        user_client->send("Error");
+        user_connection->send("Error");
         return;
     }
 
     auto user_nickname = m_user_storage.try_find_user_nickname(user_uuid);
     if (!user_nickname)
     {
-        user_client->send("Error");
+        user_connection->send("Error");
         return;
     }
 
@@ -68,7 +68,7 @@ void ConnectToRoomCommand::execute(const std::string& data, const std::shared_pt
 
     room_ref.players.emplace(user_uuid);
 
-    user_client->send("Ok");
+    user_connection->send("Ok");
 }
 
 } // namespace rps::domain::command

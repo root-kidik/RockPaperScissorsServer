@@ -21,7 +21,7 @@ class CommandExecutor
 public:
     void execute_command(entity::ServerCommandType                         command_type,
                          const std::string&                                data,
-                         const std::shared_ptr<interface::UserConnection>& user_client);
+                         const std::shared_ptr<interface::UserConnection>& user_connection);
     void register_command(entity::ServerCommandType command_type, interface::Command& command);
 
 private:

@@ -13,7 +13,6 @@ set(SRC
     ${SRCROOT}/fixture/command/RegisterCommandFixture.hpp
     ${SRCROOT}/fixture/command/CreateRoomCommandFixture.hpp
     ${SRCROOT}/fixture/command/ConnectToRoomCommandFixture.hpp
-    ${SRCROOT}/fixture/RoomFixture.hpp
 
     ${SRCROOT}/src/command/ConnectToRoomCommandTest.cpp
     ${SRCROOT}/src/command/RegisterCommandTest.cpp

@@ -11,7 +11,7 @@ CreateRoomCommand::CreateRoomCommand(interface::RoomStorage& room_storage) : m_r
 {
 }
 
-void CreateRoomCommand::execute(const std::string& data, const std::shared_ptr<interface::UserConnection>& user_client)
+void CreateRoomCommand::execute(const std::string& data, const std::shared_ptr<interface::UserConnection>& user_connection)
 {
     std::istringstream iss{data};
 
@@ -22,7 +22,7 @@ void CreateRoomCommand::execute(const std::string& data, const std::shared_ptr<i
 
     if (name.empty())
     {
-        user_client->send("Error");
+        user_connection->send("Error");
         return;
     }
 
@@ -30,14 +30,14 @@ void CreateRoomCommand::execute(const std::string& data, const std::shared_ptr<i
 
     if (owner_uuid.empty())
     {
-        user_client->send("Error");
+        user_connection->send("Error");
         return;
     }
 
     if (auto status = m_room_storage.try_add_room(name, owner_uuid))
-        user_client->send("Ok");
+        user_connection->send("Ok");
     else
-        user_client->send("Error");
+        user_connection->send("Error");
 }
 
 } // namespace rps::domain::command

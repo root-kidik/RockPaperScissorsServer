@@ -16,7 +16,7 @@ class ConnectToRoomCommand final : public interface::Command
 public:
     ConnectToRoomCommand(interface::RoomStorage& room_storage, interface::UserStorage& user_storage);
 
-    void execute(const std::string& data, const std::shared_ptr<interface::UserConnection>& user_client) override;
+    void execute(const std::string& data, const std::shared_ptr<interface::UserConnection>& user_connection) override;
 
 private:
     interface::RoomStorage& m_room_storage;

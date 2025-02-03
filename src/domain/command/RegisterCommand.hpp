@@ -15,7 +15,7 @@ class RegisterCommand final : public interface::Command
 public:
     RegisterCommand(interface::UserStorage& user_storage);
 
-    void execute(const std::string& data, const std::shared_ptr<interface::UserConnection>& user_client) override;
+    void execute(const std::string& data, const std::shared_ptr<interface::UserConnection>& user_connection) override;
 
 private:
     interface::UserStorage& m_user_storage;
