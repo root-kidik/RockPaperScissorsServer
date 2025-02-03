@@ -1,13 +1,13 @@
 #pragma once
 
-#include <domain/interface/UserConnection.hpp>
+#include <RockPaperScissorsProtocol/interface/Connection.hpp>
 
 class QTcpSocket;
 
 namespace rps::infrastructure::client
 {
 
-class TcpSocketUserConnection final : public domain::interface::UserConnection
+class TcpSocketUserConnection final : public protocol::interface::Connection
 {
 public:
     TcpSocketUserConnection(QTcpSocket* tcp_socket);

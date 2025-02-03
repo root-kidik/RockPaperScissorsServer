@@ -5,7 +5,8 @@
 #include <vector>
 
 #include <domain/entity/Uuid.hpp>
-#include <domain/interface/UserConnection.hpp>
+
+#include <RockPaperScissorsProtocol/interface/Connection.hpp>
 
 namespace rps::domain::entity
 {

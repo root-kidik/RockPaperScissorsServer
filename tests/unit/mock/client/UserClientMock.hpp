@@ -2,11 +2,11 @@
 
 #include <gmock/gmock.h>
 
-#include <domain/interface/UserConnection.hpp>
+#include <RockPaperScissorsProtocol/interface/Connection.hpp>
 
 using namespace rps;
 
-class UserClientMock final : public domain::interface::UserConnection
+class UserClientMock final : public protocol::interface::Connection
 {
 public:
     MOCK_METHOD(bool, is_connected, (), (override, const));

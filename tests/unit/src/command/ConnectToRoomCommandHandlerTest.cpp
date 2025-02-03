@@ -8,31 +8,31 @@ using testing::Return;
 
 TEST_F(ConnectToRoomCommandFixture, room_name_is_empty)
 {
-    auto user_connection = std::make_shared<UserClientMock>();
+    auto connection = std::make_shared<UserClientMock>();
 
     domain::entity::Uuid user_uuid = "1234";
     std::string          room_name = " ";
 
-    EXPECT_CALL(*user_connection, send("Error")).WillOnce(Return());
+    EXPECT_CALL(*connection, send("Error")).WillOnce(Return());
 
-    connect_to_room_command_handler.execute(user_uuid + ' ' + room_name, user_connection);
+    connect_to_room_command_handler.execute(user_uuid + ' ' + room_name, connection);
 }
 
 TEST_F(ConnectToRoomCommandFixture, user_uuid_is_empty)
 {
-    auto user_connection = std::make_shared<UserClientMock>();
+    auto connection = std::make_shared<UserClientMock>();
 
     domain::entity::Uuid user_uuid = " ";
     std::string          room_name = "user_room";
 
-    EXPECT_CALL(*user_connection, send("Error")).WillOnce(Return());
+    EXPECT_CALL(*connection, send("Error")).WillOnce(Return());
 
-    connect_to_room_command_handler.execute(user_uuid + ' ' + room_name, user_connection);
+    connect_to_room_command_handler.execute(user_uuid + ' ' + room_name, connection);
 }
 
 TEST_F(ConnectToRoomCommandFixture, room_exist)
 {
-    auto user_connection = std::make_shared<UserClientMock>();
+    auto connection = std::make_shared<UserClientMock>();
 
     domain::entity::Uuid user_uuid = "1234";
     std::string          room_name = "user_room";
@@ -47,9 +47,9 @@ TEST_F(ConnectToRoomCommandFixture, room_exist)
     EXPECT_CALL(room_storage, try_find_room(room_name))
         .WillOnce(Return(std::optional<std::reference_wrapper<domain::entity::Room>>{room}));
     EXPECT_CALL(user_storage, try_find_user_nickname(user_uuid)).WillOnce(Return(user_name));
-    EXPECT_CALL(*user_connection, send("Ok")).WillOnce(Return());
+    EXPECT_CALL(*connection, send("Ok")).WillOnce(Return());
 
-    connect_to_room_command_handler.execute(user_uuid + ' ' + room_name, user_connection);
+    connect_to_room_command_handler.execute(user_uuid + ' ' + room_name, connection);
 
     EXPECT_TRUE(room.players.size() == 1);
     EXPECT_TRUE(room.players.find(user_uuid) != room.players.end());
@@ -57,21 +57,21 @@ TEST_F(ConnectToRoomCommandFixture, room_exist)
 
 TEST_F(ConnectToRoomCommandFixture, room_not_exist)
 {
-    auto user_connection = std::make_shared<UserClientMock>();
+    auto connection = std::make_shared<UserClientMock>();
 
     std::string          user_name = "user";
     domain::entity::Uuid user_uuid = "1234";
     std::string          room_name = "user_room";
 
     EXPECT_CALL(room_storage, try_find_room(room_name)).WillOnce(Return(std::nullopt));
-    EXPECT_CALL(*user_connection, send("Error")).WillOnce(Return());
+    EXPECT_CALL(*connection, send("Error")).WillOnce(Return());
 
-    connect_to_room_command_handler.execute(user_uuid + ' ' + room_name, user_connection);
+    connect_to_room_command_handler.execute(user_uuid + ' ' + room_name, connection);
 }
 
 TEST_F(ConnectToRoomCommandFixture, user_uuid_wrong)
 {
-    auto user_connection = std::make_shared<UserClientMock>();
+    auto connection = std::make_shared<UserClientMock>();
 
     domain::entity::Uuid user_uuid = "1234";
     std::string          room_name = "user_room";
@@ -84,9 +84,9 @@ TEST_F(ConnectToRoomCommandFixture, user_uuid_wrong)
     EXPECT_CALL(room_storage, try_find_room(room_name))
         .WillOnce(Return(std::optional<std::reference_wrapper<domain::entity::Room>>{room}));
     EXPECT_CALL(user_storage, try_find_user_nickname(user_uuid)).WillOnce(Return(std::nullopt));
-    EXPECT_CALL(*user_connection, send("Error")).WillOnce(Return());
+    EXPECT_CALL(*connection, send("Error")).WillOnce(Return());
 
-    connect_to_room_command_handler.execute(user_uuid + ' ' + room_name, user_connection);
+    connect_to_room_command_handler.execute(user_uuid + ' ' + room_name, connection);
 }
 
 TEST_F(ConnectToRoomCommandFixture, user_is_added_then_notifed_after_new_user_added)

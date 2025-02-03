@@ -2,14 +2,14 @@
 
 #include <memory>
 
-#include <domain/CommandExecutor.hpp>
 #include <domain/handler/ConnectToRoomCommandHandler.hpp>
 #include <domain/handler/CreateRoomCommandHandler.hpp>
 #include <domain/handler/RegisterCommandHandler.hpp>
 
+#include <RockPaperScissorsProtocol/entity/CommandExecutor.hpp>
+
 namespace rps::domain::interface
 {
-class UserConnection;
 class UserStorage;
 class RoomStorage;
 } // namespace rps::domain::interface
@@ -22,9 +22,9 @@ class Server
 public:
     Server(interface::UserStorage& user_storage, interface::RoomStorage& room_storage);
 
-    void on_command(protocol::entity::ServerCommandType               command_type,
-                    const std::string&                                data,
-                    const std::shared_ptr<interface::UserConnection>& client);
+    void on_command(protocol::entity::ServerCommandType                     command_type,
+                    const std::string&                                      data,
+                    const std::shared_ptr<protocol::interface::Connection>& client);
 
 private:
     interface::UserStorage& m_user_storage;
@@ -34,7 +34,7 @@ private:
     handler::CreateRoomCommandHandler    m_create_room_command_handler;
     handler::ConnectToRoomCommandHandler m_connect_to_room_command_handler;
 
-    CommandExecutor m_command_executor;
+    protocol::entity::ServerCommandExecutor m_command_executor;
 };
 
 } // namespace rps::domain

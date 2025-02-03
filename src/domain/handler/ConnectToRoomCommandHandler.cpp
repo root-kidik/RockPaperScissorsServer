@@ -2,7 +2,6 @@
 
 #include <domain/handler/ConnectToRoomCommandHandler.hpp>
 #include <domain/interface/RoomStorage.hpp>
-#include <domain/interface/UserConnection.hpp>
 #include <domain/interface/UserStorage.hpp>
 
 #include <RockPaperScissorsProtocol/entity/client/ClientCommandType.hpp>
@@ -19,21 +18,21 @@ m_user_storage{user_storage}
 {
 }
 
-void ConnectToRoomCommandHandler::execute(const std::string&                                data,
-                                          const std::shared_ptr<interface::UserConnection>& user_connection)
+void ConnectToRoomCommandHandler::execute(const std::string&                                      data,
+                                          const std::shared_ptr<protocol::interface::Connection>& connection)
 {
     auto command = protocol::utils::deserialize<protocol::entity::ConnectToRoomCommand>(data);
 
     if (command.user_uuid.empty() || command.room_name.empty())
     {
-        user_connection->send("Error");
+        connection->send("Error");
         return;
     }
 
     auto room = m_room_storage.try_find_room(command.room_name);
     if (!room)
     {
-        user_connection->send("Error");
+        connection->send("Error");
         return;
     }
 
@@ -42,14 +41,14 @@ void ConnectToRoomCommandHandler::execute(const std::string&                    
     if (room_ref.players.size() == 6 || (room_ref.players.size() == 5 && command.user_uuid != room_ref.owner_uuid &&
                                          room_ref.players.find(room_ref.owner_uuid) == room_ref.players.end()))
     {
-        user_connection->send("Error");
+        connection->send("Error");
         return;
     }
 
     auto user_nickname = m_user_storage.try_find_user_nickname(command.user_uuid);
     if (!user_nickname)
     {
-        user_connection->send("Error");
+        connection->send("Error");
         return;
     }
 
@@ -62,7 +61,7 @@ void ConnectToRoomCommandHandler::execute(const std::string&                    
 
     room_ref.players.emplace(command.user_uuid);
 
-    user_connection->send("Ok");
+    connection->send("Ok");
 }
 
 } // namespace rps::domain::handler

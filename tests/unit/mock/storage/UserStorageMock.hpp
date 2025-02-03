@@ -11,7 +11,7 @@ class UserStorageMock final : public domain::interface::UserStorage
 public:
     MOCK_METHOD(std::optional<domain::entity::Uuid>,
                 try_add_user,
-                (const std::string& nickname, const std::shared_ptr<domain::interface::UserConnection>& connection),
+                (const std::string& nickname, const std::shared_ptr<protocol::interface::Connection>& connection),
                 (override));
     MOCK_METHOD(std::optional<domain::entity::Uuid>, try_find_user_uuid, (const std::string& nickname), (override, const));
     MOCK_METHOD(std::optional<std::string>, try_find_user_nickname, (const domain::entity::Uuid& uuid), (override, const));

@@ -8,8 +8,6 @@ set(SRC
     ${SRCROOT}/entity/User.hpp
     ${SRCROOT}/entity/Room.hpp
     
-    ${SRCROOT}/interface/CommandHandler.hpp
-    ${SRCROOT}/interface/UserConnection.hpp
     ${SRCROOT}/interface/UserStorage.hpp
     ${SRCROOT}/interface/RoomStorage.hpp
     ${SRCROOT}/interface/UuidGenerator.hpp
@@ -20,9 +18,6 @@ set(SRC
     ${SRCROOT}/handler/CreateRoomCommandHandler.cpp
     ${SRCROOT}/handler/ConnectToRoomCommandHandler.hpp
     ${SRCROOT}/handler/ConnectToRoomCommandHandler.cpp
-
-    ${SRCROOT}/CommandExecutor.hpp
-    ${SRCROOT}/CommandExecutor.cpp
 
     ${SRCROOT}/Server.hpp
     ${SRCROOT}/Server.cpp

@@ -1,7 +1,6 @@
 #include <sstream>
 
 #include <domain/handler/RegisterCommandHandler.hpp>
-#include <domain/interface/UserConnection.hpp>
 #include <domain/interface/UserStorage.hpp>
 
 #include <RockPaperScissorsProtocol/entity/server/RegisterCommand.hpp>
@@ -14,20 +13,20 @@ RegisterCommandHandler::RegisterCommandHandler(interface::UserStorage& user_stor
 {
 }
 
-void RegisterCommandHandler::execute(const std::string& data, const std::shared_ptr<interface::UserConnection>& user_connection)
+void RegisterCommandHandler::execute(const std::string& data, const std::shared_ptr<protocol::interface::Connection>& connection)
 {
     auto command = protocol::utils::deserialize<protocol::entity::RegisterCommand>(data);
 
     if (command.user_nickname.empty())
     {
-        user_connection->send("Error");
+        connection->send("Error");
         return;
     }
 
-    if (auto uuid = m_user_storage.try_add_user(command.user_nickname, user_connection))
-        user_connection->send(uuid.value());
+    if (auto uuid = m_user_storage.try_add_user(command.user_nickname, connection))
+        connection->send(uuid.value());
     else
-        user_connection->send("Error");
+        connection->send("Error");
 }
 
 } // namespace rps::domain::handler

@@ -4,11 +4,12 @@
 #include <QTcpSocket>
 
 #include <domain/Server.hpp>
-#include <domain/interface/UserConnection.hpp>
 
 #include <infrastructure/generator/UuidGenerator.hpp>
 #include <infrastructure/storage/MemoryRoomStorage.hpp>
 #include <infrastructure/storage/MemoryUserStorage.hpp>
+
+#include <RockPaperScissorsProtocol/interface/Connection.hpp>
 
 namespace rps::infrastructure
 {
