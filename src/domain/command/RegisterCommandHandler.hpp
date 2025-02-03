@@ -1,6 +1,6 @@
 #pragma once
 
-#include <domain/interface/Command.hpp>
+#include <domain/interface/CommandHandler.hpp>
 
 namespace rps::domain::interface
 {
@@ -10,10 +10,10 @@ class UserStorage;
 namespace rps::domain::command
 {
 
-class RegisterCommand final : public interface::Command
+class RegisterCommandHandler final : public interface::CommandHandler
 {
 public:
-    RegisterCommand(interface::UserStorage& user_storage);
+    RegisterCommandHandler(interface::UserStorage& user_storage);
 
     void execute(const std::string& data, const std::shared_ptr<interface::UserConnection>& user_connection) override;
 

@@ -14,9 +14,9 @@ set(SRC
     ${SRCROOT}/fixture/command/CreateRoomCommandFixture.hpp
     ${SRCROOT}/fixture/command/ConnectToRoomCommandFixture.hpp
 
-    ${SRCROOT}/src/command/ConnectToRoomCommandTest.cpp
-    ${SRCROOT}/src/command/RegisterCommandTest.cpp
-    ${SRCROOT}/src/command/CreateRoomCommandTest.cpp
+    ${SRCROOT}/src/command/ConnectToRoomCommandHandlerTest.cpp
+    ${SRCROOT}/src/command/RegisterCommandHandlerTest.cpp
+    ${SRCROOT}/src/command/CreateRoomCommandHandlerTest.cpp
 )
 
 add_executable(${TARGET_NAME} ${SRC})

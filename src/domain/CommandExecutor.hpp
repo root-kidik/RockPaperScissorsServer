@@ -9,7 +9,7 @@
 
 namespace rps::domain::interface
 {
-class Command;
+class CommandHandler;
 class UserConnection;
 } // namespace rps::domain::interface
 
@@ -22,10 +22,10 @@ public:
     void execute_command(protocol::entity::ServerCommandType               command_type,
                          const std::string&                                data,
                          const std::shared_ptr<interface::UserConnection>& user_connection);
-    void register_command(protocol::entity::ServerCommandType command_type, interface::Command& command);
+    void register_command(protocol::entity::ServerCommandType command_type, interface::CommandHandler& command);
 
 private:
-    std::unordered_map<protocol::entity::ServerCommandType, interface::Command&> m_commands;
+    std::unordered_map<protocol::entity::ServerCommandType, interface::CommandHandler&> m_commands;
 };
 
 } // namespace rps::domain

@@ -1,17 +1,17 @@
 #include <sstream>
 
-#include <domain/command/CreateRoomCommand.hpp>
+#include <domain/command/CreateRoomCommandHandler.hpp>
 #include <domain/interface/RoomStorage.hpp>
 #include <domain/interface/UserConnection.hpp>
 
 namespace rps::domain::command
 {
 
-CreateRoomCommand::CreateRoomCommand(interface::RoomStorage& room_storage) : m_room_storage{room_storage}
+CreateRoomCommandHandler::CreateRoomCommandHandler(interface::RoomStorage& room_storage) : m_room_storage{room_storage}
 {
 }
 
-void CreateRoomCommand::execute(const std::string& data, const std::shared_ptr<interface::UserConnection>& user_connection)
+void CreateRoomCommandHandler::execute(const std::string& data, const std::shared_ptr<interface::UserConnection>& user_connection)
 {
     std::istringstream iss{data};
 

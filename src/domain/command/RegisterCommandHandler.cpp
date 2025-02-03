@@ -1,17 +1,17 @@
 #include <sstream>
 
-#include <domain/command/RegisterCommand.hpp>
+#include <domain/command/RegisterCommandHandler.hpp>
 #include <domain/interface/UserConnection.hpp>
 #include <domain/interface/UserStorage.hpp>
 
 namespace rps::domain::command
 {
 
-RegisterCommand::RegisterCommand(interface::UserStorage& user_storage) : m_user_storage{user_storage}
+RegisterCommandHandler::RegisterCommandHandler(interface::UserStorage& user_storage) : m_user_storage{user_storage}
 {
 }
 
-void RegisterCommand::execute(const std::string& data, const std::shared_ptr<interface::UserConnection>& user_connection)
+void RegisterCommandHandler::execute(const std::string& data, const std::shared_ptr<interface::UserConnection>& user_connection)
 {
     std::istringstream iss{data};
 

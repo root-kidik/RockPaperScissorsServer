@@ -11,7 +11,7 @@ TEST_F(CreateRoomCommandFixture, name_is_empty)
 
     EXPECT_CALL(*user_connection, send("Error")).WillOnce(Return());
 
-    create_command_room.execute(name + ' ' + owner_uuid, user_connection);
+    create_room_command_handler.execute(name + ' ' + owner_uuid, user_connection);
 }
 
 TEST_F(CreateRoomCommandFixture, owner_uuid_is_empty)
@@ -21,7 +21,7 @@ TEST_F(CreateRoomCommandFixture, owner_uuid_is_empty)
 
     EXPECT_CALL(*user_connection, send("Error")).WillOnce(Return());
 
-    create_command_room.execute(name + ' ' + owner_uuid, user_connection);
+    create_room_command_handler.execute(name + ' ' + owner_uuid, user_connection);
 }
 
 TEST_F(CreateRoomCommandFixture, room_exist)
@@ -32,7 +32,7 @@ TEST_F(CreateRoomCommandFixture, room_exist)
     EXPECT_CALL(room_storage, try_add_room(name, owner_uuid)).WillOnce(Return(true));
     EXPECT_CALL(*user_connection, send("Ok")).WillOnce(Return());
 
-    create_command_room.execute(name + ' ' + owner_uuid, user_connection);
+    create_room_command_handler.execute(name + ' ' + owner_uuid, user_connection);
 }
 
 TEST_F(CreateRoomCommandFixture, room_not_exist)
@@ -43,5 +43,5 @@ TEST_F(CreateRoomCommandFixture, room_not_exist)
     EXPECT_CALL(room_storage, try_add_room(name, owner_uuid)).WillOnce(Return(false));
     EXPECT_CALL(*user_connection, send("Error")).WillOnce(Return());
 
-    create_command_room.execute(name + ' ' + owner_uuid, user_connection);
+    create_room_command_handler.execute(name + ' ' + owner_uuid, user_connection);
 }

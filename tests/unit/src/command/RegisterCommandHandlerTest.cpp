@@ -13,7 +13,7 @@ TEST_F(RegisterCommandFixture, name_is_unqiue)
         .WillOnce(Return(uuid));
     EXPECT_CALL(*user_connection, send(uuid)).WillOnce(Return());
 
-    register_command.execute(name, user_connection);
+    register_command_handler.execute(name, user_connection);
 }
 
 TEST_F(RegisterCommandFixture, name_is_empty)
@@ -22,7 +22,7 @@ TEST_F(RegisterCommandFixture, name_is_empty)
 
     EXPECT_CALL(*user_connection, send("Error")).WillOnce(Return());
 
-    register_command.execute(name, user_connection);
+    register_command_handler.execute(name, user_connection);
 }
 
 TEST_F(RegisterCommandFixture, name_already_exist)
@@ -33,5 +33,5 @@ TEST_F(RegisterCommandFixture, name_already_exist)
         .WillOnce(Return(std::nullopt));
     EXPECT_CALL(*user_connection, send("Error")).WillOnce(Return());
 
-    register_command.execute(name, user_connection);
+    register_command_handler.execute(name, user_connection);
 }

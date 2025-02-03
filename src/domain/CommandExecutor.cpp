@@ -1,13 +1,13 @@
 #include <cassert>
 
 #include <domain/CommandExecutor.hpp>
-#include <domain/interface/Command.hpp>
+#include <domain/interface/CommandHandler.hpp>
 #include <domain/interface/UserConnection.hpp>
 
 namespace rps::domain
 {
 
-void CommandExecutor::execute_command(protocol::entity::ServerCommandType                         command_type,
+void CommandExecutor::execute_command(protocol::entity::ServerCommandType               command_type,
                                       const std::string&                                data,
                                       const std::shared_ptr<interface::UserConnection>& user_connection)
 {
@@ -18,7 +18,7 @@ void CommandExecutor::execute_command(protocol::entity::ServerCommandType       
     it->second.execute(data, user_connection);
 }
 
-void CommandExecutor::register_command(protocol::entity::ServerCommandType command_type, interface::Command& command)
+void CommandExecutor::register_command(protocol::entity::ServerCommandType command_type, interface::CommandHandler& command)
 {
     assert(m_commands.find(command_type) == m_commands.end() && "Already setted command to execute this command_type");
 

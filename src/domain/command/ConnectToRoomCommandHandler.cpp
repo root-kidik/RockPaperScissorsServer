@@ -1,6 +1,6 @@
 #include <sstream>
 
-#include <domain/command/ConnectToRoomCommand.hpp>
+#include <domain/command/ConnectToRoomCommandHandler.hpp>
 #include <domain/interface/RoomStorage.hpp>
 #include <domain/interface/UserConnection.hpp>
 #include <domain/interface/UserStorage.hpp>
@@ -10,13 +10,15 @@
 namespace rps::domain::command
 {
 
-ConnectToRoomCommand::ConnectToRoomCommand(interface::RoomStorage& room_storage, interface::UserStorage& user_storage) :
+ConnectToRoomCommandHandler::ConnectToRoomCommandHandler(interface::RoomStorage& room_storage,
+                                                         interface::UserStorage& user_storage) :
 m_room_storage{room_storage},
 m_user_storage{user_storage}
 {
 }
 
-void ConnectToRoomCommand::execute(const std::string& data, const std::shared_ptr<interface::UserConnection>& user_connection)
+void ConnectToRoomCommandHandler::execute(const std::string&                                data,
+                                          const std::shared_ptr<interface::UserConnection>& user_connection)
 {
     std::istringstream iss{data};
 

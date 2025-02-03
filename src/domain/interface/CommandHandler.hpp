@@ -8,10 +8,10 @@ namespace rps::domain::interface
 
 class UserConnection;
 
-class Command
+class CommandHandler
 {
 public:
-    virtual ~Command() = default;
+    virtual ~CommandHandler() = default;
 
     virtual void execute(const std::string& data, const std::shared_ptr<UserConnection>& user_connection) = 0;
 };
