@@ -19,7 +19,7 @@ void Server::on_command(protocol::entity::ServerCommandType                     
                         const std::string&                                      data,
                         const std::shared_ptr<protocol::interface::Connection>& client)
 {
-    m_command_executor.execute_command(command_type, data, std::move(client));
+    m_command_executor.execute_command(command_type, data, client);
 }
 
 } // namespace rps::domain
