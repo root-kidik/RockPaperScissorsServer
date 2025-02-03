@@ -9,7 +9,7 @@
 
 namespace rps::domain::interface
 {
-class UserClient;
+class UserConnection;
 class UserStorage;
 class RoomStorage;
 } // namespace rps::domain::interface
@@ -24,7 +24,7 @@ public:
 
     void on_command(entity::ServerCommandType                     command_type,
                     const std::string&                            data,
-                    const std::shared_ptr<interface::UserClient>& client);
+                    const std::shared_ptr<interface::UserConnection>& client);
 
 private:
     interface::UserStorage& m_user_storage;

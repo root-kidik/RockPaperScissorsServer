@@ -4,7 +4,7 @@
 #include <QTcpSocket>
 
 #include <domain/Server.hpp>
-#include <domain/interface/UserClient.hpp>
+#include <domain/interface/UserConnection.hpp>
 
 #include <infrastructure/generator/UuidGenerator.hpp>
 #include <infrastructure/storage/MemoryRoomStorage.hpp>

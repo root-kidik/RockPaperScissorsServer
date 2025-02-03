@@ -2,7 +2,7 @@
 
 #include <domain/command/ConnectToRoomCommand.hpp>
 #include <domain/interface/RoomStorage.hpp>
-#include <domain/interface/UserClient.hpp>
+#include <domain/interface/UserConnection.hpp>
 #include <domain/interface/UserStorage.hpp>
 
 namespace rps::domain::command
@@ -14,7 +14,7 @@ m_user_storage{user_storage}
 {
 }
 
-void ConnectToRoomCommand::execute(const std::string& data, const std::shared_ptr<interface::UserClient>& user_client)
+void ConnectToRoomCommand::execute(const std::string& data, const std::shared_ptr<interface::UserConnection>& user_client)
 {
     std::istringstream iss{data};
 

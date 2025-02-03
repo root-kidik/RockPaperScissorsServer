@@ -2,11 +2,11 @@
 
 #include <gmock/gmock.h>
 
-#include <domain/interface/UserClient.hpp>
+#include <domain/interface/UserConnection.hpp>
 
 using namespace rps::domain;
 
-class UserClientMock final : public interface::UserClient
+class UserClientMock final : public interface::UserConnection
 {
 public:
     MOCK_METHOD(bool, is_connected, (), (override, const));

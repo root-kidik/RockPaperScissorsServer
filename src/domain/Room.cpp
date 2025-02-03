@@ -1,6 +1,6 @@
 #include <domain/Room.hpp>
 #include <domain/entity/ClientCommandType.hpp>
-#include <domain/interface/UserClient.hpp>
+#include <domain/interface/UserConnection.hpp>
 
 namespace rps::domain
 {
@@ -11,7 +11,7 @@ Room::Room(const entity::Uuid& uuid, const entity::Uuid& owner_uuid) : m_uuid{uu
 
 bool Room::try_add_player(const entity::Uuid&                           player_uuid,
                           const std::string&                            nickname,
-                          const std::shared_ptr<interface::UserClient>& client)
+                          const std::shared_ptr<interface::UserConnection>& client)
 {
     if (m_players.size() == 6)
         return false;

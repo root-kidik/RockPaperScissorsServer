@@ -2,7 +2,7 @@
 
 #include <domain/command/CreateRoomCommand.hpp>
 #include <domain/interface/RoomStorage.hpp>
-#include <domain/interface/UserClient.hpp>
+#include <domain/interface/UserConnection.hpp>
 
 namespace rps::domain::command
 {
@@ -11,7 +11,7 @@ CreateRoomCommand::CreateRoomCommand(interface::RoomStorage& room_storage) : m_r
 {
 }
 
-void CreateRoomCommand::execute(const std::string& data, const std::shared_ptr<interface::UserClient>& user_client)
+void CreateRoomCommand::execute(const std::string& data, const std::shared_ptr<interface::UserConnection>& user_client)
 {
     std::istringstream iss{data};
 

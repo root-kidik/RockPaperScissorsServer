@@ -8,7 +8,7 @@ set(SRC
     ${SRCROOT}/entity/ServerCommandType.hpp
     
     ${SRCROOT}/interface/Command.hpp
-    ${SRCROOT}/interface/UserClient.hpp
+    ${SRCROOT}/interface/UserConnection.hpp
     ${SRCROOT}/interface/UserStorage.hpp
     ${SRCROOT}/interface/RoomStorage.hpp
     ${SRCROOT}/interface/UuidGenerator.hpp

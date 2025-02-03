@@ -1,7 +1,7 @@
 #include <sstream>
 
 #include <domain/command/RegisterCommand.hpp>
-#include <domain/interface/UserClient.hpp>
+#include <domain/interface/UserConnection.hpp>
 #include <domain/interface/UserStorage.hpp>
 
 namespace rps::domain::command
@@ -11,7 +11,7 @@ RegisterCommand::RegisterCommand(interface::UserStorage& user_storage) : m_user_
 {
 }
 
-void RegisterCommand::execute(const std::string& data, const std::shared_ptr<interface::UserClient>& user_client)
+void RegisterCommand::execute(const std::string& data, const std::shared_ptr<interface::UserConnection>& user_client)
 {
     std::istringstream iss{data};
 

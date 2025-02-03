@@ -5,7 +5,7 @@
 #include <vector>
 
 #include <domain/entity/Uuid.hpp>
-#include <domain/interface/UserClient.hpp>
+#include <domain/interface/UserConnection.hpp>
 
 namespace rps::domain
 {
@@ -17,13 +17,13 @@ public:
 
     bool try_add_player(const entity::Uuid&                           player_uuid,
                         const std::string&                            nickname,
-                        const std::shared_ptr<interface::UserClient>& client);
+                        const std::shared_ptr<interface::UserConnection>& client);
 
 private:
     struct Player
     {
         std::string                            nickname;
-        std::shared_ptr<interface::UserClient> client;
+        std::shared_ptr<interface::UserConnection> client;
     };
 
     entity::Uuid m_uuid;

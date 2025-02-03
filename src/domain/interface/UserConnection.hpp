@@ -5,10 +5,10 @@
 namespace rps::domain::interface
 {
 
-class UserClient
+class UserConnection
 {
 public:
-    virtual ~UserClient() = default;
+    virtual ~UserConnection() = default;
 
     virtual bool is_connected() const          = 0;
     virtual void send(const std::string& data) = 0;

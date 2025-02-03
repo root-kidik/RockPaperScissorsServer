@@ -1,16 +1,16 @@
 #pragma once
 
-#include <domain/interface/UserClient.hpp>
+#include <domain/interface/UserConnection.hpp>
 
 class QTcpSocket;
 
 namespace rps::infrastructure::client
 {
 
-class TcpSocketUserClient final : public domain::interface::UserClient
+class TcpSocketUserConnection final : public domain::interface::UserConnection
 {
 public:
-    TcpSocketUserClient(QTcpSocket* tcp_socket);
+    TcpSocketUserConnection(QTcpSocket* tcp_socket);
 
     bool is_connected() const override;
     void send(const std::string& data) override;

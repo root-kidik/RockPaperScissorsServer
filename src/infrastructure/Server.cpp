@@ -1,7 +1,7 @@
 #include <sstream>
 
 #include <infrastructure/Server.hpp>
-#include <infrastructure/client/TcpSocketUserClient.hpp>
+#include <infrastructure/client/TcpSocketUserConnection.hpp>
 
 namespace rps::infrastructure
 {
@@ -41,7 +41,7 @@ m_server{m_memory_user_storage, m_memory_room_storage}
                             if (!data.empty() && std::isspace(data.front()))
                                 data.erase(0, 1);
 
-                            auto client_wrapper = std::make_shared<client::TcpSocketUserClient>(client_socket);
+                            auto client_wrapper = std::make_shared<client::TcpSocketUserConnection>(client_socket);
                             connect(client_socket,
                                     &QTcpSocket::disconnected,
                                     this,

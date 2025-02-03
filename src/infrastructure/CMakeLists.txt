@@ -4,8 +4,8 @@ set(TARGET_NAME ${PROJECT_NAME}-${TARGET_SUFFIX})
 set(SRCROOT ${CMAKE_CURRENT_LIST_DIR})
 
 set(SRC 
-    ${SRCROOT}/client/TcpSocketUserClient.hpp
-    ${SRCROOT}/client/TcpSocketUserClient.cpp
+    ${SRCROOT}/client/TcpSocketUserConnection.hpp
+    ${SRCROOT}/client/TcpSocketUserConnection.cpp
 
     ${SRCROOT}/generator/UuidGenerator.hpp
     ${SRCROOT}/generator/UuidGenerator.cpp

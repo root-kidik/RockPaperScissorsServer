@@ -10,7 +10,7 @@
 namespace rps::domain::interface
 {
 class Command;
-class UserClient;
+class UserConnection;
 } // namespace rps::domain::interface
 
 namespace rps::domain
@@ -21,7 +21,7 @@ class CommandExecutor
 public:
     void execute_command(entity::ServerCommandType                     command_type,
                          const std::string&                            data,
-                         const std::shared_ptr<interface::UserClient>& user_client);
+                         const std::shared_ptr<interface::UserConnection>& user_client);
     void register_command(entity::ServerCommandType command_type, interface::Command& command);
 
 private:

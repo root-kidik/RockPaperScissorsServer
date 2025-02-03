@@ -6,14 +6,14 @@
 namespace rps::domain::interface
 {
 
-class UserClient;
+class UserConnection;
 
 class Command
 {
 public:
     virtual ~Command() = default;
 
-    virtual void execute(const std::string& data, const std::shared_ptr<UserClient>& user_client) = 0;
+    virtual void execute(const std::string& data, const std::shared_ptr<UserConnection>& user_client) = 0;
 };
 
 } // namespace rps::domain::interface
