@@ -11,9 +11,11 @@ namespace rps::domain::handler
 {
 
 ConnectToRoomCommandHandler::ConnectToRoomCommandHandler(interface::RoomStorage& room_storage,
-                                                         interface::UserStorage& user_storage) :
+                                                         interface::UserStorage& user_storage,
+                                                         protocol::entity::NewPlayerAddedCommandSender& command_sender) :
 m_room_storage{room_storage},
-m_user_storage{user_storage}
+m_user_storage{user_storage},
+m_command_sender{command_sender}
 {
 }
 
@@ -53,13 +55,14 @@ protocol::entity::server::StatusResponse ConnectToRoomCommandHandler::handle(
         return response;
     }
 
-    std::string message = std::to_string(static_cast<protocol::entity::CommandRepresentation>(
-                              protocol::entity::client::ClientCommandType::NewPlayerAdded)) +
-                          ' ' + user_nickname.value();
-
     for (auto& player_uuid : room_ref.players)
         if (auto player = m_user_storage.try_find_user(player_uuid))
-            player.value().get().connection->send(message);
+        {
+            protocol::entity::client::NewPlayerAddedRequest new_request;
+            new_request.user_nickname = user_nickname.value();
+
+            m_command_sender.send(std::move(new_request), player.value().get().connection);
+        }
 
     room_ref.players.emplace(request.user_uuid);
 

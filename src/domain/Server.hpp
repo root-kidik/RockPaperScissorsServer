@@ -8,6 +8,8 @@
 
 #include <RockPaperScissorsProtocol/entity/server/ServerCommandExecutor.hpp>
 
+#include <RockPaperScissorsProtocol/entity/NewPlayerAddedCommandSender.hpp>
+
 namespace rps::domain::interface
 {
 class UserStorage;
@@ -29,6 +31,8 @@ public:
 private:
     interface::UserStorage& m_user_storage;
     interface::RoomStorage& m_room_storage;
+
+    protocol::entity::NewPlayerAddedCommandSender m_new_player_added_command_sender;
 
     handler::RegisterCommandHandler      m_register_command_handler;
     handler::CreateRoomCommandHandler    m_create_room_command_handler;
