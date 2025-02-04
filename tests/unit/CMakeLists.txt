@@ -10,6 +10,8 @@ set(SRC
 
     ${SRCROOT}/mock/client/UserClientMock.hpp
 
+    ${SRCROOT}/mock/utils/TimerMock.hpp
+
     ${SRCROOT}/fixture/command/RegisterCommandFixture.hpp
     ${SRCROOT}/fixture/command/CreateRoomCommandFixture.hpp
     ${SRCROOT}/fixture/command/ConnectToRoomCommandFixture.hpp

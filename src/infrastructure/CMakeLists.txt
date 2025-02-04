@@ -15,6 +15,9 @@ set(SRC
     ${SRCROOT}/storage/MemoryRoomStorage.hpp
     ${SRCROOT}/storage/MemoryRoomStorage.cpp
 
+    ${SRCROOT}/utils/QtTimer.hpp
+    ${SRCROOT}/utils/QtTimer.cpp
+
     ${SRCROOT}/Server.hpp
     ${SRCROOT}/Server.cpp
 )

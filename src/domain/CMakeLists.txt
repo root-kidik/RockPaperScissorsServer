@@ -11,6 +11,7 @@ set(SRC
     ${SRCROOT}/interface/UserStorage.hpp
     ${SRCROOT}/interface/RoomStorage.hpp
     ${SRCROOT}/interface/UuidGenerator.hpp
+    ${SRCROOT}/interface/Timer.hpp
 
     ${SRCROOT}/handler/RegisterCommandHandler.hpp
     ${SRCROOT}/handler/RegisterCommandHandler.cpp

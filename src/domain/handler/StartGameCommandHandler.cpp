@@ -2,6 +2,7 @@
 
 #include <domain/handler/StartGameCommandHandler.hpp>
 #include <domain/interface/RoomStorage.hpp>
+#include <domain/interface/Timer.hpp>
 #include <domain/interface/UserStorage.hpp>
 
 #include <RockPaperScissorsProtocol/utils/Utils.hpp>
@@ -11,10 +12,12 @@ namespace rps::domain::handler
 
 StartGameCommandHandler::StartGameCommandHandler(interface::RoomStorage&                     room_storage,
                                                  interface::UserStorage&                     user_storage,
-                                                 protocol::entity::GameStartedCommandSender& command_sender) :
+                                                 protocol::entity::GameStartedCommandSender& command_sender,
+                                                 std::shared_ptr<interface::Timer>           timer) :
 m_room_storage{room_storage},
 m_user_storage{user_storage},
-m_command_sender{command_sender}
+m_command_sender{command_sender},
+m_timer{std::move(timer)}
 {
 }
 
