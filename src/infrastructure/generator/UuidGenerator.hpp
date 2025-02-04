@@ -8,7 +8,7 @@ namespace rps::infrastructure::generator
 class UuidGenerator final : public domain::interface::UuidGenerator
 {
 public:
-    std::string generate() const;
+    domain::entity::Uuid generate() const;
 };
 
 } // namespace rps::infrastructure::generator

@@ -5,7 +5,7 @@
 namespace rps::infrastructure::generator
 {
 
-std::string UuidGenerator::generate() const
+domain::entity::Uuid UuidGenerator::generate() const
 {
     return QUuid::createUuid().toString().toStdString();
 }
