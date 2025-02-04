@@ -3,7 +3,6 @@
 #include <domain/handler/CreateRoomCommandHandler.hpp>
 #include <domain/interface/RoomStorage.hpp>
 
-#include <RockPaperScissorsProtocol/entity/server/CreateRoomCommand.hpp>
 #include <RockPaperScissorsProtocol/interface/Connection.hpp>
 #include <RockPaperScissorsProtocol/utils/Utils.hpp>
 
@@ -14,21 +13,26 @@ CreateRoomCommandHandler::CreateRoomCommandHandler(interface::RoomStorage& room_
 {
 }
 
-void CreateRoomCommandHandler::execute(const std::string&                                      data,
-                                       const std::shared_ptr<protocol::interface::Connection>& connection)
+protocol::entity::StatusResponse CreateRoomCommandHandler::handle(
+    protocol::entity::CreateRoomRequest&&                   request,
+    const std::shared_ptr<protocol::interface::Connection>& connection)
 {
-    auto command = protocol::utils::deserialize<protocol::entity::CreateRoomCommand>(data);
+    protocol::entity::StatusResponse response;
 
-    if (command.room_name.empty() || command.user_uuid.empty())
+    if (request.room_name.empty() || request.user_uuid.empty())
     {
-        connection->send("Error");
-        return;
+        response.is_ok = false;
+        return response;
     }
 
-    if (auto status = m_room_storage.try_add_room(command.room_name, command.user_uuid))
-        connection->send("Ok");
-    else
-        connection->send("Error");
+    if (!m_room_storage.try_add_room(request.room_name, request.user_uuid))
+    {
+        response.is_ok = false;
+        return response;
+    }
+
+    response.is_ok = true;
+    return response;
 }
 
 } // namespace rps::domain::handler

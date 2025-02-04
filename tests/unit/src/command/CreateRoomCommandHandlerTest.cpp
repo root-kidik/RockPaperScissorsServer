@@ -6,42 +6,48 @@ using testing::Return;
 
 TEST_F(CreateRoomCommandFixture, name_is_empty)
 {
-    std::string          name       = " ";
-    domain::entity::Uuid owner_uuid = "1234";
+    protocol::entity::CreateRoomRequest request;
+    request.room_name = "";
+    request.user_uuid = "1234";
 
-    EXPECT_CALL(*connection, send("Error")).WillOnce(Return());
+    auto response = create_room_command_handler.handle(std::move(request), connection);
 
-    create_room_command_handler.execute(name + ' ' + owner_uuid, connection);
+    EXPECT_FALSE(response.is_ok);
 }
 
 TEST_F(CreateRoomCommandFixture, owner_uuid_is_empty)
 {
-    std::string          name       = "user";
-    domain::entity::Uuid owner_uuid = " ";
+    protocol::entity::CreateRoomRequest request;
+    request.room_name = "";
+    request.user_uuid = "1234";
 
-    EXPECT_CALL(*connection, send("Error")).WillOnce(Return());
+    auto response = create_room_command_handler.handle(std::move(request), connection);
 
-    create_room_command_handler.execute(name + ' ' + owner_uuid, connection);
+    EXPECT_FALSE(response.is_ok);
 }
 
 TEST_F(CreateRoomCommandFixture, room_exist)
 {
-    std::string          name       = "user";
-    domain::entity::Uuid owner_uuid = "1234";
+    protocol::entity::CreateRoomRequest request;
+    request.room_name = "user";
+    request.user_uuid = "1234";
 
-    EXPECT_CALL(room_storage, try_add_room(name, owner_uuid)).WillOnce(Return(true));
-    EXPECT_CALL(*connection, send("Ok")).WillOnce(Return());
+    EXPECT_CALL(room_storage, try_add_room(request.room_name, request.user_uuid)).WillOnce(Return(true));
 
-    create_room_command_handler.execute(name + ' ' + owner_uuid, connection);
+    auto response = create_room_command_handler.handle(std::move(request), connection);
+
+    EXPECT_TRUE(response.is_ok);
 }
 
 TEST_F(CreateRoomCommandFixture, room_not_exist)
 {
-    std::string          name       = "user";
-    domain::entity::Uuid owner_uuid = "1234";
+    protocol::entity::CreateRoomRequest request;
+    request.room_name = "user";
+    request.user_uuid = "1234";
 
-    EXPECT_CALL(room_storage, try_add_room(name, owner_uuid)).WillOnce(Return(false));
-    EXPECT_CALL(*connection, send("Error")).WillOnce(Return());
+    EXPECT_CALL(room_storage, try_add_room(request.room_name, request.user_uuid)).WillOnce(Return(false));
 
-    create_room_command_handler.execute(name + ' ' + owner_uuid, connection);
+    auto response = create_room_command_handler.handle(std::move(request), connection);
+
+    EXPECT_FALSE(response.is_ok);
 }

@@ -5,7 +5,6 @@
 #include <domain/interface/UserStorage.hpp>
 
 #include <RockPaperScissorsProtocol/entity/client/ClientCommandType.hpp>
-#include <RockPaperScissorsProtocol/entity/server/ConnectToRoomCommand.hpp>
 #include <RockPaperScissorsProtocol/utils/Utils.hpp>
 
 namespace rps::domain::handler
@@ -18,38 +17,39 @@ m_user_storage{user_storage}
 {
 }
 
-void ConnectToRoomCommandHandler::execute(const std::string&                                      data,
-                                          const std::shared_ptr<protocol::interface::Connection>& connection)
+protocol::entity::StatusResponse ConnectToRoomCommandHandler::handle(
+    protocol::entity::ConnectToRoomRequest&&                request,
+    const std::shared_ptr<protocol::interface::Connection>& connection)
 {
-    auto command = protocol::utils::deserialize<protocol::entity::ConnectToRoomCommand>(data);
+    protocol::entity::StatusResponse response;
 
-    if (command.user_uuid.empty() || command.room_name.empty())
+    if (request.user_uuid.empty() || request.room_name.empty())
     {
-        connection->send("Error");
-        return;
+        response.is_ok = false;
+        return response;
     }
 
-    auto room = m_room_storage.try_find_room(command.room_name);
+    auto room = m_room_storage.try_find_room(request.room_name);
     if (!room)
     {
-        connection->send("Error");
-        return;
+        response.is_ok = false;
+        return response;
     }
 
     auto& room_ref = room.value().get();
 
-    if (room_ref.players.size() == 6 || (room_ref.players.size() == 5 && command.user_uuid != room_ref.owner_uuid &&
+    if (room_ref.players.size() == 6 || (room_ref.players.size() == 5 && request.user_uuid != room_ref.owner_uuid &&
                                          room_ref.players.find(room_ref.owner_uuid) == room_ref.players.end()))
     {
-        connection->send("Error");
-        return;
+        response.is_ok = false;
+        return response;
     }
 
-    auto user_nickname = m_user_storage.try_find_user_nickname(command.user_uuid);
+    auto user_nickname = m_user_storage.try_find_user_nickname(request.user_uuid);
     if (!user_nickname)
     {
-        connection->send("Error");
-        return;
+        response.is_ok = false;
+        return response;
     }
 
     std::string message = std::to_string(static_cast<std::uint32_t>(protocol::entity::ClientCommandType::NewPlayerAdded)) +
@@ -59,9 +59,10 @@ void ConnectToRoomCommandHandler::execute(const std::string&                    
         if (auto player = m_user_storage.try_find_user(player_uuid))
             player.value().get().connection->send(message);
 
-    room_ref.players.emplace(command.user_uuid);
+    room_ref.players.emplace(request.user_uuid);
 
-    connection->send("Ok");
+    response.is_ok = true;
+    return response;
 }
 
 } // namespace rps::domain::handler

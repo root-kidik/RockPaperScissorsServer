@@ -6,34 +6,38 @@ using testing::Return;
 
 TEST_F(RegisterCommandFixture, name_is_unqiue)
 {
-    std::string          name = "user";
-    domain::entity::Uuid uuid = "1234";
+    protocol::entity::RegisterRequest request;
+    request.user_nickname = "user";
+
+    std::string user_uuid = "1234";
 
     EXPECT_CALL(user_storage,
-                try_add_user(name, std::static_pointer_cast<protocol::interface::Connection>(connection)))
-        .WillOnce(Return(uuid));
-    EXPECT_CALL(*connection, send(uuid)).WillOnce(Return());
+                try_add_user(request.user_nickname, std::static_pointer_cast<protocol::interface::Connection>(connection)))
+        .WillOnce(Return(user_uuid));
 
-    register_command_handler.execute(name, connection);
+    auto response = register_command_handler.handle(std::move(request), connection);
+
+    EXPECT_TRUE(response.user_uuid == user_uuid);
 }
 
 TEST_F(RegisterCommandFixture, name_is_empty)
 {
-    std::string name = " ";
+    protocol::entity::RegisterRequest request;
+    request.user_nickname = "";
 
-    EXPECT_CALL(*connection, send("Error")).WillOnce(Return());
+    auto response = register_command_handler.handle(std::move(request), connection);
 
-    register_command_handler.execute(name, connection);
+    EXPECT_TRUE(response.user_uuid.empty());
 }
 
 TEST_F(RegisterCommandFixture, name_already_exist)
 {
-    std::string name = "user";
+    protocol::entity::RegisterRequest request;
+    request.user_nickname = "user";
 
     EXPECT_CALL(user_storage,
-                try_add_user(name, std::static_pointer_cast<protocol::interface::Connection>(connection)))
+                try_add_user(request.user_nickname, std::static_pointer_cast<protocol::interface::Connection>(connection)))
         .WillOnce(Return(std::nullopt));
-    EXPECT_CALL(*connection, send("Error")).WillOnce(Return());
 
-    register_command_handler.execute(name, connection);
+    register_command_handler.handle(std::move(request), connection);
 }

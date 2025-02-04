@@ -13,7 +13,7 @@ m_uuid_generator{uuid_generator}
 }
 
 std::optional<domain::entity::Uuid> MemoryUserStorage::try_add_user(
-    const std::string&                                              nickname,
+    const std::string&                                      nickname,
     const std::shared_ptr<protocol::interface::Connection>& connection)
 {
     if (m_users.find(nickname) != m_users.end())

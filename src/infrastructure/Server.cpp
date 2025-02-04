@@ -48,7 +48,7 @@ m_server{m_memory_user_storage, m_memory_room_storage}
                                     [client_wrapper]() { client_wrapper->disconnect(); });
 
                             m_server.on_command(static_cast<protocol::entity::ServerCommandType>(command_type),
-                                                data,
+                                                std::move(data),
                                                 client_wrapper);
                         });
 

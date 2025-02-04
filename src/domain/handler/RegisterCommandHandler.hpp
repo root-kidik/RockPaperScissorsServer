@@ -10,12 +10,13 @@ class UserStorage;
 namespace rps::domain::handler
 {
 
-class RegisterCommandHandler final : public protocol::interface::CommandHandler
+class RegisterCommandHandler final : public protocol::interface::RegisterCommandHandlerBase
 {
 public:
     RegisterCommandHandler(interface::UserStorage& user_storage);
 
-    void execute(const std::string& data, const std::shared_ptr<protocol::interface::Connection>& connection) override;
+    protocol::entity::RegisterResponse handle(protocol::entity::RegisterRequest&& request,
+                                              const std::shared_ptr<protocol::interface::Connection>& connection) override;
 
 private:
     interface::UserStorage& m_user_storage;

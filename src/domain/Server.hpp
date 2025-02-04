@@ -23,7 +23,7 @@ public:
     Server(interface::UserStorage& user_storage, interface::RoomStorage& room_storage);
 
     void on_command(protocol::entity::ServerCommandType                     command_type,
-                    const std::string&                                      data,
+                    std::string&&                                           data,
                     const std::shared_ptr<protocol::interface::Connection>& client);
 
 private:

@@ -11,12 +11,13 @@ class UserStorage;
 namespace rps::domain::handler
 {
 
-class ConnectToRoomCommandHandler final : public protocol::interface::CommandHandler
+class ConnectToRoomCommandHandler final : public protocol::interface::ConnectToRoomHandlerBase
 {
 public:
     ConnectToRoomCommandHandler(interface::RoomStorage& room_storage, interface::UserStorage& user_storage);
 
-    void execute(const std::string& data, const std::shared_ptr<protocol::interface::Connection>& connection) override;
+    protocol::entity::StatusResponse handle(protocol::entity::ConnectToRoomRequest&& request,
+                                            const std::shared_ptr<protocol::interface::Connection>& connection) override;
 
 private:
     interface::RoomStorage& m_room_storage;

@@ -17,9 +17,8 @@ class MemoryUserStorage final : public domain::interface::UserStorage
 public:
     MemoryUserStorage(const domain::interface::UuidGenerator& uuid_generator);
 
-    std::optional<domain::entity::Uuid> try_add_user(
-        const std::string&                                              nickname,
-        const std::shared_ptr<protocol::interface::Connection>& connection) override;
+    std::optional<domain::entity::Uuid> try_add_user(const std::string& nickname,
+                                                     const std::shared_ptr<protocol::interface::Connection>& connection) override;
 
     std::optional<domain::entity::Uuid> try_find_user_uuid(const std::string& nickname) const override;
 

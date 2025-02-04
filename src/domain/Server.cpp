@@ -16,10 +16,10 @@ m_connect_to_room_command_handler{m_room_storage, m_user_storage}
 }
 
 void Server::on_command(protocol::entity::ServerCommandType                     command_type,
-                        const std::string&                                      data,
+                        std::string&&                                           data,
                         const std::shared_ptr<protocol::interface::Connection>& client)
 {
-    m_command_executor.execute_command(command_type, data, client);
+    m_command_executor.execute_command(command_type, std::move(data), client);
 }
 
 } // namespace rps::domain
