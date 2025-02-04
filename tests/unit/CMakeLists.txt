@@ -8,7 +8,7 @@ set(SRC
     ${SRCROOT}/mock/storage/UserStorageMock.hpp
     ${SRCROOT}/mock/storage/RoomStorageMock.hpp
 
-    ${SRCROOT}/mock/client/UserClientMock.hpp
+    ${SRCROOT}/mock/client/ConnectionMock.hpp
 
     ${SRCROOT}/mock/utils/TimerMock.hpp
 

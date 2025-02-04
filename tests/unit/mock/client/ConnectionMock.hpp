@@ -6,7 +6,7 @@
 
 using namespace rps;
 
-class UserClientMock final : public protocol::interface::Connection
+class ConnectionMock final : public protocol::interface::Connection
 {
 public:
     MOCK_METHOD(bool, is_connected, (), (override, const));

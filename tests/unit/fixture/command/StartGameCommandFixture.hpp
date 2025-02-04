@@ -1,4 +1,4 @@
-#include <mock/client/UserClientMock.hpp>
+#include <mock/client/ConnectionMock.hpp>
 #include <mock/storage/RoomStorageMock.hpp>
 #include <mock/storage/UserStorageMock.hpp>
 #include <mock/utils/TimerMock.hpp>

@@ -21,7 +21,7 @@ public:
     StartGameCommandHandler(interface::RoomStorage&                     room_storage,
                             interface::UserStorage&                     user_storage,
                             protocol::entity::GameStartedCommandSender& command_sender,
-                            std::shared_ptr<interface::Timer> timer);
+                            std::shared_ptr<interface::Timer>           timer);
 
     protocol::entity::server::StatusResponse handle(protocol::entity::server::StartGameRequest&& request,
                                                     const std::shared_ptr<protocol::interface::Connection>& connection) override;

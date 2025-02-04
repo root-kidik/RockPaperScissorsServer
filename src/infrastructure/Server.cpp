@@ -29,22 +29,22 @@ Server::Server() : m_memory_user_storage{m_uuid_generator}, m_memory_room_storag
             this,
             [this]()
             {
-                auto* client_socket = nextPendingConnection();
+                auto* connection = nextPendingConnection();
 
-                auto client_wrapper = std::make_shared<client::TcpSocketUserConnection>(client_socket);
+                auto connection_wrapper = std::make_shared<client::TcpSocketUserConnection>(connection);
 
-                connect(client_socket,
+                connect(connection,
                         &QTcpSocket::disconnected,
                         this,
-                        [client_wrapper]() { client_wrapper->disconnect(); });
+                        [connection_wrapper]() { connection_wrapper->disconnect(); });
 
-                connect(client_socket, &QTcpSocket::disconnected, client_socket, &QTcpSocket::deleteLater);
+                connect(connection, &QTcpSocket::disconnected, connection, &QTcpSocket::deleteLater);
 
-                connect(client_socket,
+                connect(connection,
                         &QTcpSocket::readyRead,
                         this,
-                        [client_socket, client_wrapper, this]()
-                        { m_command_executor.execute_command(client_socket->readAll().toStdString(), client_wrapper); });
+                        [connection, connection_wrapper, this]()
+                        { m_command_executor.execute_command(connection->readAll().toStdString(), connection_wrapper); });
             });
 }
 
