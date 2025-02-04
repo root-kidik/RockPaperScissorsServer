@@ -12,9 +12,8 @@ m_uuid_generator{uuid_generator}
 {
 }
 
-std::optional<domain::entity::Uuid> MemoryUserStorage::try_add_user(
-    const std::string&                                      nickname,
-    const std::shared_ptr<protocol::interface::Connection>& connection)
+std::optional<std::string> MemoryUserStorage::try_add_user(const std::string& nickname,
+                                                           const std::shared_ptr<protocol::interface::Connection>& connection)
 {
     if (m_users.find(nickname) != m_users.end())
         return std::nullopt;
@@ -28,7 +27,7 @@ std::optional<domain::entity::Uuid> MemoryUserStorage::try_add_user(
     return uuid;
 }
 
-std::optional<domain::entity::Uuid> MemoryUserStorage::try_find_user_uuid(const std::string& nickname) const
+std::optional<std::string> MemoryUserStorage::try_find_user_uuid(const std::string& nickname) const
 {
     const auto it = m_nickname_to_uuid.find(nickname);
 
@@ -38,7 +37,7 @@ std::optional<domain::entity::Uuid> MemoryUserStorage::try_find_user_uuid(const 
     return it->second;
 }
 
-std::optional<std::string> MemoryUserStorage::try_find_user_nickname(const domain::entity::Uuid& uuid) const
+std::optional<std::string> MemoryUserStorage::try_find_user_nickname(const std::string& uuid) const
 {
     auto it = m_uuid_to_nickname.find(uuid);
 
@@ -48,8 +47,7 @@ std::optional<std::string> MemoryUserStorage::try_find_user_nickname(const domai
     return it->second;
 }
 
-std::optional<std::reference_wrapper<const domain::entity::User>> MemoryUserStorage::try_find_user(
-    const domain::entity::Uuid& uuid) const
+std::optional<std::reference_wrapper<const domain::entity::User>> MemoryUserStorage::try_find_user(const std::string& uuid) const
 {
     auto it = m_users.find(uuid);
 

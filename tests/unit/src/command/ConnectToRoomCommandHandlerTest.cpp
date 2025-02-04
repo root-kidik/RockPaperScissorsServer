@@ -290,7 +290,7 @@ TEST_F(ConnectToRoomCommandFixture, player_numer_6_is_not_added_because_owner_is
         request.user_uuid = seven_user.uuid;
 
         auto response = connect_to_room_command_handler.handle(std::move(request), seven_user.connection);
-    
+
         EXPECT_FALSE(response.is_ok);
 
         EXPECT_TRUE(room.players.find(seven_user.uuid) == room.players.end());

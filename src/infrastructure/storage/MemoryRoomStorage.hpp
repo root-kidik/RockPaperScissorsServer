@@ -18,7 +18,7 @@ class MemoryRoomStorage final : public domain::interface::RoomStorage
 public:
     MemoryRoomStorage(const domain::interface::UuidGenerator& uuid_generator);
 
-    bool try_add_room(const std::string& name, const domain::entity::Uuid& owner_uuid) override;
+    bool try_add_room(const std::string& name, const std::string& owner_uuid) override;
     std::optional<std::reference_wrapper<domain::entity::Room>> try_find_room(const std::string& name) override;
 
 private:

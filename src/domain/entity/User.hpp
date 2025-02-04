@@ -2,8 +2,6 @@
 
 #include <memory>
 
-#include <domain/entity/Uuid.hpp>
-
 #include <RockPaperScissorsProtocol/interface/Connection.hpp>
 
 namespace rps::domain::entity
@@ -11,7 +9,7 @@ namespace rps::domain::entity
 
 struct User
 {
-    Uuid        uuid;
+    std::string uuid;
     std::string nickname;
 
     std::shared_ptr<protocol::interface::Connection> connection;

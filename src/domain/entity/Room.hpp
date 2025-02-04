@@ -4,8 +4,6 @@
 #include <unordered_set>
 #include <vector>
 
-#include <domain/entity/Uuid.hpp>
-
 #include <RockPaperScissorsProtocol/interface/Connection.hpp>
 
 namespace rps::domain::entity
@@ -13,10 +11,10 @@ namespace rps::domain::entity
 
 struct Room
 {
-    std::string  name;
-    entity::Uuid owner_uuid;
+    std::string name;
+    std::string owner_uuid;
 
-    std::unordered_set<entity::Uuid> players;
+    std::unordered_set<std::string> players;
 };
 
 } // namespace rps::domain::entity
