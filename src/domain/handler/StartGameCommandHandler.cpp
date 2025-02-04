@@ -42,6 +42,7 @@ protocol::entity::server::StatusResponse StartGameCommandHandler::handle(
     }
 
     auto& room_ref = room.value().get();
+    room_ref.is_game_started = true;
 
     for (auto& player_uuid : room_ref.players)
         if (auto player = m_user_storage.try_find_user(player_uuid))

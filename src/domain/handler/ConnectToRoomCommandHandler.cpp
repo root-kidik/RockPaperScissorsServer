@@ -40,7 +40,7 @@ protocol::entity::server::StatusResponse ConnectToRoomCommandHandler::handle(
 
     auto& room_ref = room.value().get();
 
-    if (room_ref.players.size() == entity::Room::kMaxPlayers ||
+    if (room_ref.is_game_started || room_ref.players.size() == entity::Room::kMaxPlayers ||
         (room_ref.players.size() == entity::Room::kMaxPlayers - 1 && request.user_uuid != room_ref.owner_uuid &&
          room_ref.players.find(room_ref.owner_uuid) == room_ref.players.end()))
     {

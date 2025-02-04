@@ -54,6 +54,29 @@ TEST_F(ConnectToRoomCommandFixture, room_exist)
     EXPECT_TRUE(room.players.find(request.user_uuid) != room.players.end());
 }
 
+TEST_F(ConnectToRoomCommandFixture, room_game_already_started)
+{
+    auto connection = std::make_shared<ConnectionMock>();
+
+    domain::entity::Room room;
+    room.name       = "user_room";
+    room.owner_uuid = "5678";
+    room.is_game_started = true;
+
+    protocol::entity::server::ConnectToRoomRequest request;
+    request.room_name = room.name;
+    request.user_uuid = "1234";
+
+    EXPECT_CALL(room_storage, try_find_room(request.room_name))
+        .WillOnce(Return(std::optional<std::reference_wrapper<domain::entity::Room>>{room}));
+
+    auto response = connect_to_room_command_handler.handle(std::move(request), connection);
+
+    EXPECT_FALSE(response.is_ok);
+
+    EXPECT_TRUE(room.players.size() == 0);
+}
+
 TEST_F(ConnectToRoomCommandFixture, room_not_exist)
 {
     auto connection = std::make_shared<ConnectionMock>();

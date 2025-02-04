@@ -21,6 +21,8 @@ struct Room
     std::string  name;
     entity::Uuid owner_uuid;
 
+    bool is_game_started{};
+
     std::unordered_set<entity::Uuid> players;
 };
 
