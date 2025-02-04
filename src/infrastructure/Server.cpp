@@ -29,10 +29,10 @@ m_server{m_memory_user_storage, m_memory_room_storage}
                             iss >> command_type;
 
                             if (command_type < static_cast<protocol::entity::CommandRepresentation>(
-                                                   protocol::entity::ServerCommandType::Begin) +
+                                                   protocol::entity::server::ServerCommandType::Begin) +
                                                    1 ||
                                 command_type > static_cast<protocol::entity::CommandRepresentation>(
-                                                   protocol::entity::ServerCommandType::End) -
+                                                   protocol::entity::server::ServerCommandType::End) -
                                                    1)
                                 return;
 
@@ -48,7 +48,7 @@ m_server{m_memory_user_storage, m_memory_room_storage}
                                     this,
                                     [client_wrapper]() { client_wrapper->disconnect(); });
 
-                            m_server.on_command(static_cast<protocol::entity::ServerCommandType>(command_type),
+                            m_server.on_command(static_cast<protocol::entity::server::ServerCommandType>(command_type),
                                                 std::move(data),
                                                 client_wrapper);
                         });

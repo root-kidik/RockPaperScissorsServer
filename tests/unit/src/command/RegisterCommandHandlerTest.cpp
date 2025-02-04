@@ -6,7 +6,7 @@ using testing::Return;
 
 TEST_F(RegisterCommandFixture, name_is_unqiue)
 {
-    protocol::entity::RegisterRequest request;
+    protocol::entity::server::RegisterRequest request;
     request.user_nickname = "user";
 
     std::string user_uuid = "1234";
@@ -22,7 +22,7 @@ TEST_F(RegisterCommandFixture, name_is_unqiue)
 
 TEST_F(RegisterCommandFixture, name_is_empty)
 {
-    protocol::entity::RegisterRequest request;
+    protocol::entity::server::RegisterRequest request;
     request.user_nickname = "";
 
     auto response = register_command_handler.handle(std::move(request), connection);
@@ -32,7 +32,7 @@ TEST_F(RegisterCommandFixture, name_is_empty)
 
 TEST_F(RegisterCommandFixture, name_already_exist)
 {
-    protocol::entity::RegisterRequest request;
+    protocol::entity::server::RegisterRequest request;
     request.user_nickname = "user";
 
     EXPECT_CALL(user_storage,

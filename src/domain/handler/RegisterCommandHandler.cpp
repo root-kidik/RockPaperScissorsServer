@@ -12,11 +12,11 @@ RegisterCommandHandler::RegisterCommandHandler(interface::UserStorage& user_stor
 {
 }
 
-protocol::entity::RegisterResponse RegisterCommandHandler::handle(
-    protocol::entity::RegisterRequest&&                     request,
+protocol::entity::server::RegisterResponse RegisterCommandHandler::handle(
+    protocol::entity::server::RegisterRequest&&             request,
     const std::shared_ptr<protocol::interface::Connection>& connection)
 {
-    protocol::entity::RegisterResponse response;
+    protocol::entity::server::RegisterResponse response;
 
     if (request.user_nickname.empty())
         return response;

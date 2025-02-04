@@ -6,7 +6,7 @@ using testing::Return;
 
 TEST_F(CreateRoomCommandFixture, name_is_empty)
 {
-    protocol::entity::CreateRoomRequest request;
+    protocol::entity::server::CreateRoomRequest request;
     request.room_name = "";
     request.user_uuid = "1234";
 
@@ -17,7 +17,7 @@ TEST_F(CreateRoomCommandFixture, name_is_empty)
 
 TEST_F(CreateRoomCommandFixture, owner_uuid_is_empty)
 {
-    protocol::entity::CreateRoomRequest request;
+    protocol::entity::server::CreateRoomRequest request;
     request.room_name = "";
     request.user_uuid = "1234";
 
@@ -28,7 +28,7 @@ TEST_F(CreateRoomCommandFixture, owner_uuid_is_empty)
 
 TEST_F(CreateRoomCommandFixture, room_exist)
 {
-    protocol::entity::CreateRoomRequest request;
+    protocol::entity::server::CreateRoomRequest request;
     request.room_name = "user";
     request.user_uuid = "1234";
 
@@ -41,7 +41,7 @@ TEST_F(CreateRoomCommandFixture, room_exist)
 
 TEST_F(CreateRoomCommandFixture, room_not_exist)
 {
-    protocol::entity::CreateRoomRequest request;
+    protocol::entity::server::CreateRoomRequest request;
     request.room_name = "user";
     request.user_uuid = "1234";
 

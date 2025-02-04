@@ -5,7 +5,7 @@
 namespace rps::domain::entity
 {
 
-using CardRepresentation = std::uint32_t; 
+using CardRepresentation = std::uint32_t;
 
 enum class Card : CardRepresentation
 {

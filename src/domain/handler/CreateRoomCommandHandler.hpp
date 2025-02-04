@@ -1,6 +1,6 @@
 #pragma once
 
-#include <RockPaperScissorsProtocol/interface/CommandHandler.hpp>
+#include <RockPaperScissorsProtocol/interface/CreateRoomCommandHandlerBase.hpp>
 
 namespace rps::domain::interface
 {
@@ -15,8 +15,8 @@ class CreateRoomCommandHandler final : public protocol::interface::CreateRoomCom
 public:
     CreateRoomCommandHandler(interface::RoomStorage& room_storage);
 
-    protocol::entity::StatusResponse handle(protocol::entity::CreateRoomRequest&& request,
-                                            const std::shared_ptr<protocol::interface::Connection>& connection) override;
+    protocol::entity::server::StatusResponse handle(protocol::entity::server::CreateRoomRequest&& request,
+                                                    const std::shared_ptr<protocol::interface::Connection>& connection) override;
 
 private:
     interface::RoomStorage& m_room_storage;

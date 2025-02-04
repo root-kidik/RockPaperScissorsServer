@@ -17,11 +17,11 @@ m_user_storage{user_storage}
 {
 }
 
-protocol::entity::StatusResponse ConnectToRoomCommandHandler::handle(
-    protocol::entity::ConnectToRoomRequest&&                request,
+protocol::entity::server::StatusResponse ConnectToRoomCommandHandler::handle(
+    protocol::entity::server::ConnectToRoomRequest&&        request,
     const std::shared_ptr<protocol::interface::Connection>& connection)
 {
-    protocol::entity::StatusResponse response;
+    protocol::entity::server::StatusResponse response;
 
     if (request.user_uuid.empty() || request.room_name.empty())
     {
@@ -53,7 +53,7 @@ protocol::entity::StatusResponse ConnectToRoomCommandHandler::handle(
     }
 
     std::string message = std::to_string(static_cast<protocol::entity::CommandRepresentation>(
-                              protocol::entity::ClientCommandType::NewPlayerAdded)) +
+                              protocol::entity::client::ClientCommandType::NewPlayerAdded)) +
                           ' ' + user_nickname.value();
 
     for (auto& player_uuid : room_ref.players)

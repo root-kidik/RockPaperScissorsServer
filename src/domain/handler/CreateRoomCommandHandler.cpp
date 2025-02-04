@@ -13,11 +13,11 @@ CreateRoomCommandHandler::CreateRoomCommandHandler(interface::RoomStorage& room_
 {
 }
 
-protocol::entity::StatusResponse CreateRoomCommandHandler::handle(
-    protocol::entity::CreateRoomRequest&&                   request,
+protocol::entity::server::StatusResponse CreateRoomCommandHandler::handle(
+    protocol::entity::server::CreateRoomRequest&&           request,
     const std::shared_ptr<protocol::interface::Connection>& connection)
 {
-    protocol::entity::StatusResponse response;
+    protocol::entity::server::StatusResponse response;
 
     if (request.room_name.empty() || request.user_uuid.empty())
     {
