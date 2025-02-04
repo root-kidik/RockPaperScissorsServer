@@ -128,8 +128,8 @@ TEST_F(ConnectToRoomCommandFixture, user_is_added_then_notifed_after_new_user_ad
             EXPECT_CALL(user_storage, try_find_user(first_user.uuid))
                 .WillOnce(Return(std::optional<std::reference_wrapper<const domain::entity::User>>{first_user}));
 
-            std::string message = std::to_string(
-                                      static_cast<std::uint32_t>(protocol::entity::ClientCommandType::NewPlayerAdded)) +
+            std::string message = std::to_string(static_cast<protocol::entity::CommandRepresentation>(
+                                      protocol::entity::ClientCommandType::NewPlayerAdded)) +
                                   ' ' + second_user.nickname;
 
             EXPECT_CALL(*std::dynamic_pointer_cast<UserClientMock>(first_user.connection), send(message)).WillOnce(Return());
@@ -187,8 +187,8 @@ TEST_F(ConnectToRoomCommandFixture, player_number_7_is_not_added)
             EXPECT_CALL(user_storage, try_find_user(owner_user.uuid))
                 .WillOnce(Return(std::optional<std::reference_wrapper<const domain::entity::User>>{owner_user}));
 
-            std::string message = std::to_string(
-                                      static_cast<std::uint32_t>(protocol::entity::ClientCommandType::NewPlayerAdded)) +
+            std::string message = std::to_string(static_cast<protocol::entity::CommandRepresentation>(
+                                      protocol::entity::ClientCommandType::NewPlayerAdded)) +
                                   ' ' + user.nickname;
 
             EXPECT_CALL(*std::dynamic_pointer_cast<UserClientMock>(owner_user.connection), send(message)).WillOnce(Return());
@@ -200,8 +200,8 @@ TEST_F(ConnectToRoomCommandFixture, player_number_7_is_not_added)
             EXPECT_CALL(user_storage, try_find_user(existed_user.uuid))
                 .WillOnce(Return(std::optional<std::reference_wrapper<const domain::entity::User>>{existed_user}));
 
-            std::string message = std::to_string(
-                                      static_cast<std::uint32_t>(protocol::entity::ClientCommandType::NewPlayerAdded)) +
+            std::string message = std::to_string(static_cast<protocol::entity::CommandRepresentation>(
+                                      protocol::entity::ClientCommandType::NewPlayerAdded)) +
                                   ' ' + user.nickname;
 
             EXPECT_CALL(*std::dynamic_pointer_cast<UserClientMock>(existed_user.connection), send(message)).WillOnce(Return());
@@ -259,8 +259,8 @@ TEST_F(ConnectToRoomCommandFixture, player_numer_6_is_not_added_because_owner_is
             EXPECT_CALL(user_storage, try_find_user(existed_user.uuid))
                 .WillOnce(Return(std::optional<std::reference_wrapper<const domain::entity::User>>{existed_user}));
 
-            std::string message = std::to_string(
-                                      static_cast<std::uint32_t>(protocol::entity::ClientCommandType::NewPlayerAdded)) +
+            std::string message = std::to_string(static_cast<protocol::entity::CommandRepresentation>(
+                                      protocol::entity::ClientCommandType::NewPlayerAdded)) +
                                   ' ' + user.nickname;
 
             EXPECT_CALL(*std::dynamic_pointer_cast<UserClientMock>(existed_user.connection), send(message)).WillOnce(Return());
@@ -290,7 +290,7 @@ TEST_F(ConnectToRoomCommandFixture, player_numer_6_is_not_added_because_owner_is
         request.user_uuid = seven_user.uuid;
 
         auto response = connect_to_room_command_handler.handle(std::move(request), seven_user.connection);
-    
+
         EXPECT_FALSE(response.is_ok);
 
         EXPECT_TRUE(room.players.find(seven_user.uuid) == room.players.end());

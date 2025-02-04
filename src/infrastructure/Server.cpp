@@ -25,11 +25,15 @@ m_server{m_memory_user_storage, m_memory_room_storage}
                         {
                             std::istringstream iss{client_socket->readAll().toStdString()};
 
-                            std::uint32_t command_type;
+                            protocol::entity::CommandRepresentation command_type;
                             iss >> command_type;
 
-                            if (command_type < static_cast<std::uint32_t>(protocol::entity::ServerCommandType::Begin) + 1 ||
-                                command_type > static_cast<std::uint32_t>(protocol::entity::ServerCommandType::End) - 1)
+                            if (command_type < static_cast<protocol::entity::CommandRepresentation>(
+                                                   protocol::entity::ServerCommandType::Begin) +
+                                                   1 ||
+                                command_type > static_cast<protocol::entity::CommandRepresentation>(
+                                                   protocol::entity::ServerCommandType::End) -
+                                                   1)
                             {
                                 client_socket->write("No such command");
                                 return;

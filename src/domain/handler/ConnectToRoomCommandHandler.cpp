@@ -52,7 +52,8 @@ protocol::entity::StatusResponse ConnectToRoomCommandHandler::handle(
         return response;
     }
 
-    std::string message = std::to_string(static_cast<std::uint32_t>(protocol::entity::ClientCommandType::NewPlayerAdded)) +
+    std::string message = std::to_string(static_cast<protocol::entity::CommandRepresentation>(
+                              protocol::entity::ClientCommandType::NewPlayerAdded)) +
                           ' ' + user_nickname.value();
 
     for (auto& player_uuid : room_ref.players)
