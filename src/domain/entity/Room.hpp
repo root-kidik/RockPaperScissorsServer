@@ -13,6 +13,8 @@ namespace rps::domain::entity
 
 struct Room
 {
+    static constexpr std::uint8_t kMaxPlayers = 6;
+
     std::string  name;
     entity::Uuid owner_uuid;
 
