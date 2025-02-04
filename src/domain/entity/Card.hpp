@@ -5,7 +5,9 @@
 namespace rps::domain::entity
 {
 
-enum class Card : std::uint32_t
+using CardRepresentation = std::uint32_t; 
+
+enum class Card : CardRepresentation
 {
     Begin, // just for min value
     Rock,
