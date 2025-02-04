@@ -34,10 +34,7 @@ m_server{m_memory_user_storage, m_memory_room_storage}
                                 command_type > static_cast<protocol::entity::CommandRepresentation>(
                                                    protocol::entity::ServerCommandType::End) -
                                                    1)
-                            {
-                                client_socket->write("No such command");
                                 return;
-                            }
 
                             std::string data;
                             std::getline(iss, data);

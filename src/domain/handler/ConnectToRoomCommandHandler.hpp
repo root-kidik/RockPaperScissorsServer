@@ -11,7 +11,7 @@ class UserStorage;
 namespace rps::domain::handler
 {
 
-class ConnectToRoomCommandHandler final : public protocol::interface::ConnectToRoomHandlerBase
+class ConnectToRoomCommandHandler final : public protocol::interface::ConnectToRoomCommandHandlerBase
 {
 public:
     ConnectToRoomCommandHandler(interface::RoomStorage& room_storage, interface::UserStorage& user_storage);
