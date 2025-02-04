@@ -10,7 +10,7 @@ m_uuid_generator{uuid_generator}
 {
 }
 
-bool MemoryRoomStorage::try_add_room(const std::string& name, const std::string& owner_uuid)
+bool MemoryRoomStorage::try_add_room(const std::string& name, const domain::entity::Uuid& owner_uuid)
 {
     if (m_rooms.find(name) != m_rooms.end())
         return false;

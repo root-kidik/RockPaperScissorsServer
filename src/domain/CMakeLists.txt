@@ -4,6 +4,7 @@ set(TARGET_NAME ${PROJECT_NAME}-${TARGET_SUFFIX})
 set(SRCROOT ${CMAKE_CURRENT_LIST_DIR})
 
 set(SRC
+    ${SRCROOT}/entity/Uuid.hpp
     ${SRCROOT}/entity/User.hpp
     ${SRCROOT}/entity/Room.hpp
     
