@@ -13,10 +13,12 @@ set(SRC
     ${SRCROOT}/fixture/command/RegisterCommandFixture.hpp
     ${SRCROOT}/fixture/command/CreateRoomCommandFixture.hpp
     ${SRCROOT}/fixture/command/ConnectToRoomCommandFixture.hpp
+    ${SRCROOT}/fixture/command/StartGameCommandFixture.hpp
 
     ${SRCROOT}/src/command/ConnectToRoomCommandHandlerTest.cpp
     ${SRCROOT}/src/command/RegisterCommandHandlerTest.cpp
     ${SRCROOT}/src/command/CreateRoomCommandHandlerTest.cpp
+    ${SRCROOT}/src/command/StartGameCommandHandlerTest.cpp
 )
 
 add_executable(${TARGET_NAME} ${SRC})

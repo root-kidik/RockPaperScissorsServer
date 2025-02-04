@@ -5,10 +5,11 @@
 #include <domain/handler/ConnectToRoomCommandHandler.hpp>
 #include <domain/handler/CreateRoomCommandHandler.hpp>
 #include <domain/handler/RegisterCommandHandler.hpp>
+#include <domain/handler/StartGameCommandHandler.hpp>
 
-#include <RockPaperScissorsProtocol/entity/server/ServerCommandExecutor.hpp>
-
+#include <RockPaperScissorsProtocol/entity/GameStartedCommandSender.hpp>
 #include <RockPaperScissorsProtocol/entity/NewPlayerAddedCommandSender.hpp>
+#include <RockPaperScissorsProtocol/entity/server/ServerCommandExecutor.hpp>
 
 namespace rps::domain::interface
 {
@@ -33,10 +34,12 @@ private:
     interface::RoomStorage& m_room_storage;
 
     protocol::entity::NewPlayerAddedCommandSender m_new_player_added_command_sender;
+    protocol::entity::GameStartedCommandSender    m_game_started_command_sender;
 
     handler::RegisterCommandHandler      m_register_command_handler;
     handler::CreateRoomCommandHandler    m_create_room_command_handler;
     handler::ConnectToRoomCommandHandler m_connect_to_room_command_handler;
+    handler::StartGameCommandHandler     m_start_game_command_handler;
 
     protocol::entity::server::ServerCommandExecutor m_command_executor;
 };

@@ -18,6 +18,8 @@ set(SRC
     ${SRCROOT}/handler/CreateRoomCommandHandler.cpp
     ${SRCROOT}/handler/ConnectToRoomCommandHandler.hpp
     ${SRCROOT}/handler/ConnectToRoomCommandHandler.cpp
+    ${SRCROOT}/handler/StartGameCommandHandler.hpp
+    ${SRCROOT}/handler/StartGameCommandHandler.cpp
 
     ${SRCROOT}/Server.hpp
     ${SRCROOT}/Server.cpp
