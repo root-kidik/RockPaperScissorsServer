@@ -1,16 +1,27 @@
 #include <sstream>
 
+#include <domain/handler/ConnectToRoomCommandHandler.hpp>
+#include <domain/handler/CreateRoomCommandHandler.hpp>
+#include <domain/handler/RegisterCommandHandler.hpp>
+#include <domain/handler/StartGameCommandHandler.hpp>
+
 #include <infrastructure/Server.hpp>
 #include <infrastructure/client/TcpSocketUserConnection.hpp>
 
 namespace rps::infrastructure
 {
 
-Server::Server() :
-m_memory_user_storage{m_uuid_generator},
-m_memory_room_storage{m_uuid_generator},
-m_server{m_memory_user_storage, m_memory_room_storage}
+Server::Server() : m_memory_user_storage{m_uuid_generator}, m_memory_room_storage{m_uuid_generator}
 {
+    m_command_executor.register_command<domain::handler::RegisterCommandHandler>(m_memory_user_storage);
+    m_command_executor.register_command<domain::handler::CreateRoomCommandHandler>(m_memory_room_storage);
+    m_command_executor.register_command<domain::handler::ConnectToRoomCommandHandler>(m_memory_room_storage,
+                                                                                      m_memory_user_storage,
+                                                                                      m_new_player_added_command_sender);
+    m_command_executor.register_command<domain::handler::StartGameCommandHandler>(m_memory_room_storage,
+                                                                                  m_memory_user_storage,
+                                                                                  m_game_started_command_sender);
+
     connect(this,
             &QTcpServer::newConnection,
             this,
@@ -48,9 +59,11 @@ m_server{m_memory_user_storage, m_memory_room_storage}
                                     this,
                                     [client_wrapper]() { client_wrapper->disconnect(); });
 
-                            m_server.on_command(static_cast<protocol::entity::server::ServerCommandType>(command_type),
-                                                std::move(data),
-                                                client_wrapper);
+
+                            m_command_executor.execute_command(static_cast<protocol::entity::server::ServerCommandType>(
+                                                                   command_type),
+                                                               std::move(data),
+                                                               client_wrapper);
                         });
 
                 connect(client_socket, &QTcpSocket::disconnected, client_socket, &QTcpSocket::deleteLater);

@@ -20,9 +20,6 @@ set(SRC
     ${SRCROOT}/handler/ConnectToRoomCommandHandler.cpp
     ${SRCROOT}/handler/StartGameCommandHandler.hpp
     ${SRCROOT}/handler/StartGameCommandHandler.cpp
-
-    ${SRCROOT}/Server.hpp
-    ${SRCROOT}/Server.cpp
 )
 
 add_library(${TARGET_NAME} ${SRC})

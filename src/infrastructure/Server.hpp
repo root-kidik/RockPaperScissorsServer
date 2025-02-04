@@ -3,7 +3,9 @@
 #include <QTcpServer>
 #include <QTcpSocket>
 
-#include <domain/Server.hpp>
+#include <RockPaperScissorsProtocol/entity/NewPlayerAddedCommandSender.hpp>
+#include <RockPaperScissorsProtocol/entity/GameStartedCommandSender.hpp>
+#include <RockPaperScissorsProtocol/entity/server/ServerCommandExecutor.hpp>
 
 #include <infrastructure/generator/UuidGenerator.hpp>
 #include <infrastructure/storage/MemoryRoomStorage.hpp>
@@ -26,7 +28,10 @@ private:
     storage::MemoryUserStorage m_memory_user_storage;
     storage::MemoryRoomStorage m_memory_room_storage;
 
-    domain::Server m_server;
+    protocol::entity::NewPlayerAddedCommandSender m_new_player_added_command_sender;
+    protocol::entity::GameStartedCommandSender    m_game_started_command_sender;
+
+    protocol::entity::server::ServerCommandExecutor m_command_executor;
 };
 
 } // namespace rps::infrastructure
