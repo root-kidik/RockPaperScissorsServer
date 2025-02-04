@@ -6,7 +6,7 @@
 #include <domain/handler/CreateRoomCommandHandler.hpp>
 #include <domain/handler/RegisterCommandHandler.hpp>
 
-#include <RockPaperScissorsProtocol/entity/CommandExecutor.hpp>
+#include <RockPaperScissorsProtocol/entity/server/ServerCommandExecutor.hpp>
 
 namespace rps::domain::interface
 {
@@ -34,7 +34,7 @@ private:
     handler::CreateRoomCommandHandler    m_create_room_command_handler;
     handler::ConnectToRoomCommandHandler m_connect_to_room_command_handler;
 
-    protocol::entity::ServerCommandExecutor m_command_executor;
+    protocol::entity::server::ServerCommandExecutor m_command_executor;
 };
 
 } // namespace rps::domain
