@@ -16,8 +16,8 @@ class StartGameCommandHandler final : public protocol::interface::StartGameComma
 {
 public:
     StartGameCommandHandler(interface::RoomStorage&                     room_storage,
-                           interface::UserStorage&                     user_storage,
-                           protocol::entity::GameStartedCommandSender& command_sender);
+                            interface::UserStorage&                     user_storage,
+                            protocol::entity::GameStartedCommandSender& command_sender);
 
     protocol::entity::server::StatusResponse handle(protocol::entity::server::StartGameRequest&& request,
                                                     const std::shared_ptr<protocol::interface::Connection>& connection) override;
