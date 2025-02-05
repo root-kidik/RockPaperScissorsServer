@@ -149,7 +149,7 @@ TEST_F(ConnectToRoomCommandFixture, user_is_added_then_notifed_after_new_user_ad
         // first user notified
         {
             EXPECT_CALL(user_storage, try_find_user(first_user.uuid))
-                .WillOnce(Return(std::optional<std::reference_wrapper<const domain::entity::User>>{first_user}));
+                .WillOnce(Return(std::optional<std::reference_wrapper<domain::entity::User>>{first_user}));
 
             std::string message = std::to_string(static_cast<protocol::entity::CommandRepresentation>(
                                       protocol::entity::client::ClientCommandType::NewPlayerAdded)) +
@@ -208,7 +208,7 @@ TEST_F(ConnectToRoomCommandFixture, player_number_7_is_not_added)
         // owner notified
         {
             EXPECT_CALL(user_storage, try_find_user(owner_user.uuid))
-                .WillOnce(Return(std::optional<std::reference_wrapper<const domain::entity::User>>{owner_user}));
+                .WillOnce(Return(std::optional<std::reference_wrapper<domain::entity::User>>{owner_user}));
 
             std::string message = std::to_string(static_cast<protocol::entity::CommandRepresentation>(
                                       protocol::entity::client::ClientCommandType::NewPlayerAdded)) +
@@ -221,7 +221,7 @@ TEST_F(ConnectToRoomCommandFixture, player_number_7_is_not_added)
         for (auto& existed_user : users)
         {
             EXPECT_CALL(user_storage, try_find_user(existed_user.uuid))
-                .WillOnce(Return(std::optional<std::reference_wrapper<const domain::entity::User>>{existed_user}));
+                .WillOnce(Return(std::optional<std::reference_wrapper<domain::entity::User>>{existed_user}));
 
             std::string message = std::to_string(static_cast<protocol::entity::CommandRepresentation>(
                                       protocol::entity::client::ClientCommandType::NewPlayerAdded)) +
@@ -280,7 +280,7 @@ TEST_F(ConnectToRoomCommandFixture, player_numer_6_is_not_added_because_owner_is
         for (auto& existed_user : users)
         {
             EXPECT_CALL(user_storage, try_find_user(existed_user.uuid))
-                .WillOnce(Return(std::optional<std::reference_wrapper<const domain::entity::User>>{existed_user}));
+                .WillOnce(Return(std::optional<std::reference_wrapper<domain::entity::User>>{existed_user}));
 
             std::string message = std::to_string(static_cast<protocol::entity::CommandRepresentation>(
                                       protocol::entity::client::ClientCommandType::NewPlayerAdded)) +

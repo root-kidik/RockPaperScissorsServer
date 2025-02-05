@@ -22,7 +22,7 @@ public:
     virtual std::optional<entity::Uuid> try_find_user_uuid(const std::string& nickname) const  = 0;
     virtual std::optional<std::string>  try_find_user_nickname(const entity::Uuid& uuid) const = 0;
 
-    virtual std::optional<std::reference_wrapper<const entity::User>> try_find_user(const entity::Uuid& uuid) const = 0;
+    virtual std::optional<std::reference_wrapper<entity::User>> try_find_user(const entity::Uuid& uuid) = 0;
 };
 
 } // namespace rps::domain::interface

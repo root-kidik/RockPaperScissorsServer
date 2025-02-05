@@ -5,7 +5,8 @@
 namespace rps::domain::interface
 {
 class RoomStorage;
-}
+class TimerFactory;
+} // namespace rps::domain::interface
 
 namespace rps::domain::handler
 {

@@ -24,7 +24,7 @@ public:
 
     std::optional<std::string> try_find_user_nickname(const domain::entity::Uuid& uuid) const override;
 
-    std::optional<std::reference_wrapper<const domain::entity::User>> try_find_user(const domain::entity::Uuid& uuid) const;
+    std::optional<std::reference_wrapper<domain::entity::User>> try_find_user(const domain::entity::Uuid& uuid) override;
 
 private:
     const domain::interface::UuidGenerator& m_uuid_generator;

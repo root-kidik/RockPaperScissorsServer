@@ -1,5 +1,7 @@
 #include <fixture/command/StartGameCommandFixture.hpp>
 
+#include <infrastructure/util/Util.hpp>
+
 #include <gtest/gtest.h>
 
 #include <RockPaperScissorsProtocol/entity/client/ClientCommandType.hpp>
@@ -81,6 +83,7 @@ TEST_F(StartGameCommandFixture, user_notified)
     domain::entity::Room room;
     room.name       = "user_room";
     room.owner_uuid = "5678";
+    room.cards      = infrastructure::util::gen_cards();
 
     domain::entity::User user{"first_uuid", "first_name", std::make_shared<ConnectionMock>()};
 
@@ -89,11 +92,19 @@ TEST_F(StartGameCommandFixture, user_notified)
     // user notifed
     {
         EXPECT_CALL(user_storage, try_find_user(user.uuid))
-            .WillOnce(Return(std::optional<std::reference_wrapper<const domain::entity::User>>{user}));
+            .WillOnce(Return(std::optional<std::reference_wrapper<domain::entity::User>>{user}));
 
         std::string message = std::to_string(static_cast<protocol::entity::CommandRepresentation>(
                                   protocol::entity::client::ClientCommandType::GameStarted)) +
-                              ' ' + room.name;
+                              ' ';
+
+        for (std::size_t i = room.cards.size() - 1; i > room.cards.size() - 1 - protocol::entity::kMaxCardsPerPlayer; i--)
+        {
+            message += std::to_string(static_cast<protocol::entity::CardRepresentation>(room.cards[i]));
+        
+            if (i != room.cards.size() - protocol::entity::kMaxCardsPerPlayer)
+                message += ' ';
+        }
 
         EXPECT_CALL(*std::dynamic_pointer_cast<ConnectionMock>(user.connection), send(message)).WillOnce(Return());
     }

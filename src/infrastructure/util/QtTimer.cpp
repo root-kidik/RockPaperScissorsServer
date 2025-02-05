@@ -1,6 +1,6 @@
-#include <infrastructure/utils/QtTimer.hpp>
+#include <infrastructure/util/QtTimer.hpp>
 
-namespace rps::infrastructure::utils
+namespace rps::infrastructure::util
 {
 
 void QtTimer::start(std::chrono::milliseconds timeout, std::function<void()> callback, bool fire_once)

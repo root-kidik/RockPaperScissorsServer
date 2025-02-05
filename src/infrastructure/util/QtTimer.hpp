@@ -4,7 +4,7 @@
 
 #include <domain/interface/Timer.hpp>
 
-namespace rps::infrastructure::utils
+namespace rps::infrastructure::util
 {
 
 class QtTimer final : public domain::interface::Timer

@@ -48,8 +48,8 @@ std::optional<std::string> MemoryUserStorage::try_find_user_nickname(const domai
     return it->second;
 }
 
-std::optional<std::reference_wrapper<const domain::entity::User>> MemoryUserStorage::try_find_user(
-    const domain::entity::Uuid& uuid) const
+std::optional<std::reference_wrapper<domain::entity::User>> MemoryUserStorage::try_find_user(
+    const domain::entity::Uuid& uuid)
 {
     auto it = m_users.find(uuid);
 

@@ -7,8 +7,10 @@
 #include <vector>
 
 #include <domain/entity/Uuid.hpp>
+#include <domain/interface/Timer.hpp>
 
 #include <RockPaperScissorsProtocol/interface/Connection.hpp>
+#include <RockPaperScissorsProtocol/entity/Card.hpp>
 
 namespace rps::domain::entity
 {
@@ -23,7 +25,10 @@ struct Room
 
     bool is_game_started{};
 
-    std::unordered_set<entity::Uuid> players;
+    std::shared_ptr<interface::Timer> timer;
+
+    std::unordered_set<entity::Uuid>    players;
+    std::vector<protocol::entity::Card> cards;
 };
 
 } // namespace rps::domain::entity

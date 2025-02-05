@@ -7,7 +7,6 @@
 
 #include <infrastructure/Server.hpp>
 #include <infrastructure/client/TcpSocketUserConnection.hpp>
-#include <infrastructure/utils/QtTimer.hpp>
 
 namespace rps::infrastructure
 {
@@ -21,8 +20,7 @@ Server::Server() : m_memory_user_storage{m_uuid_generator}, m_memory_room_storag
                                                                                       m_new_player_added_command_sender);
     m_command_executor.register_command<domain::handler::StartGameCommandHandler>(m_memory_room_storage,
                                                                                   m_memory_user_storage,
-                                                                                  m_game_started_command_sender,
-                                                                                  std::make_shared<utils::QtTimer>());
+                                                                                  m_game_started_command_sender);
 
     connect(this,
             &QTcpServer::newConnection,

@@ -1,0 +1,30 @@
+#pragma once
+
+#include <algorithm>
+#include <chrono>
+#include <random>
+
+#include <RockPaperScissorsProtocol/entity/Card.hpp>
+
+namespace rps::infrastructure::util
+{
+
+std::vector<protocol::entity::Card> gen_cards()
+{
+    std::vector<protocol::entity::Card> cards;
+
+    for (auto card : {protocol::entity::Card::Rock, protocol::entity::Card::Paper, protocol::entity::Card::Scissors})
+        for (std::size_t i = 0;
+             i < protocol::entity::kMaxCardsPerRoom /
+                         static_cast<protocol::entity::CardRepresentation>(protocol::entity::Card::End) -
+                     1;
+             i++)
+            cards.emplace_back(card);
+
+    auto seed = std::chrono::system_clock::now().time_since_epoch().count();
+    std::shuffle(cards.begin(), cards.end(), std::default_random_engine{static_cast<std::uint32_t>(seed)});
+
+    return cards;
+}
+
+} // namespace rps::infrastructure::util
