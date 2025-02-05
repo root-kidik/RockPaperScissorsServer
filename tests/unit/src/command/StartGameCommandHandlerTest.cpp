@@ -101,7 +101,7 @@ TEST_F(StartGameCommandFixture, user_notified)
         for (std::size_t i = room.cards.size() - 1; i > room.cards.size() - 1 - protocol::entity::kMaxCardsPerPlayer; i--)
         {
             message += std::to_string(static_cast<protocol::entity::CardRepresentation>(room.cards[i]));
-        
+
             if (i != room.cards.size() - protocol::entity::kMaxCardsPerPlayer)
                 message += ' ';
         }
@@ -119,4 +119,5 @@ TEST_F(StartGameCommandFixture, user_notified)
     auto response = start_game_command_handler.handle(std::move(request), std::make_shared<ConnectionMock>());
 
     EXPECT_TRUE(response.is_ok);
+    EXPECT_TRUE(user.cards.size() == protocol::entity::kMaxCardsPerPlayer);
 }
