@@ -1,11 +1,11 @@
-#include "Room.hpp"
-
 #include <cassert>
 
 #include <domain/model/Room.hpp>
 #include <domain/util/Util.hpp>
 
 #include <RockPaperScissorsProtocol/entity/CommandSender.hpp>
+#include <RockPaperScissorsProtocol/entity/client/request/CardForcedNominatedRequest.hpp>
+#include <RockPaperScissorsProtocol/entity/client/request/CardRaisedRequest.hpp>
 #include <RockPaperScissorsProtocol/entity/client/request/GameStartedRequest.hpp>
 #include <RockPaperScissorsProtocol/entity/client/request/NewPlayerAddedRequest.hpp>
 
@@ -58,7 +58,7 @@ bool Room::try_start_game(const entity::Uuid& user_uuid)
 
         for (std::size_t i = 0; i < protocol::entity::kMaxCardsPerPlayer; i++)
         {
-            assert(!m_cards.empty());
+            assert(!m_cards.empty() && "Deck empty, something went wrong");
 
             auto card            = m_cards.back();
             new_request.cards[i] = card;
@@ -70,12 +70,57 @@ bool Room::try_start_game(const entity::Uuid& user_uuid)
     }
 
     m_is_game_started = true;
+
+    m_timer->start(interface::Room::kTurnTime, [this]() { compute_and_notify_winner(); }, false);
+
     return true;
 }
 
 const std::unordered_map<entity::Uuid, Room::Player>& Room::get_players()
 {
     return m_players;
+}
+
+void Room::compute_and_notify_winner()
+{
+    for (auto& [uuid, player] : m_players)
+    {
+        if (player.cards.empty())
+            continue;
+
+        if (!player.nominated_card)
+            force_nominate_card(player);
+
+        raise_player_card(player);
+    }
+}
+
+void Room::force_nominate_card(Player& player)
+{
+    player.nominated_card = player.cards.back();
+
+    protocol::entity::client::CardForcedNominatedRequest request;
+    request.card = player.cards.back();
+
+    m_command_sender.send(std::move(request), player.connection);
+}
+
+void Room::raise_player_card(Player& player)
+{
+    assert(player.nominated_card && "Card must be nominated, something went wrong");
+
+    auto card = player.nominated_card.value();
+
+    auto it = std::find(player.cards.begin(), player.cards.end(), card);
+
+    assert(it != player.cards.end() && "Nominated card must be exists");
+
+    player.cards.erase(it);
+
+    protocol::entity::client::CardRaisedRequest request;
+    request.card = player.nominated_card.value();
+
+    m_command_sender.send(std::move(request), player.connection);
 }
 
 } // namespace rps::domain::model

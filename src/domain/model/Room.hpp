@@ -44,6 +44,10 @@ public:
     const std::unordered_map<entity::Uuid, Player>& get_players();
 
 private:
+    void compute_and_notify_winner();
+    void force_nominate_card(Player& player);
+    void raise_player_card(Player& player);
+
     std::string  m_name;
     entity::Uuid m_owner_uuid;
 
