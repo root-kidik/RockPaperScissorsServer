@@ -6,7 +6,7 @@
 
 #include <RockPaperScissorsProtocol/entity/Card.hpp>
 
-namespace rps::infrastructure::util
+namespace rps::domain::util
 {
 
 std::vector<protocol::entity::Card> gen_cards()
@@ -16,8 +16,8 @@ std::vector<protocol::entity::Card> gen_cards()
     for (auto card : {protocol::entity::Card::Rock, protocol::entity::Card::Paper, protocol::entity::Card::Scissors})
         for (std::size_t i = 0;
              i < protocol::entity::kMaxCardsPerRoom /
-                         static_cast<protocol::entity::CardRepresentation>(protocol::entity::Card::End) -
-                     1;
+                         (static_cast<protocol::entity::CardRepresentation>(protocol::entity::Card::End) -
+                     1);
              i++)
             cards.emplace_back(card);
 
@@ -27,4 +27,4 @@ std::vector<protocol::entity::Card> gen_cards()
     return cards;
 }
 
-} // namespace rps::infrastructure::util
+} // namespace rps::domain::util

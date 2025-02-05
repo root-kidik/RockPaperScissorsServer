@@ -6,7 +6,9 @@ set(SRCROOT ${CMAKE_CURRENT_LIST_DIR})
 set(SRC
     ${SRCROOT}/entity/Uuid.hpp
     ${SRCROOT}/entity/User.hpp
-    ${SRCROOT}/entity/Room.hpp
+    
+    ${SRCROOT}/model/Room.hpp
+    ${SRCROOT}/model/Room.cpp
     
     ${SRCROOT}/interface/UserStorage.hpp
     ${SRCROOT}/interface/RoomStorage.hpp

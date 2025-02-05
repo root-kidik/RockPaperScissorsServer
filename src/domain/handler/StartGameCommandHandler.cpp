@@ -3,20 +3,14 @@
 
 #include <domain/handler/StartGameCommandHandler.hpp>
 #include <domain/interface/RoomStorage.hpp>
-#include <domain/interface/Timer.hpp>
 #include <domain/interface/UserStorage.hpp>
-
-#include <RockPaperScissorsProtocol/utils/Utils.hpp>
 
 namespace rps::domain::handler
 {
 
-StartGameCommandHandler::StartGameCommandHandler(interface::RoomStorage&                     room_storage,
-                                                 interface::UserStorage&                     user_storage,
-                                                 protocol::entity::GameStartedCommandSender& command_sender) :
+StartGameCommandHandler::StartGameCommandHandler(interface::RoomStorage& room_storage, interface::UserStorage& user_storage) :
 m_room_storage{room_storage},
-m_user_storage{user_storage},
-m_command_sender{command_sender}
+m_user_storage{user_storage}
 {
 }
 
@@ -34,37 +28,13 @@ protocol::entity::server::StatusResponse StartGameCommandHandler::handle(
 
     auto room = m_room_storage.try_find_room(request.room_name);
 
-    if (!room || room.value().get().owner_uuid != request.user_uuid)
+    if (!room)
     {
         response.is_ok = false;
         return response;
     }
 
-    auto& room_ref           = room.value().get();
-    room_ref.is_game_started = true;
-
-    for (auto& [player_uuid, player] : room_ref.players)
-    {
-        protocol::entity::client::GameStartedRequest new_request;
-
-        for (std::size_t i = 0; i < protocol::entity::kMaxCardsPerPlayer; i++)
-        {
-            assert(!room_ref.cards.empty());
-
-            auto card            = room_ref.cards.back();
-            new_request.cards[i] = card;
-            player.cards.push_back(card);
-            room_ref.cards.pop_back();
-        }
-
-        m_command_sender.send(std::move(new_request), player.connection);
-    }
-
-    // room_ref.timer->start(entity::Room::kTurnTime, [](){
-        
-    // }, false);
-
-    response.is_ok = true;
+    response.is_ok = room.value().get().try_start_game(request.user_uuid);
     return response;
 }
 

@@ -11,16 +11,13 @@
 namespace rps::infrastructure
 {
 
-Server::Server() : m_memory_user_storage{m_uuid_generator}, m_memory_room_storage{m_uuid_generator}
+Server::Server() : m_memory_user_storage{m_uuid_generator}, m_memory_room_storage{m_uuid_generator, m_command_sender}
 {
     m_command_executor.register_command<domain::handler::RegisterCommandHandler>(m_memory_user_storage);
     m_command_executor.register_command<domain::handler::CreateRoomCommandHandler>(m_memory_room_storage);
     m_command_executor.register_command<domain::handler::ConnectToRoomCommandHandler>(m_memory_room_storage,
-                                                                                      m_memory_user_storage,
-                                                                                      m_new_player_added_command_sender);
-    m_command_executor.register_command<domain::handler::StartGameCommandHandler>(m_memory_room_storage,
-                                                                                  m_memory_user_storage,
-                                                                                  m_game_started_command_sender);
+                                                                                      m_memory_user_storage);
+    m_command_executor.register_command<domain::handler::StartGameCommandHandler>(m_memory_room_storage, m_memory_user_storage);
 
     connect(this,
             &QTcpServer::newConnection,

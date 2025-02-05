@@ -3,9 +3,6 @@
 #include <domain/handler/CreateRoomCommandHandler.hpp>
 #include <domain/interface/RoomStorage.hpp>
 
-#include <RockPaperScissorsProtocol/interface/Connection.hpp>
-#include <RockPaperScissorsProtocol/utils/Utils.hpp>
-
 namespace rps::domain::handler
 {
 

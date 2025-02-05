@@ -10,17 +10,23 @@ set(SRC
 
     ${SRCROOT}/mock/client/ConnectionMock.hpp
 
-    ${SRCROOT}/mock/utils/TimerMock.hpp
+    ${SRCROOT}/mock/model/RoomMock.hpp
 
-    ${SRCROOT}/fixture/command/RegisterCommandFixture.hpp
-    ${SRCROOT}/fixture/command/CreateRoomCommandFixture.hpp
-    ${SRCROOT}/fixture/command/ConnectToRoomCommandFixture.hpp
-    ${SRCROOT}/fixture/command/StartGameCommandFixture.hpp
+    ${SRCROOT}/mock/util/TimerMock.hpp
 
-    ${SRCROOT}/src/command/ConnectToRoomCommandHandlerTest.cpp
-    ${SRCROOT}/src/command/RegisterCommandHandlerTest.cpp
-    ${SRCROOT}/src/command/CreateRoomCommandHandlerTest.cpp
-    ${SRCROOT}/src/command/StartGameCommandHandlerTest.cpp
+    ${SRCROOT}/fixture/handler/RegisterCommandFixture.hpp
+    ${SRCROOT}/fixture/handler/CreateRoomCommandFixture.hpp
+    ${SRCROOT}/fixture/handler/ConnectToRoomCommandFixture.hpp
+    ${SRCROOT}/fixture/handler/StartGameCommandFixture.hpp
+
+    ${SRCROOT}/fixture/model/RoomFixture.hpp
+
+    ${SRCROOT}/src/model/RoomTest.cpp
+
+    ${SRCROOT}/src/handler/ConnectToRoomCommandHandlerTest.cpp
+    ${SRCROOT}/src/handler/RegisterCommandHandlerTest.cpp
+    ${SRCROOT}/src/handler/CreateRoomCommandHandlerTest.cpp
+    ${SRCROOT}/src/handler/StartGameCommandHandlerTest.cpp
 )
 
 add_executable(${TARGET_NAME} ${SRC})

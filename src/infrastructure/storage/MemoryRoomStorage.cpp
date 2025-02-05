@@ -2,15 +2,16 @@
 
 #include <infrastructure/storage/MemoryRoomStorage.hpp>
 #include <infrastructure/util/QtTimer.hpp>
-#include <infrastructure/util/Util.hpp>
 
 #include <RockPaperScissorsProtocol/entity/Card.hpp>
 
 namespace rps::infrastructure::storage
 {
 
-MemoryRoomStorage::MemoryRoomStorage(const domain::interface::UuidGenerator& uuid_generator) :
-m_uuid_generator{uuid_generator}
+MemoryRoomStorage::MemoryRoomStorage(const domain::interface::UuidGenerator& uuid_generator,
+                                     protocol::entity::CommandSender&        command_sender) :
+m_uuid_generator{uuid_generator},
+m_command_sender{command_sender}
 {
 }
 
@@ -19,14 +20,12 @@ bool MemoryRoomStorage::try_add_room(const std::string& name, const domain::enti
     if (m_rooms.find(name) != m_rooms.end())
         return false;
 
-
-    m_rooms.emplace(name,
-                    domain::entity::Room{name, owner_uuid, false, std::make_shared<util::QtTimer>(), {}, util::gen_cards()});
+    m_rooms.emplace(name, domain::model::Room{name, owner_uuid, std::make_shared<util::QtTimer>(), m_command_sender});
 
     return true;
 }
 
-std::optional<std::reference_wrapper<domain::entity::Room>> MemoryRoomStorage::try_find_room(const std::string& name)
+std::optional<std::reference_wrapper<domain::interface::Room>> MemoryRoomStorage::try_find_room(const std::string& name)
 {
     auto it = m_rooms.find(name);
 

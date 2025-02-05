@@ -3,8 +3,6 @@
 #include <domain/handler/RegisterCommandHandler.hpp>
 #include <domain/interface/UserStorage.hpp>
 
-#include <RockPaperScissorsProtocol/utils/Utils.hpp>
-
 namespace rps::domain::handler
 {
 
