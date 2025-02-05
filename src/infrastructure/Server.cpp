@@ -6,7 +6,7 @@
 #include <domain/handler/StartGameCommandHandler.hpp>
 
 #include <infrastructure/Server.hpp>
-#include <infrastructure/client/TcpSocketUserConnection.hpp>
+#include <infrastructure/client/TcpSocketConnection.hpp>
 
 namespace rps::infrastructure
 {
@@ -29,14 +29,12 @@ Server::Server() : m_memory_user_storage{m_uuid_generator}, m_memory_room_storag
             {
                 auto* connection = nextPendingConnection();
 
-                auto connection_wrapper = std::make_shared<client::TcpSocketUserConnection>(connection);
+                auto connection_wrapper = std::make_shared<client::TcpSocketConnection>(connection);
 
                 connect(connection,
                         &QTcpSocket::disconnected,
                         this,
                         [connection_wrapper]() { connection_wrapper->disconnect(); });
-
-                connect(connection, &QTcpSocket::disconnected, connection, &QTcpSocket::deleteLater);
 
                 connect(connection,
                         &QTcpSocket::readyRead,
