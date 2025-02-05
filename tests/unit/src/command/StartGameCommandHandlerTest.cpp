@@ -85,15 +85,16 @@ TEST_F(StartGameCommandFixture, user_notified)
     room.owner_uuid = "5678";
     room.cards      = infrastructure::util::gen_cards();
 
-    domain::entity::User user{"first_uuid", "first_name", std::make_shared<ConnectionMock>()};
+    domain::entity::Room::Player player;
+    player.connection = std::make_shared<ConnectionMock>();
+    player.nickname = "first_name";
 
-    room.players.emplace(user.uuid);
+    domain::entity::Uuid user_uuid = "first_uuid";
+
+    room.players.emplace(user_uuid, player);
 
     // user notifed
     {
-        EXPECT_CALL(user_storage, try_find_user(user.uuid))
-            .WillOnce(Return(std::optional<std::reference_wrapper<domain::entity::User>>{user}));
-
         std::string message = std::to_string(static_cast<protocol::entity::CommandRepresentation>(
                                   protocol::entity::client::ClientCommandType::GameStarted)) +
                               ' ';
@@ -106,7 +107,7 @@ TEST_F(StartGameCommandFixture, user_notified)
                 message += ' ';
         }
 
-        EXPECT_CALL(*std::dynamic_pointer_cast<ConnectionMock>(user.connection), send(message)).WillOnce(Return());
+        EXPECT_CALL(*std::dynamic_pointer_cast<ConnectionMock>(player.connection), send(message)).WillOnce(Return());
     }
 
     protocol::entity::server::StartGameRequest request;
@@ -119,5 +120,5 @@ TEST_F(StartGameCommandFixture, user_notified)
     auto response = start_game_command_handler.handle(std::move(request), std::make_shared<ConnectionMock>());
 
     EXPECT_TRUE(response.is_ok);
-    EXPECT_TRUE(user.cards.size() == protocol::entity::kMaxCardsPerPlayer);
+    EXPECT_TRUE(room.players[user_uuid].cards.size() == protocol::entity::kMaxCardsPerPlayer);
 }

@@ -1,5 +1,5 @@
-#include <sstream>
 #include <cassert>
+#include <sstream>
 
 #include <domain/handler/StartGameCommandHandler.hpp>
 #include <domain/interface/RoomStorage.hpp>
@@ -43,26 +43,25 @@ protocol::entity::server::StatusResponse StartGameCommandHandler::handle(
     auto& room_ref           = room.value().get();
     room_ref.is_game_started = true;
 
-    for (auto& player_uuid : room_ref.players)
-        if (auto player = m_user_storage.try_find_user(player_uuid))
+    for (auto& [player_uuid, player] : room_ref.players)
+    {
+        protocol::entity::client::GameStartedRequest new_request;
+
+        for (std::size_t i = 0; i < protocol::entity::kMaxCardsPerPlayer; i++)
         {
-            protocol::entity::client::GameStartedRequest new_request;
+            assert(!room_ref.cards.empty());
 
-            for (std::size_t i = 0; i < protocol::entity::kMaxCardsPerPlayer; i++)
-            {
-                assert(!room_ref.cards.empty());
-                
-                auto card = room_ref.cards.back();
-                new_request.cards[i] = card;
-                player.value().get().cards.push_back(card);
-                room_ref.cards.pop_back();
-            }
-
-            m_command_sender.send(std::move(new_request), player.value().get().connection);
+            auto card            = room_ref.cards.back();
+            new_request.cards[i] = card;
+            player.cards.push_back(card);
+            room_ref.cards.pop_back();
         }
 
+        m_command_sender.send(std::move(new_request), player.connection);
+    }
+
     // room_ref.timer->start(entity::Room::kTurnTime, [](){
-    // DealDeck
+        
     // }, false);
 
     response.is_ok = true;

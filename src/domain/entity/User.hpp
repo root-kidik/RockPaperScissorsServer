@@ -15,9 +15,6 @@ struct User
 {
     Uuid        uuid;
     std::string nickname;
-
-    std::shared_ptr<protocol::interface::Connection> connection;
-    std::vector<protocol::entity::Card>              cards;
 };
 
 } // namespace rps::domain::entity

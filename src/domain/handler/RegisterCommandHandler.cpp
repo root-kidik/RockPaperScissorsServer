@@ -21,7 +21,7 @@ protocol::entity::server::RegisterResponse RegisterCommandHandler::handle(
     if (request.user_nickname.empty())
         return response;
 
-    if (auto uuid = m_user_storage.try_add_user(request.user_nickname, connection))
+    if (auto uuid = m_user_storage.try_add_user(request.user_nickname))
         response.user_uuid = uuid.value();
 
     return response;

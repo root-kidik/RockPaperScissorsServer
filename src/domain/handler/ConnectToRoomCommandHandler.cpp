@@ -55,16 +55,15 @@ protocol::entity::server::StatusResponse ConnectToRoomCommandHandler::handle(
         return response;
     }
 
-    for (auto& player_uuid : room_ref.players)
-        if (auto player = m_user_storage.try_find_user(player_uuid))
-        {
-            protocol::entity::client::NewPlayerAddedRequest new_request;
-            new_request.user_nickname = user_nickname.value();
+    for (auto& [player_uuid, player] : room_ref.players)
+    {
+        protocol::entity::client::NewPlayerAddedRequest new_request;
+        new_request.user_nickname = user_nickname.value();
 
-            m_command_sender.send(std::move(new_request), player.value().get().connection);
-        }
+        m_command_sender.send(std::move(new_request), player.connection);
+    }
 
-    room_ref.players.emplace(request.user_uuid);
+    room_ref.players.emplace(request.user_uuid, entity::Room::Player{user_nickname.value(), std::nullopt, {}, connection});
 
     response.is_ok = true;
     return response;

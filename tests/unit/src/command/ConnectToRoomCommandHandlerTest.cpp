@@ -59,8 +59,8 @@ TEST_F(ConnectToRoomCommandFixture, room_game_already_started)
     auto connection = std::make_shared<ConnectionMock>();
 
     domain::entity::Room room;
-    room.name       = "user_room";
-    room.owner_uuid = "5678";
+    room.name            = "user_room";
+    room.owner_uuid      = "5678";
     room.is_game_started = true;
 
     protocol::entity::server::ConnectToRoomRequest request;
@@ -119,7 +119,8 @@ TEST_F(ConnectToRoomCommandFixture, user_is_added_then_notifed_after_new_user_ad
     room.name       = "room_name";
     room.owner_uuid = "owner_uuid";
 
-    domain::entity::User first_user{"first_uuid", "first_name", std::make_shared<ConnectionMock>()};
+    auto                 first_user_connection = std::make_shared<ConnectionMock>();
+    domain::entity::User first_user{"first_uuid", "first_name"};
     {
         EXPECT_CALL(room_storage, try_find_room(room.name))
             .WillOnce(Return(std::optional<std::reference_wrapper<domain::entity::Room>>{room}));
@@ -129,7 +130,7 @@ TEST_F(ConnectToRoomCommandFixture, user_is_added_then_notifed_after_new_user_ad
         request.room_name = room.name;
         request.user_uuid = first_user.uuid;
 
-        auto response = connect_to_room_command_handler.handle(std::move(request), first_user.connection);
+        auto response = connect_to_room_command_handler.handle(std::move(request), first_user_connection);
 
         EXPECT_TRUE(response.is_ok);
 
@@ -137,7 +138,8 @@ TEST_F(ConnectToRoomCommandFixture, user_is_added_then_notifed_after_new_user_ad
         EXPECT_TRUE(room.players.find(first_user.uuid) != room.players.end());
     }
 
-    domain::entity::User second_user{"second_uuid", "second_name", std::make_shared<ConnectionMock>()};
+    auto                 second_user_connection = std::make_shared<ConnectionMock>();
+    domain::entity::User second_user{"second_uuid", "second_name"};
     {
         // second user connect
         {
@@ -148,21 +150,18 @@ TEST_F(ConnectToRoomCommandFixture, user_is_added_then_notifed_after_new_user_ad
 
         // first user notified
         {
-            EXPECT_CALL(user_storage, try_find_user(first_user.uuid))
-                .WillOnce(Return(std::optional<std::reference_wrapper<domain::entity::User>>{first_user}));
-
             std::string message = std::to_string(static_cast<protocol::entity::CommandRepresentation>(
                                       protocol::entity::client::ClientCommandType::NewPlayerAdded)) +
                                   ' ' + second_user.nickname;
 
-            EXPECT_CALL(*std::dynamic_pointer_cast<ConnectionMock>(first_user.connection), send(message)).WillOnce(Return());
+            EXPECT_CALL(*std::dynamic_pointer_cast<ConnectionMock>(first_user_connection), send(message)).WillOnce(Return());
         }
 
         protocol::entity::server::ConnectToRoomRequest request;
         request.room_name = room.name;
         request.user_uuid = second_user.uuid;
 
-        auto response = connect_to_room_command_handler.handle(std::move(request), second_user.connection);
+        auto response = connect_to_room_command_handler.handle(std::move(request), second_user_connection);
 
         EXPECT_TRUE(response.is_ok);
 
@@ -177,7 +176,8 @@ TEST_F(ConnectToRoomCommandFixture, player_number_7_is_not_added)
     std::string          owner_uuid = "owner_uuid";
     domain::entity::Room room{"room_name", owner_uuid};
 
-    domain::entity::User owner_user{owner_uuid, "owner_name", std::make_shared<ConnectionMock>()};
+    auto                 owner_user_connection = std::make_shared<ConnectionMock>();
+    domain::entity::User owner_user{owner_uuid, "owner_name"};
     {
         EXPECT_CALL(room_storage, try_find_room(room.name))
             .WillOnce(Return(std::optional<std::reference_wrapper<domain::entity::Room>>{room}));
@@ -187,19 +187,18 @@ TEST_F(ConnectToRoomCommandFixture, player_number_7_is_not_added)
         request.room_name = room.name;
         request.user_uuid = owner_user.uuid;
 
-        auto response = connect_to_room_command_handler.handle(std::move(request), owner_user.connection);
+        auto response = connect_to_room_command_handler.handle(std::move(request), owner_user_connection);
 
         EXPECT_TRUE(response.is_ok);
 
         EXPECT_TRUE(room.players.find(owner_user.uuid) != room.players.end());
     }
 
-    std::vector<domain::entity::User> users;
+    std::vector<std::pair<domain::entity::User, std::shared_ptr<ConnectionMock>>> users;
     for (std::size_t i = 0; i < 5; i++)
     {
-        domain::entity::User user{"first_uuid" + std::to_string(i),
-                                  "first_name" + std::to_string(i),
-                                  std::make_shared<ConnectionMock>()};
+        auto                 user_connection = std::make_shared<ConnectionMock>();
+        domain::entity::User user{"first_uuid" + std::to_string(i), "first_name" + std::to_string(i)};
 
         EXPECT_CALL(room_storage, try_find_room(room.name))
             .WillOnce(Return(std::optional<std::reference_wrapper<domain::entity::Room>>{room}));
@@ -207,44 +206,39 @@ TEST_F(ConnectToRoomCommandFixture, player_number_7_is_not_added)
 
         // owner notified
         {
-            EXPECT_CALL(user_storage, try_find_user(owner_user.uuid))
-                .WillOnce(Return(std::optional<std::reference_wrapper<domain::entity::User>>{owner_user}));
-
             std::string message = std::to_string(static_cast<protocol::entity::CommandRepresentation>(
                                       protocol::entity::client::ClientCommandType::NewPlayerAdded)) +
                                   ' ' + user.nickname;
 
-            EXPECT_CALL(*std::dynamic_pointer_cast<ConnectionMock>(owner_user.connection), send(message)).WillOnce(Return());
+            EXPECT_CALL(*std::dynamic_pointer_cast<ConnectionMock>(owner_user_connection), send(message)).WillOnce(Return());
         }
 
         // other users notified
-        for (auto& existed_user : users)
+        for (auto& [existed_user, existed_user_connection] : users)
         {
-            EXPECT_CALL(user_storage, try_find_user(existed_user.uuid))
-                .WillOnce(Return(std::optional<std::reference_wrapper<domain::entity::User>>{existed_user}));
-
             std::string message = std::to_string(static_cast<protocol::entity::CommandRepresentation>(
                                       protocol::entity::client::ClientCommandType::NewPlayerAdded)) +
                                   ' ' + user.nickname;
 
-            EXPECT_CALL(*std::dynamic_pointer_cast<ConnectionMock>(existed_user.connection), send(message)).WillOnce(Return());
+            EXPECT_CALL(*std::dynamic_pointer_cast<ConnectionMock>(existed_user_connection), send(message)).WillOnce(Return());
         }
 
         protocol::entity::server::ConnectToRoomRequest request;
         request.room_name = room.name;
         request.user_uuid = user.uuid;
 
-        auto response = connect_to_room_command_handler.handle(std::move(request), user.connection);
+        auto response = connect_to_room_command_handler.handle(std::move(request), user_connection);
 
         EXPECT_TRUE(response.is_ok);
 
         EXPECT_TRUE(room.players.size() == i + 2);
         EXPECT_TRUE(room.players.find(user.uuid) != room.players.end());
 
-        users.push_back(std::move(user));
+        users.emplace_back(std::move(user), user_connection);
     }
 
-    domain::entity::User seven_user{"seven_uuid", "seven_name", std::make_shared<ConnectionMock>()};
+    auto                 seven_user_connection = std::make_shared<ConnectionMock>();
+    domain::entity::User seven_user{"seven_uuid", "seven_name"};
     {
         EXPECT_CALL(room_storage, try_find_room(room.name))
             .WillOnce(Return(std::optional<std::reference_wrapper<domain::entity::Room>>{room}));
@@ -253,7 +247,7 @@ TEST_F(ConnectToRoomCommandFixture, player_number_7_is_not_added)
         request.room_name = room.name;
         request.user_uuid = seven_user.uuid;
 
-        auto response = connect_to_room_command_handler.handle(std::move(request), seven_user.connection);
+        auto response = connect_to_room_command_handler.handle(std::move(request), seven_user_connection);
 
         EXPECT_FALSE(response.is_ok);
 
@@ -265,45 +259,42 @@ TEST_F(ConnectToRoomCommandFixture, player_numer_6_is_not_added_because_owner_is
 {
     domain::entity::Room room{"room_name", "owner_uuid"};
 
-    std::vector<domain::entity::User> users;
+    std::vector<std::pair<domain::entity::User, std::shared_ptr<ConnectionMock>>> users;
     for (std::size_t i = 0; i < 5; i++)
     {
-        domain::entity::User user{"first_uuid" + std::to_string(i),
-                                  "first_name" + std::to_string(i),
-                                  std::make_shared<ConnectionMock>()};
+        auto                 user_connection = std::make_shared<ConnectionMock>();
+        domain::entity::User user{"first_uuid" + std::to_string(i), "first_name" + std::to_string(i)};
 
         EXPECT_CALL(room_storage, try_find_room(room.name))
             .WillOnce(Return(std::optional<std::reference_wrapper<domain::entity::Room>>{room}));
         EXPECT_CALL(user_storage, try_find_user_nickname(user.uuid)).WillOnce(Return(user.nickname));
 
         // other users notified
-        for (auto& existed_user : users)
+        for (auto& [existed_user, existed_user_connection] : users)
         {
-            EXPECT_CALL(user_storage, try_find_user(existed_user.uuid))
-                .WillOnce(Return(std::optional<std::reference_wrapper<domain::entity::User>>{existed_user}));
-
             std::string message = std::to_string(static_cast<protocol::entity::CommandRepresentation>(
                                       protocol::entity::client::ClientCommandType::NewPlayerAdded)) +
                                   ' ' + user.nickname;
 
-            EXPECT_CALL(*std::dynamic_pointer_cast<ConnectionMock>(existed_user.connection), send(message)).WillOnce(Return());
+            EXPECT_CALL(*std::dynamic_pointer_cast<ConnectionMock>(existed_user_connection), send(message)).WillOnce(Return());
         }
 
         protocol::entity::server::ConnectToRoomRequest request;
         request.room_name = room.name;
         request.user_uuid = user.uuid;
 
-        auto response = connect_to_room_command_handler.handle(std::move(request), user.connection);
+        auto response = connect_to_room_command_handler.handle(std::move(request), user_connection);
 
         EXPECT_TRUE(response.is_ok);
 
         EXPECT_TRUE(room.players.size() == i + 1);
         EXPECT_TRUE(room.players.find(user.uuid) != room.players.end());
 
-        users.push_back(std::move(user));
+        users.emplace_back(std::move(user), user_connection);
     }
 
-    domain::entity::User seven_user{"six_uuid", "six_name", std::make_shared<ConnectionMock>()};
+    auto                 seven_user_connection = std::make_shared<ConnectionMock>();
+    domain::entity::User seven_user{"six_uuid", "six_name"};
     {
         EXPECT_CALL(room_storage, try_find_room(room.name))
             .WillOnce(Return(std::optional<std::reference_wrapper<domain::entity::Room>>{room}));
@@ -312,7 +303,7 @@ TEST_F(ConnectToRoomCommandFixture, player_numer_6_is_not_added_because_owner_is
         request.room_name = room.name;
         request.user_uuid = seven_user.uuid;
 
-        auto response = connect_to_room_command_handler.handle(std::move(request), seven_user.connection);
+        auto response = connect_to_room_command_handler.handle(std::move(request), seven_user_connection);
 
         EXPECT_FALSE(response.is_ok);
 
