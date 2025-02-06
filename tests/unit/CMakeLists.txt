@@ -23,11 +23,13 @@ set(SRC
 
     ${SRCROOT}/fixture/model/round_pipe/ComputePlayerWinnerPipeFixture.hpp
     ${SRCROOT}/fixture/model/round_pipe/ForceNominatePlayerCardPipeFixture.hpp
+    ${SRCROOT}/fixture/model/round_pipe/RaisePlayerCardPipeFixture.hpp
 
     ${SRCROOT}/src/model/RoomTest.cpp
     
     ${SRCROOT}/src/model/round_pipe/ComputePlayerWinnerPipeTest.cpp
     ${SRCROOT}/src/model/round_pipe/ForceNominatePlayerCardPipeTest.cpp
+    ${SRCROOT}/src/model/round_pipe/RaisePlayerCardPipeTest.cpp
 
     ${SRCROOT}/src/handler/ConnectToRoomCommandHandlerTest.cpp
     ${SRCROOT}/src/handler/RegisterCommandHandlerTest.cpp
