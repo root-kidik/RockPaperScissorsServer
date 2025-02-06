@@ -22,13 +22,7 @@ protocol::entity::server::StatusResponse CreateRoomCommandHandler::handle(
         return response;
     }
 
-    if (!m_room_storage.try_add_room(request.room_name, request.user_uuid))
-    {
-        response.is_ok = false;
-        return response;
-    }
-
-    response.is_ok = true;
+    response.is_ok = m_room_storage.try_add_room(request.room_name, request.user_uuid);
     return response;
 }
 

@@ -15,7 +15,7 @@ protocol::entity::server::StatusResponse NominateCardCommandHandler::handle(
 {
     protocol::entity::server::StatusResponse response;
 
-    if (request.room_name.empty() || request.user_uuid.empty())
+    if (request.room_name.empty() || request.user_uuid.empty() || !protocol::util::is_enum_has_valid_value(request.card))
     {
         response.is_ok = false;
         return response;

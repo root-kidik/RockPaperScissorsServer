@@ -18,6 +18,7 @@ set(SRC
     ${SRCROOT}/fixture/handler/CreateRoomCommandFixture.hpp
     ${SRCROOT}/fixture/handler/ConnectToRoomCommandFixture.hpp
     ${SRCROOT}/fixture/handler/StartGameCommandFixture.hpp
+    ${SRCROOT}/fixture/handler/NominateCardCommandHandlerFixture.hpp
 
     ${SRCROOT}/fixture/model/RoomFixture.hpp
 
@@ -35,6 +36,7 @@ set(SRC
     ${SRCROOT}/src/handler/RegisterCommandHandlerTest.cpp
     ${SRCROOT}/src/handler/CreateRoomCommandHandlerTest.cpp
     ${SRCROOT}/src/handler/StartGameCommandHandlerTest.cpp
+    ${SRCROOT}/src/handler/NominateCardCommandHandlerTest.cpp
 )
 
 add_executable(${TARGET_NAME} ${SRC})
