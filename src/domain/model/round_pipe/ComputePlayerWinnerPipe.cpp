@@ -17,8 +17,6 @@ void ComputePlayerWinnerPipe::run(Room::RoundContext& context)
 {
     auto& [player, player_uuid, is_rock_raised, is_paper_raised, is_scissors_raised] = context;
 
-    protocol::entity::client::RoundInfoRequest request;
-
     assert(player.nominated_card && "player must have nominated card");
 
     auto card = player.nominated_card.value();
@@ -27,6 +25,8 @@ void ComputePlayerWinnerPipe::run(Room::RoundContext& context)
     bool is_paper_winned    = is_rock_raised && is_paper_raised;
     bool is_rock_winned     = is_rock_raised && is_scissors_raised;
     bool is_scissors_winned = is_scissors_raised && is_paper_raised;
+
+    protocol::entity::client::RoundInfoRequest request;
 
     if (is_all_losed)
         request.is_winned = false;

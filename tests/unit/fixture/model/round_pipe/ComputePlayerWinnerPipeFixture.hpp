@@ -7,8 +7,12 @@
 class ComputePlayerWinnerPipeFixture : public testing::Test
 {
 public:
-    std::shared_ptr<ConnectionMock> connection = std::make_shared<ConnectionMock>();
+    ComputePlayerWinnerPipeFixture()
+    {
+        player.connection = connection;
+    }
 
+    std::shared_ptr<ConnectionMock>                    connection = std::make_shared<ConnectionMock>();
     domain::model::Room::Player                        player;
     domain::entity::Uuid                               uuid;
     domain::model::Room::RoundContext                  context{player, uuid};

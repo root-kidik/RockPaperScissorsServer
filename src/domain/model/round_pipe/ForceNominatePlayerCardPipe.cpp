@@ -17,10 +17,10 @@ void ForceNominatePlayerCardPipe::run(Room::RoundContext& context)
     auto& player      = context.player;
     auto& player_uuid = context.player_uuid;
 
-    assert(!player.cards.empty() && "Player must have cards");
-
     if (player.nominated_card)
         return;
+
+    assert(!player.cards.empty() && "Player must have cards");
 
     player.nominated_card = player.cards.back();
 

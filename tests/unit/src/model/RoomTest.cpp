@@ -56,10 +56,12 @@ TEST_F(RoomFixture, try_add_user_too_many_users)
 
         for (const auto& [player_uuid, player] : room.get_players())
         {
-            std::string message = std::to_string(static_cast<protocol::entity::CommandRepresentation>(
-                                      protocol::entity::client::ClientCommandType::NewPlayerAdded)) +
-                                  ' ' + user_nickname;
-            EXPECT_CALL(*std::dynamic_pointer_cast<ConnectionMock>(player.connection), send(message)).WillOnce(Return());
+            protocol::entity::client::NewPlayerAddedRequest request;
+            request.user_nickname = user_nickname;
+
+            EXPECT_CALL(*std::dynamic_pointer_cast<ConnectionMock>(player.connection),
+                        send(protocol::util::serialize_request(std::move(request))))
+                .WillOnce(Return());
         }
 
         room.try_add_user(user_uuid, user_nickname, user_connection);
@@ -78,10 +80,12 @@ TEST_F(RoomFixture, try_add_user_wait_owner)
 
         for (const auto& [player_uuid, player] : room.get_players())
         {
-            std::string message = std::to_string(static_cast<protocol::entity::CommandRepresentation>(
-                                      protocol::entity::client::ClientCommandType::NewPlayerAdded)) +
-                                  ' ' + user_nickname;
-            EXPECT_CALL(*std::dynamic_pointer_cast<ConnectionMock>(player.connection), send(message)).WillOnce(Return());
+            protocol::entity::client::NewPlayerAddedRequest request;
+            request.user_nickname = user_nickname;
+
+            EXPECT_CALL(*std::dynamic_pointer_cast<ConnectionMock>(player.connection),
+                        send(protocol::util::serialize_request(std::move(request))))
+                .WillOnce(Return());
         }
 
         room.try_add_user(user_uuid, user_nickname, user_connection);
@@ -93,10 +97,12 @@ TEST_F(RoomFixture, try_add_user_wait_owner)
 
     for (const auto& [player_uuid, player] : room.get_players())
     {
-        std::string message = std::to_string(static_cast<protocol::entity::CommandRepresentation>(
-                                  protocol::entity::client::ClientCommandType::NewPlayerAdded)) +
-                              ' ' + owner_nickname;
-        EXPECT_CALL(*std::dynamic_pointer_cast<ConnectionMock>(player.connection), send(message)).WillOnce(Return());
+        protocol::entity::client::NewPlayerAddedRequest request;
+        request.user_nickname = owner_nickname;
+
+        EXPECT_CALL(*std::dynamic_pointer_cast<ConnectionMock>(player.connection),
+                    send(protocol::util::serialize_request(std::move(request))))
+            .WillOnce(Return());
     }
 
     EXPECT_TRUE(room.try_add_user(owner_uuid, owner_nickname, connection));
@@ -131,10 +137,12 @@ TEST_F(RoomFixture, try_start_game_with_six_users)
 
         for (const auto& [player_uuid, player] : room.get_players())
         {
-            std::string message = std::to_string(static_cast<protocol::entity::CommandRepresentation>(
-                                      protocol::entity::client::ClientCommandType::NewPlayerAdded)) +
-                                  ' ' + user_nickname;
-            EXPECT_CALL(*std::dynamic_pointer_cast<ConnectionMock>(player.connection), send(message)).WillOnce(Return());
+            protocol::entity::client::NewPlayerAddedRequest request;
+            request.user_nickname = user_nickname;
+
+            EXPECT_CALL(*std::dynamic_pointer_cast<ConnectionMock>(player.connection),
+                        send(protocol::util::serialize_request(std::move(request))))
+                .WillOnce(Return());
         }
 
         room.try_add_user(user_uuid, user_nickname, user_connection);
