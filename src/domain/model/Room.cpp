@@ -1,6 +1,9 @@
 #include <cassert>
 
 #include <domain/model/Room.hpp>
+#include <domain/model/round_pipe/ComputePlayerWinnerPipe.hpp>
+#include <domain/model/round_pipe/ForceNominatePlayerCardPipe.hpp>
+#include <domain/model/round_pipe/RaisePlayerCardPipe.hpp>
 #include <domain/util/Util.hpp>
 
 #include <RockPaperScissorsProtocol/entity/CommandSender.hpp>
@@ -13,14 +16,15 @@ namespace rps::domain::model
 Room::Room(const std::string&                       name,
            const entity::Uuid&                      owner_uuid,
            const std::shared_ptr<interface::Timer>& timer,
-           protocol::entity::CommandSender&         command_sender,
-           const std::shared_ptr<RoundPipeline>&    round_pipeline) :
+           protocol::entity::CommandSender&         command_sender) :
 m_name{name},
 m_owner_uuid{owner_uuid},
 m_timer{timer},
-m_command_sender{command_sender},
-m_round_pipeline{round_pipeline}
+m_command_sender{command_sender}
 {
+    m_round_pipeline.add<round_pipe::ForceNominatePlayerCardPipe>(m_command_sender);
+    m_round_pipeline.add<round_pipe::RaisePlayerCardPipe>(m_command_sender);
+    m_round_pipeline.add<round_pipe::ComputePlayerWinnerPipe>(m_command_sender);
 }
 
 bool Room::try_add_user(const entity::Uuid&                                     user_uuid,
@@ -82,7 +86,7 @@ bool Room::try_start_game(const entity::Uuid& user_uuid)
                     continue;
 
                 RoundContext context{player, uuid};
-                m_round_pipeline->run(context);
+                m_round_pipeline.run(context);
             }
         },
         false);

@@ -1,5 +1,4 @@
 #include <domain/interface/UuidGenerator.hpp>
-#include <domain/util/Pipeline.hpp>
 
 #include <infrastructure/storage/MemoryRoomStorage.hpp>
 #include <infrastructure/util/QtTimer.hpp>
@@ -25,8 +24,7 @@ bool MemoryRoomStorage::try_add_room(const std::string& name, const domain::enti
                     domain::model::Room{name,
                                         owner_uuid,
                                         std::make_shared<util::QtTimer>(),
-                                        m_command_sender,
-                                        std::make_shared<domain::util::Pipeline<domain::model::Room::RoundContext>>()});
+                                        m_command_sender});
 
     return true;
 }

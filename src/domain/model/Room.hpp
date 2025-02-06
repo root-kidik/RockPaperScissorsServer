@@ -8,9 +8,9 @@
 #include <vector>
 
 #include <domain/entity/Uuid.hpp>
-#include <domain/interface/Pipeline.hpp>
 #include <domain/interface/Room.hpp>
 #include <domain/interface/Timer.hpp>
+#include <domain/util/Pipeline.hpp>
 
 #include <RockPaperScissorsProtocol/entity/Card.hpp>
 #include <RockPaperScissorsProtocol/entity/CommandSender.hpp>
@@ -41,13 +41,12 @@ public:
         bool is_scissors_raised{};
     };
 
-    using RoundPipeline = interface::Pipeline<RoundContext>;
+    using RoundPipeline = util::Pipeline<RoundContext>;
 
     Room(const std::string&                       name,
          const entity::Uuid&                      owner_uuid,
          const std::shared_ptr<interface::Timer>& timer,
-         protocol::entity::CommandSender&         command_sender,
-         const std::shared_ptr<RoundPipeline>&    round_pipeline);
+         protocol::entity::CommandSender&         command_sender);
 
     bool try_add_user(const entity::Uuid&                                     user_uuid,
                       const std::string&                                      user_nickname,
@@ -70,7 +69,7 @@ private:
 
     protocol::entity::CommandSender& m_command_sender;
 
-    std::shared_ptr<RoundPipeline>                           m_round_pipeline;
+    RoundPipeline                                            m_round_pipeline;
     std::unordered_map<entity::Uuid, protocol::entity::Card> play_table;
 };
 
