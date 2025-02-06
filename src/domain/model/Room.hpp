@@ -46,7 +46,8 @@ public:
 private:
     void compute_and_notify_winner();
     void force_nominate_card(Player& player);
-    void raise_player_card(Player& player);
+    void raise_player_card(const entity::Uuid& uuid, Player& player, std::unordered_map<entity::Uuid, protocol::entity::Card>& play_table);
+    void compute_winner(std::unordered_map<entity::Uuid, protocol::entity::Card>& play_table);
 
     std::string  m_name;
     entity::Uuid m_owner_uuid;

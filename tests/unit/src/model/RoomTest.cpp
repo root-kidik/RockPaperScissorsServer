@@ -101,6 +101,15 @@ TEST_F(RoomFixture, try_add_user_added)
     EXPECT_TRUE(room.try_add_user(user_uuid, user_nickname, connection));
 }
 
+TEST_F(RoomFixture, try_add_same_user_twice)
+{
+    domain::entity::Uuid user_uuid     = "user_uuid";
+    std::string          user_nickname = "user_nickname";
+
+    EXPECT_TRUE(room.try_add_user(user_uuid, user_nickname, connection));
+    EXPECT_FALSE(room.try_add_user(user_uuid, user_nickname, connection));
+}
+
 TEST_F(RoomFixture, try_start_game_with_six_users)
 {
     room.try_add_user(owner_uuid, "owner_nickname", connection);

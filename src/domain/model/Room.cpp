@@ -27,7 +27,8 @@ bool Room::try_add_user(const entity::Uuid&                                     
                         const std::string&                                      user_nickname,
                         const std::shared_ptr<protocol::interface::Connection>& connection)
 {
-    if (m_is_game_started || m_players.size() == interface::Room::kMaxPlayers ||
+    if (m_is_game_started || m_players.find(user_uuid) != m_players.end() ||
+        m_players.size() == interface::Room::kMaxPlayers ||
         (m_players.size() == model::Room::kMaxPlayers - 1 && user_uuid != m_owner_uuid &&
          m_players.find(m_owner_uuid) == m_players.end()))
         return false;
@@ -83,6 +84,8 @@ const std::unordered_map<entity::Uuid, Room::Player>& Room::get_players()
 
 void Room::compute_and_notify_winner()
 {
+    std::unordered_map<entity::Uuid, protocol::entity::Card> play_table;
+
     for (auto& [uuid, player] : m_players)
     {
         if (player.cards.empty())
@@ -91,8 +94,10 @@ void Room::compute_and_notify_winner()
         if (!player.nominated_card)
             force_nominate_card(player);
 
-        raise_player_card(player);
+        raise_player_card(uuid, player, play_table);
     }
+
+    compute_winner(play_table);
 }
 
 void Room::force_nominate_card(Player& player)
@@ -105,11 +110,14 @@ void Room::force_nominate_card(Player& player)
     m_command_sender.send(std::move(request), player.connection);
 }
 
-void Room::raise_player_card(Player& player)
+void Room::raise_player_card(const entity::Uuid&                                       uuid,
+                             Player&                                                   player,
+                             std::unordered_map<entity::Uuid, protocol::entity::Card>& play_table)
 {
     assert(player.nominated_card && "Card must be nominated, something went wrong");
 
-    auto card = player.nominated_card.value();
+    auto card        = player.nominated_card.value();
+    play_table[uuid] = card;
 
     auto it = std::find(player.cards.begin(), player.cards.end(), card);
 
@@ -121,6 +129,47 @@ void Room::raise_player_card(Player& player)
     request.card = player.nominated_card.value();
 
     m_command_sender.send(std::move(request), player.connection);
+}
+
+void Room::compute_winner(std::unordered_map<entity::Uuid, protocol::entity::Card>& play_table)
+{
+    bool has_rock{}, has_paper{}, has_scissors{};
+
+    for (const auto& [uuid, card] : play_table)
+        if (card == protocol::entity::Card::Rock)
+            has_rock = true;
+        else if (card == protocol::entity::Card::Paper)
+            has_paper = true;
+        else if (card == protocol::entity::Card::Scissors)
+            has_scissors = true;
+
+    if (has_rock && has_paper && has_scissors)
+    {
+        // No Winner
+
+        return;
+    }
+
+    if (has_rock && has_paper)
+    {
+        // Paper winners
+
+        return;
+    }
+
+    if (has_rock && has_scissors)
+    {
+        // Rock winners
+
+        return;
+    }
+
+    if (has_scissors && has_paper)
+    {
+        // Scissors winners
+
+        return;
+    }
 }
 
 } // namespace rps::domain::model
