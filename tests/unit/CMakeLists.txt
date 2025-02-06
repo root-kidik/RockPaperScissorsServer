@@ -13,6 +13,7 @@ set(SRC
     ${SRCROOT}/mock/model/RoomMock.hpp
 
     ${SRCROOT}/mock/util/TimerMock.hpp
+    ${SRCROOT}/mock/util/RoundPipelineMock.hpp
 
     ${SRCROOT}/fixture/handler/RegisterCommandFixture.hpp
     ${SRCROOT}/fixture/handler/CreateRoomCommandFixture.hpp

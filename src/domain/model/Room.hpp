@@ -8,6 +8,7 @@
 #include <vector>
 
 #include <domain/entity/Uuid.hpp>
+#include <domain/interface/Pipeline.hpp>
 #include <domain/interface/Room.hpp>
 #include <domain/interface/Timer.hpp>
 
@@ -30,10 +31,23 @@ public:
         std::size_t                                      wins_count{};
     };
 
+    struct RoundContext
+    {
+        Player&             player;
+        const entity::Uuid& player_uuid;
+
+        bool is_rock_raised{};
+        bool is_paper_raised{};
+        bool is_scissors_raised{};
+    };
+
+    using RoundPipeline = interface::Pipeline<RoundContext>;
+
     Room(const std::string&                       name,
          const entity::Uuid&                      owner_uuid,
          const std::shared_ptr<interface::Timer>& timer,
-         protocol::entity::CommandSender&         command_sender);
+         protocol::entity::CommandSender&         command_sender,
+         const std::shared_ptr<RoundPipeline>&    round_pipeline);
 
     bool try_add_user(const entity::Uuid&                                     user_uuid,
                       const std::string&                                      user_nickname,
@@ -44,11 +58,6 @@ public:
     const std::unordered_map<entity::Uuid, Player>& get_players();
 
 private:
-    void compute_and_notify_winner();
-    void force_nominate_card(Player& player);
-    void raise_player_card(const entity::Uuid& uuid, Player& player, std::unordered_map<entity::Uuid, protocol::entity::Card>& play_table);
-    void compute_winner(std::unordered_map<entity::Uuid, protocol::entity::Card>& play_table);
-
     std::string  m_name;
     entity::Uuid m_owner_uuid;
 
@@ -60,6 +69,9 @@ private:
     std::vector<protocol::entity::Card>      m_cards;
 
     protocol::entity::CommandSender& m_command_sender;
+
+    std::shared_ptr<RoundPipeline>                           m_round_pipeline;
+    std::unordered_map<entity::Uuid, protocol::entity::Card> play_table;
 };
 
 } // namespace rps::domain::model

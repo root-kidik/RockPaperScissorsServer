@@ -58,4 +58,4 @@ Cmake › Options: Status Bar Visibility -> visible
 ## TODO:
 
 - [ ] `LoginCommand`
-- [ ] `SingleCommandSender`
+- [x] `SingleCommandSender`

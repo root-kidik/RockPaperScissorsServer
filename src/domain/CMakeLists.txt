@@ -10,6 +10,13 @@ set(SRC
     ${SRCROOT}/model/Room.hpp
     ${SRCROOT}/model/Room.cpp
     
+    ${SRCROOT}/model/round_pipe/ForceNominatePlayerCardPipe.hpp
+    ${SRCROOT}/model/round_pipe/ForceNominatePlayerCardPipe.cpp
+    ${SRCROOT}/model/round_pipe/RaisePlayerCardPipe.hpp
+    ${SRCROOT}/model/round_pipe/RaisePlayerCardPipe.cpp
+    ${SRCROOT}/model/round_pipe/ComputePlayerWinnerPipe.hpp
+    ${SRCROOT}/model/round_pipe/ComputePlayerWinnerPipe.cpp
+
     ${SRCROOT}/interface/UserStorage.hpp
     ${SRCROOT}/interface/RoomStorage.hpp
     ${SRCROOT}/interface/UuidGenerator.hpp
