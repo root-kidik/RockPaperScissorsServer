@@ -41,6 +41,8 @@ void ComputePlayerWinnerPipe::run(Room::RoundContext& context)
         player.wins_count++;
 
     m_command_sender.send(std::move(request), player.connection);
+
+    player.nominated_card.reset();
 }
 
 } // namespace rps::domain::model::round_pipe

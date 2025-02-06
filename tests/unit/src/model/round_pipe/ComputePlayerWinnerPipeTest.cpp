@@ -22,6 +22,8 @@ TEST_F(ComputePlayerWinnerPipeFixture, run_with_rock_all_losed)
     pipe.run(context);
 
     EXPECT_EQ(player.wins_count, 0);
+
+    EXPECT_FALSE(player.nominated_card);
 }
 
 TEST_F(ComputePlayerWinnerPipeFixture, run_with_paper_all_losed)
@@ -40,6 +42,8 @@ TEST_F(ComputePlayerWinnerPipeFixture, run_with_paper_all_losed)
     pipe.run(context);
 
     EXPECT_EQ(player.wins_count, 0);
+
+    EXPECT_FALSE(player.nominated_card);
 }
 
 TEST_F(ComputePlayerWinnerPipeFixture, run_with_scissors_all_losed)
@@ -58,6 +62,8 @@ TEST_F(ComputePlayerWinnerPipeFixture, run_with_scissors_all_losed)
     pipe.run(context);
 
     EXPECT_EQ(player.wins_count, 0);
+
+    EXPECT_FALSE(player.nominated_card);
 }
 
 TEST_F(ComputePlayerWinnerPipeFixture, run_with_rock_win)
@@ -75,6 +81,8 @@ TEST_F(ComputePlayerWinnerPipeFixture, run_with_rock_win)
     pipe.run(context);
 
     EXPECT_EQ(player.wins_count, 1);
+
+    EXPECT_FALSE(player.nominated_card);
 }
 
 TEST_F(ComputePlayerWinnerPipeFixture, run_with_rock_lose)
@@ -92,6 +100,8 @@ TEST_F(ComputePlayerWinnerPipeFixture, run_with_rock_lose)
     pipe.run(context);
 
     EXPECT_EQ(player.wins_count, 0);
+
+    EXPECT_FALSE(player.nominated_card);
 }
 
 TEST_F(ComputePlayerWinnerPipeFixture, run_with_paper_win)
@@ -109,6 +119,8 @@ TEST_F(ComputePlayerWinnerPipeFixture, run_with_paper_win)
     pipe.run(context);
 
     EXPECT_EQ(player.wins_count, 1);
+
+    EXPECT_FALSE(player.nominated_card);
 }
 
 TEST_F(ComputePlayerWinnerPipeFixture, run_with_paper_lose)
@@ -126,6 +138,8 @@ TEST_F(ComputePlayerWinnerPipeFixture, run_with_paper_lose)
     pipe.run(context);
 
     EXPECT_EQ(player.wins_count, 0);
+
+    EXPECT_FALSE(player.nominated_card);
 }
 
 TEST_F(ComputePlayerWinnerPipeFixture, run_with_scissors_win)
@@ -143,6 +157,8 @@ TEST_F(ComputePlayerWinnerPipeFixture, run_with_scissors_win)
     pipe.run(context);
 
     EXPECT_EQ(player.wins_count, 1);
+
+    EXPECT_FALSE(player.nominated_card);
 }
 
 TEST_F(ComputePlayerWinnerPipeFixture, run_with_scissors_lose)
@@ -160,4 +176,6 @@ TEST_F(ComputePlayerWinnerPipeFixture, run_with_scissors_lose)
     pipe.run(context);
 
     EXPECT_EQ(player.wins_count, 0);
+
+    EXPECT_FALSE(player.nominated_card);
 }
