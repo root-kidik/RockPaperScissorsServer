@@ -16,7 +16,7 @@ public:
     void run(Room::RoundContext& player);
 
 private:
-    protocol::entity::CommandSender&                          m_command_sender;
+    protocol::entity::CommandSender& m_command_sender;
 };
 
 } // namespace rps::domain::model::round_pipe

@@ -17,4 +17,4 @@ private:
     QTimer timer;
 };
 
-} // namespace rps::infrastructure::utils
+} // namespace rps::infrastructure::util

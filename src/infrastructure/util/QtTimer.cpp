@@ -16,4 +16,4 @@ void QtTimer::stop()
     timer.stop();
 }
 
-} // namespace rps::infrastructure::utils
+} // namespace rps::infrastructure::util

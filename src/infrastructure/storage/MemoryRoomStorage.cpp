@@ -20,11 +20,7 @@ bool MemoryRoomStorage::try_add_room(const std::string& name, const domain::enti
     if (m_rooms.find(name) != m_rooms.end())
         return false;
 
-    m_rooms.emplace(name,
-                    domain::model::Room{name,
-                                        owner_uuid,
-                                        std::make_shared<util::QtTimer>(),
-                                        m_command_sender});
+    m_rooms.emplace(name, domain::model::Room{name, owner_uuid, std::make_shared<util::QtTimer>(), m_command_sender});
 
     return true;
 }

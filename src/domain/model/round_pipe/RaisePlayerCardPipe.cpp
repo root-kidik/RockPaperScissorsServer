@@ -8,8 +8,7 @@
 namespace rps::domain::model::round_pipe
 {
 
-RaisePlayerCardPipe::RaisePlayerCardPipe(protocol::entity::CommandSender&                          command_sender
-                                         ) :
+RaisePlayerCardPipe::RaisePlayerCardPipe(protocol::entity::CommandSender& command_sender) :
 m_command_sender{command_sender}
 {
 }
