@@ -4,6 +4,7 @@
 #include <domain/model/round_pipe/ComputePlayerWinnerPipe.hpp>
 #include <domain/model/round_pipe/ForceNominatePlayerCardPipe.hpp>
 #include <domain/model/round_pipe/RaisePlayerCardPipe.hpp>
+#include <domain/model/round_pipe/DealMissingCardsPipe.hpp>
 #include <domain/util/Util.hpp>
 
 #include <RockPaperScissorsProtocol/entity/CommandSender.hpp>
@@ -25,6 +26,7 @@ m_command_sender{command_sender}
     m_round_pipeline.add<round_pipe::ForceNominatePlayerCardPipe>(m_command_sender);
     m_round_pipeline.add<round_pipe::RaisePlayerCardPipe>(m_command_sender);
     m_round_pipeline.add<round_pipe::ComputePlayerWinnerPipe>(m_command_sender);
+    m_round_pipeline.add<round_pipe::DealMissingCardsPipe>(m_command_sender, m_cards);
 }
 
 bool Room::try_add_user(const entity::Uuid&                                     user_uuid,

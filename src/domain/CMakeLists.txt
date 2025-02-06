@@ -16,6 +16,8 @@ set(SRC
     ${SRCROOT}/model/round_pipe/RaisePlayerCardPipe.cpp
     ${SRCROOT}/model/round_pipe/ComputePlayerWinnerPipe.hpp
     ${SRCROOT}/model/round_pipe/ComputePlayerWinnerPipe.cpp
+    ${SRCROOT}/model/round_pipe/DealMissingCardsPipe.hpp
+    ${SRCROOT}/model/round_pipe/DealMissingCardsPipe.cpp
 
     ${SRCROOT}/interface/UserStorage.hpp
     ${SRCROOT}/interface/RoomStorage.hpp
