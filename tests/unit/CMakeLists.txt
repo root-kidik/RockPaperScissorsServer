@@ -13,7 +13,6 @@ set(SRC
     ${SRCROOT}/mock/model/RoomMock.hpp
 
     ${SRCROOT}/mock/util/TimerMock.hpp
-    ${SRCROOT}/mock/util/RoundPipelineMock.hpp
 
     ${SRCROOT}/fixture/handler/RegisterCommandFixture.hpp
     ${SRCROOT}/fixture/handler/CreateRoomCommandFixture.hpp
@@ -22,7 +21,11 @@ set(SRC
 
     ${SRCROOT}/fixture/model/RoomFixture.hpp
 
+    ${SRCROOT}/fixture/model/round_pipe/ComputePlayerWinnerPipeFixture.hpp
+
     ${SRCROOT}/src/model/RoomTest.cpp
+    
+    ${SRCROOT}/src/model/round_pipe/ComputePlayerWinnerPipeTest.cpp
 
     ${SRCROOT}/src/handler/ConnectToRoomCommandHandlerTest.cpp
     ${SRCROOT}/src/handler/RegisterCommandHandlerTest.cpp

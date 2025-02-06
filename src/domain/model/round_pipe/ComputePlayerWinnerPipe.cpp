@@ -35,7 +35,7 @@ void ComputePlayerWinnerPipe::run(Room::RoundContext& context)
              is_scissors_winned && card == protocol::entity::Card::Scissors)
         request.is_winned = true;
     else
-        assert(false && "Undefiend result");
+        request.is_winned = false;
 
     if (request.is_winned)
         player.wins_count++;
