@@ -156,3 +156,42 @@ TEST_F(RoomFixture, try_start_game_with_six_users)
 
     EXPECT_TRUE(room.try_start_game(owner_uuid));
 }
+
+TEST_F(RoomFixture, try_nominate_user_card_but_no_such_user)
+{
+    domain::entity::Uuid user_uuid = "user_uuid";
+
+    auto nominated_card = protocol::entity::Card::Rock;
+
+    EXPECT_FALSE(room.try_nominate_user_card(user_uuid, nominated_card));
+}
+
+TEST_F(RoomFixture, try_nominate_user_card_but_no_such_card)
+{
+    domain::entity::Uuid user_uuid     = "user_uuid";
+    std::string          user_nickname = "user_nickname";
+
+    EXPECT_TRUE(room.try_add_user(user_uuid, user_nickname, connection));
+
+    auto nominated_card = protocol::entity::Card::Rock;
+
+    EXPECT_FALSE(room.try_nominate_user_card(user_uuid, nominated_card));
+}
+
+TEST_F(RoomFixture, try_nominate_user_card_success)
+{
+    domain::entity::Uuid user_uuid     = "user_uuid";
+    std::string          user_nickname = "user_nickname";
+
+    EXPECT_TRUE(room.try_add_user(user_uuid, user_nickname, connection));
+
+    EXPECT_CALL(*connection, send(testing::_)).WillOnce(Return());
+    EXPECT_CALL(*timer, start(std::chrono::milliseconds{domain::interface::Room::kTurnTime}, testing::_, false))
+        .WillOnce(Return());
+
+    EXPECT_TRUE(room.try_start_game(owner_uuid));
+
+    auto nominated_card = room.get_players().at(user_uuid).cards.back();
+
+    EXPECT_TRUE(room.try_nominate_user_card(user_uuid, nominated_card));
+}
