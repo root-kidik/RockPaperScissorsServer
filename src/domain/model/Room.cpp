@@ -94,6 +94,23 @@ bool Room::try_start_game(const entity::Uuid& user_uuid)
     return true;
 }
 
+bool Room::try_nominate_user_card(const entity::Uuid& user_uuid, protocol::entity::Card card)
+{
+    auto user_it = m_players.find(user_uuid);
+    if (user_it == m_players.end())
+        return false;
+
+    auto& player = user_it->second;
+
+    auto card_it = std::find(player.cards.begin(), player.cards.end(), card);
+    if (card_it == player.cards.end())
+        return false;
+
+    player.nominated_card = card;
+
+    return true;
+}
+
 const std::unordered_map<entity::Uuid, Room::Player>& Room::get_players()
 {
     return m_players;

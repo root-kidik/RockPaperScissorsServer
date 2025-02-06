@@ -30,6 +30,8 @@ set(SRC
     ${SRCROOT}/handler/ConnectToRoomCommandHandler.cpp
     ${SRCROOT}/handler/StartGameCommandHandler.hpp
     ${SRCROOT}/handler/StartGameCommandHandler.cpp
+    ${SRCROOT}/handler/NominateCardCommandHandler.hpp
+    ${SRCROOT}/handler/NominateCardCommandHandler.cpp
 )
 
 add_library(${TARGET_NAME} ${SRC})

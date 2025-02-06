@@ -54,6 +54,8 @@ public:
 
     bool try_start_game(const entity::Uuid& user_uuid) override;
 
+    bool try_nominate_user_card(const entity::Uuid& user_uuid, protocol::entity::Card card) override;
+
     const std::unordered_map<entity::Uuid, Player>& get_players();
 
 private:

@@ -22,7 +22,7 @@ TEST_F(ForceNominatePlayerCardPipeFixture, run_without_nominated_card_check_back
     protocol::entity::client::CardForcedNominatedRequest request;
     request.card = player.cards.back();
 
-    EXPECT_CALL(*connection, send(protocol::util::serialize_request(std::move(request)))).WillOnce(Return());
+    EXPECT_CALL(*connection, send(protocol::util::serialize_command(std::move(request)))).WillOnce(Return());
 
     pipe.run(context);
 }
