@@ -59,3 +59,4 @@ Cmake › Options: Status Bar Visibility -> visible
 
 - [ ] `LoginCommand`
 - [x] `SingleCommandSender`
+- [ ] `EndGame`
