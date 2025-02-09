@@ -1,4 +1,4 @@
-#include <fixture/handler/ConnectToRoomTest.hpp>
+#include <fixture/handler/request/ConnectToRoomTest.hpp>
 #include <mock/model/RoomMock.hpp>
 
 #include <gtest/gtest.h>

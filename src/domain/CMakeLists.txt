@@ -24,16 +24,16 @@ set(SRC
     ${SRCROOT}/interface/UuidGenerator.hpp
     ${SRCROOT}/interface/Timer.hpp
 
-    ${SRCROOT}/handler/Register.hpp
-    ${SRCROOT}/handler/Register.cpp
-    ${SRCROOT}/handler/CreateRoom.hpp
-    ${SRCROOT}/handler/CreateRoom.cpp
-    ${SRCROOT}/handler/ConnectToRoom.hpp
-    ${SRCROOT}/handler/ConnectToRoom.cpp
-    ${SRCROOT}/handler/StartGame.hpp
-    ${SRCROOT}/handler/StartGame.cpp
-    ${SRCROOT}/handler/NominateCard.hpp
-    ${SRCROOT}/handler/NominateCard.cpp
+    ${SRCROOT}/handler/request/Register.hpp
+    ${SRCROOT}/handler/request/Register.cpp
+    ${SRCROOT}/handler/request/CreateRoom.hpp
+    ${SRCROOT}/handler/request/CreateRoom.cpp
+    ${SRCROOT}/handler/request/ConnectToRoom.hpp
+    ${SRCROOT}/handler/request/ConnectToRoom.cpp
+    ${SRCROOT}/handler/request/StartGame.hpp
+    ${SRCROOT}/handler/request/StartGame.cpp
+    ${SRCROOT}/handler/request/NominateCard.hpp
+    ${SRCROOT}/handler/request/NominateCard.cpp
 )
 
 add_library(${TARGET_NAME} ${SRC})

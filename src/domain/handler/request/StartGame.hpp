@@ -10,7 +10,7 @@ class RoomStorage;
 class UserStorage;
 } // namespace rps::domain::interface
 
-namespace rps::domain::handler
+namespace rps::domain::handler::request
 {
 
 class StartGame final : public protocol::interface::server::handler::request::StartGame
@@ -25,4 +25,4 @@ private:
     interface::RoomStorage& m_room_storage;
 };
 
-} // namespace rps::domain::handler
+} // namespace rps::domain::handler::request

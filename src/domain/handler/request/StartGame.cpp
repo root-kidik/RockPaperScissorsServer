@@ -1,11 +1,11 @@
 #include <cassert>
 #include <sstream>
 
-#include <domain/handler/StartGame.hpp>
+#include <domain/handler/request/StartGame.hpp>
 #include <domain/interface/RoomStorage.hpp>
 #include <domain/interface/UserStorage.hpp>
 
-namespace rps::domain::handler
+namespace rps::domain::handler::request
 {
 
 StartGame::StartGame(interface::RoomStorage& room_storage, interface::UserStorage& user_storage) :
@@ -36,4 +36,4 @@ StartGame::Response StartGame::handle(Request&& request, const std::shared_ptr<p
     return response;
 }
 
-} // namespace rps::domain::handler
+} // namespace rps::domain::handler::request

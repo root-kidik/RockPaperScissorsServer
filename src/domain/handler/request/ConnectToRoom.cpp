@@ -1,10 +1,10 @@
 #include <sstream>
 
-#include <domain/handler/ConnectToRoom.hpp>
+#include <domain/handler/request/ConnectToRoom.hpp>
 #include <domain/interface/RoomStorage.hpp>
 #include <domain/interface/UserStorage.hpp>
 
-namespace rps::domain::handler
+namespace rps::domain::handler::request
 {
 
 ConnectToRoom::ConnectToRoom(interface::RoomStorage& room_storage, interface::UserStorage& user_storage) :
@@ -42,4 +42,4 @@ ConnectToRoom::Response ConnectToRoom::handle(Request&&                         
     return response;
 }
 
-} // namespace rps::domain::handler
+} // namespace rps::domain::handler::request

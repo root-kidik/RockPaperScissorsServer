@@ -1,7 +1,7 @@
-#include <domain/handler/NominateCard.hpp>
+#include <domain/handler/request/NominateCard.hpp>
 #include <domain/interface/RoomStorage.hpp>
 
-namespace rps::domain::handler
+namespace rps::domain::handler::request
 {
 
 NominateCard::NominateCard(interface::RoomStorage& room_storage) : m_room_storage{room_storage}
@@ -30,4 +30,4 @@ NominateCard::Response NominateCard::handle(Request&& request, const std::shared
     return response;
 }
 
-} // namespace rps::domain::handler
+} // namespace rps::domain::handler::request

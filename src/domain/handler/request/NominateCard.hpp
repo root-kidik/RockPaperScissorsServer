@@ -7,7 +7,7 @@ namespace rps::domain::interface
 class RoomStorage;
 } // namespace rps::domain::interface
 
-namespace rps::domain::handler
+namespace rps::domain::handler::request
 {
 
 class NominateCard final : public protocol::interface::server::handler::request::NominateCard
@@ -21,4 +21,4 @@ private:
     interface::RoomStorage& m_room_storage;
 };
 
-} // namespace rps::domain::handler
+} // namespace rps::domain::handler::request

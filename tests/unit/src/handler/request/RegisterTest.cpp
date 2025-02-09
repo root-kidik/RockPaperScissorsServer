@@ -1,4 +1,4 @@
-#include <fixture/handler/RegisterTest.hpp>
+#include <fixture/handler/request/RegisterTest.hpp>
 
 #include <gtest/gtest.h>
 

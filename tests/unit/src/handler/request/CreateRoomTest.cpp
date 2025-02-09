@@ -1,4 +1,4 @@
-#include <fixture/handler/CreateRoomTest.hpp>
+#include <fixture/handler/request/CreateRoomTest.hpp>
 
 #include <gtest/gtest.h>
 

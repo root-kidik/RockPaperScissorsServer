@@ -1,9 +1,9 @@
 #include <sstream>
 
-#include <domain/handler/Register.hpp>
+#include <domain/handler/request/Register.hpp>
 #include <domain/interface/UserStorage.hpp>
 
-namespace rps::domain::handler
+namespace rps::domain::handler::request
 {
 
 Register::Register(interface::UserStorage& user_storage) : m_user_storage{user_storage}
@@ -23,4 +23,4 @@ Register::Response Register::handle(Request&& request, const std::shared_ptr<pro
     return response;
 }
 
-} // namespace rps::domain::handler
+} // namespace rps::domain::handler::request

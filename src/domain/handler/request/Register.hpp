@@ -7,7 +7,7 @@ namespace rps::domain::interface
 class UserStorage;
 }
 
-namespace rps::domain::handler
+namespace rps::domain::handler::request
 {
 
 class Register final : public protocol::interface::server::handler::request::Register
@@ -21,4 +21,4 @@ private:
     interface::UserStorage& m_user_storage;
 };
 
-} // namespace rps::domain::handler
+} // namespace rps::domain::handler::request

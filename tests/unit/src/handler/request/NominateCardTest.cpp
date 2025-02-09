@@ -1,4 +1,4 @@
-#include <fixture/handler/NominateCardTest.hpp>
+#include <fixture/handler/request/NominateCardTest.hpp>
 #include <mock/model/RoomMock.hpp>
 
 #include <gtest/gtest.h>

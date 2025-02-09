@@ -1,4 +1,4 @@
-#include <fixture/handler/StartGameTest.hpp>
+#include <fixture/handler/request/StartGameTest.hpp>
 #include <mock/model/RoomMock.hpp>
 
 #include <domain/model/Room.hpp>

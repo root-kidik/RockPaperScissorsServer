@@ -8,7 +8,7 @@ class RoomStorage;
 class UserStorage;
 } // namespace rps::domain::interface
 
-namespace rps::domain::handler
+namespace rps::domain::handler::request
 {
 
 class ConnectToRoom final : public protocol::interface::server::handler::request::ConnectToRoom
@@ -23,4 +23,4 @@ private:
     interface::UserStorage& m_user_storage;
 };
 
-} // namespace rps::domain::handler
+} // namespace rps::domain::handler::request

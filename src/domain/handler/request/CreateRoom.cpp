@@ -1,9 +1,9 @@
 #include <sstream>
 
-#include <domain/handler/CreateRoom.hpp>
+#include <domain/handler/request/CreateRoom.hpp>
 #include <domain/interface/RoomStorage.hpp>
 
-namespace rps::domain::handler
+namespace rps::domain::handler::request
 {
 
 CreateRoom::CreateRoom(interface::RoomStorage& room_storage) : m_room_storage{room_storage}
@@ -24,4 +24,4 @@ CreateRoom::Response CreateRoom::handle(Request&& request, const std::shared_ptr
     return response;
 }
 
-} // namespace rps::domain::handler
+} // namespace rps::domain::handler::request

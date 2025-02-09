@@ -14,11 +14,11 @@ set(SRC
 
     ${SRCROOT}/mock/util/TimerMock.hpp
 
-    ${SRCROOT}/fixture/handler/RegisterTest.hpp
-    ${SRCROOT}/fixture/handler/CreateRoomTest.hpp
-    ${SRCROOT}/fixture/handler/ConnectToRoomTest.hpp
-    ${SRCROOT}/fixture/handler/StartGameTest.hpp
-    ${SRCROOT}/fixture/handler/NominateCardTest.hpp
+    ${SRCROOT}/fixture/handler/request/RegisterTest.hpp
+    ${SRCROOT}/fixture/handler/request/CreateRoomTest.hpp
+    ${SRCROOT}/fixture/handler/request/ConnectToRoomTest.hpp
+    ${SRCROOT}/fixture/handler/request/StartGameTest.hpp
+    ${SRCROOT}/fixture/handler/request/NominateCardTest.hpp
 
     ${SRCROOT}/fixture/model/RoomTest.hpp
 
@@ -34,11 +34,11 @@ set(SRC
     ${SRCROOT}/src/model/round_pipe/RaisePlayerCardTest.cpp
     ${SRCROOT}/src/model/round_pipe/DealMissingCardsTest.cpp
 
-    ${SRCROOT}/src/handler/ConnectToRoomTest.cpp
-    ${SRCROOT}/src/handler/RegisterTest.cpp
-    ${SRCROOT}/src/handler/CreateRoomTest.cpp
-    ${SRCROOT}/src/handler/StartGameTest.cpp
-    ${SRCROOT}/src/handler/NominateCardTest.cpp
+    ${SRCROOT}/src/handler/request/ConnectToRoomTest.cpp
+    ${SRCROOT}/src/handler/request/RegisterTest.cpp
+    ${SRCROOT}/src/handler/request/CreateRoomTest.cpp
+    ${SRCROOT}/src/handler/request/StartGameTest.cpp
+    ${SRCROOT}/src/handler/request/NominateCardTest.cpp
 )
 
 add_executable(${TARGET_NAME} ${SRC})

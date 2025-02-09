@@ -7,7 +7,7 @@ namespace rps::domain::interface
 class RoomStorage;
 } // namespace rps::domain::interface
 
-namespace rps::domain::handler
+namespace rps::domain::handler::request
 {
 
 class CreateRoom final : public protocol::interface::server::handler::request::CreateRoom
@@ -21,4 +21,4 @@ private:
     interface::RoomStorage& m_room_storage;
 };
 
-} // namespace rps::domain::handler
+} // namespace rps::domain::handler::request
