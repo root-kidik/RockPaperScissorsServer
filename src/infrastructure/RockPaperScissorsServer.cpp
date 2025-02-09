@@ -1,7 +1,7 @@
-#include <domain/handler/ConnectToRoomCommandHandler.hpp>
-#include <domain/handler/CreateRoomCommandHandler.hpp>
-#include <domain/handler/RegisterCommandHandler.hpp>
-#include <domain/handler/StartGameCommandHandler.hpp>
+#include <domain/handler/ConnectToRoom.hpp>
+#include <domain/handler/CreateRoom.hpp>
+#include <domain/handler/Register.hpp>
+#include <domain/handler/StartGame.hpp>
 
 #include <infrastructure/RockPaperScissorsServer.hpp>
 #include <infrastructure/client/TcpSocketConnection.hpp>
@@ -14,11 +14,10 @@ m_app{argc, argv},
 m_memory_user_storage{m_uuid_generator},
 m_memory_room_storage{m_uuid_generator, m_command_sender}
 {
-    m_command_executor.register_command<domain::handler::RegisterCommandHandler>(m_memory_user_storage);
-    m_command_executor.register_command<domain::handler::CreateRoomCommandHandler>(m_memory_room_storage);
-    m_command_executor.register_command<domain::handler::ConnectToRoomCommandHandler>(m_memory_room_storage,
-                                                                                      m_memory_user_storage);
-    m_command_executor.register_command<domain::handler::StartGameCommandHandler>(m_memory_room_storage, m_memory_user_storage);
+    m_command_executor.register_command<domain::handler::Register>(m_memory_user_storage);
+    m_command_executor.register_command<domain::handler::CreateRoom>(m_memory_room_storage);
+    m_command_executor.register_command<domain::handler::ConnectToRoom>(m_memory_room_storage, m_memory_user_storage);
+    m_command_executor.register_command<domain::handler::StartGame>(m_memory_room_storage, m_memory_user_storage);
 
     connect(this,
             &QTcpServer::newConnection,

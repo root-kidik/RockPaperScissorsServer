@@ -1,22 +1,21 @@
 #include <cassert>
 #include <sstream>
 
-#include <domain/handler/StartGameCommandHandler.hpp>
+#include <domain/handler/StartGame.hpp>
 #include <domain/interface/RoomStorage.hpp>
 #include <domain/interface/UserStorage.hpp>
 
 namespace rps::domain::handler
 {
 
-StartGameCommandHandler::StartGameCommandHandler(interface::RoomStorage& room_storage, interface::UserStorage& user_storage) :
+StartGame::StartGame(interface::RoomStorage& room_storage, interface::UserStorage& user_storage) :
 m_room_storage{room_storage},
 m_user_storage{user_storage}
 {
 }
 
-protocol::entity::server::StatusResponse StartGameCommandHandler::handle(
-    protocol::entity::server::StartGameRequest&&            request,
-    const std::shared_ptr<protocol::interface::Connection>& connection)
+protocol::entity::server::StatusResponse StartGame::handle(protocol::entity::server::StartGameRequest&& request,
+                                                           const std::shared_ptr<protocol::interface::Connection>& connection)
 {
     protocol::entity::server::StatusResponse response;
 

@@ -1,18 +1,17 @@
 #include <sstream>
 
-#include <domain/handler/CreateRoomCommandHandler.hpp>
+#include <domain/handler/CreateRoom.hpp>
 #include <domain/interface/RoomStorage.hpp>
 
 namespace rps::domain::handler
 {
 
-CreateRoomCommandHandler::CreateRoomCommandHandler(interface::RoomStorage& room_storage) : m_room_storage{room_storage}
+CreateRoom::CreateRoom(interface::RoomStorage& room_storage) : m_room_storage{room_storage}
 {
 }
 
-protocol::entity::server::StatusResponse CreateRoomCommandHandler::handle(
-    protocol::entity::server::CreateRoomRequest&&           request,
-    const std::shared_ptr<protocol::interface::Connection>& connection)
+protocol::entity::server::StatusResponse CreateRoom::handle(protocol::entity::server::CreateRoomRequest&& request,
+                                                            const std::shared_ptr<protocol::interface::Connection>& connection)
 {
     protocol::entity::server::StatusResponse response;
 

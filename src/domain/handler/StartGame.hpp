@@ -2,7 +2,7 @@
 
 #include <memory>
 
-#include <RockPaperScissorsProtocol/interface/StartGameCommandHandlerBase.hpp>
+#include <RockPaperScissorsProtocol/interface/server/handler/StartGame.hpp>
 
 namespace rps::domain::interface
 {
@@ -13,10 +13,10 @@ class UserStorage;
 namespace rps::domain::handler
 {
 
-class StartGameCommandHandler final : public protocol::interface::StartGameCommandHandlerBase
+class StartGame final : public protocol::interface::server::handler::StartGame
 {
 public:
-    StartGameCommandHandler(interface::RoomStorage& room_storage, interface::UserStorage& user_storage);
+    StartGame(interface::RoomStorage& room_storage, interface::UserStorage& user_storage);
 
     protocol::entity::server::StatusResponse handle(protocol::entity::server::StartGameRequest&& request,
                                                     const std::shared_ptr<protocol::interface::Connection>& connection) override;

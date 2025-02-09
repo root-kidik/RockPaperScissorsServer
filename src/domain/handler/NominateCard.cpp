@@ -1,17 +1,15 @@
-#include <domain/handler/NominateCardCommandHandler.hpp>
+#include <domain/handler/NominateCard.hpp>
 #include <domain/interface/RoomStorage.hpp>
 
 namespace rps::domain::handler
 {
 
-NominateCardCommandHandler::NominateCardCommandHandler(interface::RoomStorage& room_storage) :
-m_room_storage{room_storage}
+NominateCard::NominateCard(interface::RoomStorage& room_storage) : m_room_storage{room_storage}
 {
 }
 
-protocol::entity::server::StatusResponse NominateCardCommandHandler::handle(
-    protocol::entity::server::NominateCardRequest&&         request,
-    const std::shared_ptr<protocol::interface::Connection>& connection)
+protocol::entity::server::StatusResponse NominateCard::handle(protocol::entity::server::NominateCardRequest&& request,
+                                                              const std::shared_ptr<protocol::interface::Connection>& connection)
 {
     protocol::entity::server::StatusResponse response;
 

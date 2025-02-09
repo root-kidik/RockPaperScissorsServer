@@ -1,6 +1,6 @@
 #pragma once
 
-#include <RockPaperScissorsProtocol/interface/NominateCardCommandHandlerBase.hpp>
+#include <RockPaperScissorsProtocol/interface/server/handler/NominateCard.hpp>
 
 namespace rps::domain::interface
 {
@@ -10,10 +10,10 @@ class RoomStorage;
 namespace rps::domain::handler
 {
 
-class NominateCardCommandHandler final : public protocol::interface::NominateCardCommandHandlerBase
+class NominateCard final : public protocol::interface::server::handler::NominateCard
 {
 public:
-    NominateCardCommandHandler(interface::RoomStorage& room_storage);
+    NominateCard(interface::RoomStorage& room_storage);
 
     protocol::entity::server::StatusResponse handle(protocol::entity::server::NominateCardRequest&& request,
                                                     const std::shared_ptr<protocol::interface::Connection>& connection) override;

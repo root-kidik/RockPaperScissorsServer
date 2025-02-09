@@ -1,22 +1,20 @@
 #include <sstream>
 
-#include <domain/handler/ConnectToRoomCommandHandler.hpp>
+#include <domain/handler/ConnectToRoom.hpp>
 #include <domain/interface/RoomStorage.hpp>
 #include <domain/interface/UserStorage.hpp>
 
 namespace rps::domain::handler
 {
 
-ConnectToRoomCommandHandler::ConnectToRoomCommandHandler(interface::RoomStorage& room_storage,
-                                                         interface::UserStorage& user_storage) :
+ConnectToRoom::ConnectToRoom(interface::RoomStorage& room_storage, interface::UserStorage& user_storage) :
 m_room_storage{room_storage},
 m_user_storage{user_storage}
 {
 }
 
-protocol::entity::server::StatusResponse ConnectToRoomCommandHandler::handle(
-    protocol::entity::server::ConnectToRoomRequest&&        request,
-    const std::shared_ptr<protocol::interface::Connection>& connection)
+protocol::entity::server::StatusResponse ConnectToRoom::handle(protocol::entity::server::ConnectToRoomRequest&& request,
+                                                               const std::shared_ptr<protocol::interface::Connection>& connection)
 {
     protocol::entity::server::StatusResponse response;
 

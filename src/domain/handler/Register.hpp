@@ -1,6 +1,6 @@
 #pragma once
 
-#include <RockPaperScissorsProtocol/interface/RegisterCommandHandlerBase.hpp>
+#include <RockPaperScissorsProtocol/interface/server/handler/Register.hpp>
 
 namespace rps::domain::interface
 {
@@ -10,10 +10,10 @@ class UserStorage;
 namespace rps::domain::handler
 {
 
-class RegisterCommandHandler final : public protocol::interface::RegisterCommandHandlerBase
+class Register final : public protocol::interface::server::handler::Register
 {
 public:
-    RegisterCommandHandler(interface::UserStorage& user_storage);
+    Register(interface::UserStorage& user_storage);
 
     protocol::entity::server::RegisterResponse handle(protocol::entity::server::RegisterRequest&& request,
                                                       const std::shared_ptr<protocol::interface::Connection>& connection) override;

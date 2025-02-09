@@ -1,18 +1,17 @@
 #include <sstream>
 
-#include <domain/handler/RegisterCommandHandler.hpp>
+#include <domain/handler/Register.hpp>
 #include <domain/interface/UserStorage.hpp>
 
 namespace rps::domain::handler
 {
 
-RegisterCommandHandler::RegisterCommandHandler(interface::UserStorage& user_storage) : m_user_storage{user_storage}
+Register::Register(interface::UserStorage& user_storage) : m_user_storage{user_storage}
 {
 }
 
-protocol::entity::server::RegisterResponse RegisterCommandHandler::handle(
-    protocol::entity::server::RegisterRequest&&             request,
-    const std::shared_ptr<protocol::interface::Connection>& connection)
+protocol::entity::server::RegisterResponse Register::handle(protocol::entity::server::RegisterRequest&& request,
+                                                            const std::shared_ptr<protocol::interface::Connection>& connection)
 {
     protocol::entity::server::RegisterResponse response;
 
