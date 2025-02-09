@@ -15,9 +15,7 @@ class Register final : public protocol::interface::server::handler::Register
 public:
     Register(interface::UserStorage& user_storage);
 
-    protocol::entity::server::response::Register handle(
-        protocol::entity::server::request::Register&&           request,
-        const std::shared_ptr<protocol::interface::Connection>& connection) override;
+    Response handle(Request&& request, const std::shared_ptr<protocol::interface::Connection>& connection) override;
 
 private:
     interface::UserStorage& m_user_storage;

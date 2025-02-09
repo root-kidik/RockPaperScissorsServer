@@ -13,11 +13,10 @@ m_user_storage{user_storage}
 {
 }
 
-protocol::entity::server::response::Status ConnectToRoom::handle(
-    protocol::entity::server::request::ConnectToRoom&&      request,
-    const std::shared_ptr<protocol::interface::Connection>& connection)
+ConnectToRoom::Response ConnectToRoom::handle(Request&&                                               request,
+                                              const std::shared_ptr<protocol::interface::Connection>& connection)
 {
-    protocol::entity::server::response::Status response;
+    Response response;
 
     if (request.user_uuid.empty() || request.room_name.empty())
     {

@@ -15,8 +15,7 @@ class CreateRoom final : public protocol::interface::server::handler::CreateRoom
 public:
     CreateRoom(interface::RoomStorage& room_storage);
 
-    protocol::entity::server::response::Status handle(protocol::entity::server::request::CreateRoom&& request,
-                                                      const std::shared_ptr<protocol::interface::Connection>& connection) override;
+    Response handle(Request&& request, const std::shared_ptr<protocol::interface::Connection>& connection) override;
 
 private:
     interface::RoomStorage& m_room_storage;

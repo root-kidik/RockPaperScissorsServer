@@ -15,8 +15,7 @@ class NominateCard final : public protocol::interface::server::handler::Nominate
 public:
     NominateCard(interface::RoomStorage& room_storage);
 
-    protocol::entity::server::response::Status handle(protocol::entity::server::request::NominateCard&& request,
-                                                      const std::shared_ptr<protocol::interface::Connection>& connection) override;
+    Response handle(Request&& request, const std::shared_ptr<protocol::interface::Connection>& connection) override;
 
 private:
     interface::RoomStorage& m_room_storage;

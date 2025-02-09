@@ -10,10 +10,9 @@ CreateRoom::CreateRoom(interface::RoomStorage& room_storage) : m_room_storage{ro
 {
 }
 
-protocol::entity::server::response::Status CreateRoom::handle(protocol::entity::server::request::CreateRoom&& request,
-                                                              const std::shared_ptr<protocol::interface::Connection>& connection)
+CreateRoom::Response CreateRoom::handle(Request&& request, const std::shared_ptr<protocol::interface::Connection>& connection)
 {
-    protocol::entity::server::response::Status response;
+    Response response;
 
     if (request.room_name.empty() || request.user_uuid.empty())
     {
