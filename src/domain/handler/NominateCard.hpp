@@ -1,6 +1,6 @@
 #pragma once
 
-#include <RockPaperScissorsProtocol/interface/server/handler/NominateCard.hpp>
+#include <RockPaperScissorsProtocol/interface/server/handler/request/NominateCard.hpp>
 
 namespace rps::domain::interface
 {
@@ -10,7 +10,7 @@ class RoomStorage;
 namespace rps::domain::handler
 {
 
-class NominateCard final : public protocol::interface::server::handler::NominateCard
+class NominateCard final : public protocol::interface::server::handler::request::NominateCard
 {
 public:
     NominateCard(interface::RoomStorage& room_storage);

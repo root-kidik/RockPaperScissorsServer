@@ -1,6 +1,6 @@
 #pragma once
 
-#include <RockPaperScissorsProtocol/interface/server/handler/ConnectToRoom.hpp>
+#include <RockPaperScissorsProtocol/interface/server/handler/request/ConnectToRoom.hpp>
 
 namespace rps::domain::interface
 {
@@ -11,7 +11,7 @@ class UserStorage;
 namespace rps::domain::handler
 {
 
-class ConnectToRoom final : public protocol::interface::server::handler::ConnectToRoom
+class ConnectToRoom final : public protocol::interface::server::handler::request::ConnectToRoom
 {
 public:
     ConnectToRoom(interface::RoomStorage& room_storage, interface::UserStorage& user_storage);

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <RockPaperScissorsProtocol/interface/server/handler/Register.hpp>
+#include <RockPaperScissorsProtocol/interface/server/handler/request/Register.hpp>
 
 namespace rps::domain::interface
 {
@@ -10,7 +10,7 @@ class UserStorage;
 namespace rps::domain::handler
 {
 
-class Register final : public protocol::interface::server::handler::Register
+class Register final : public protocol::interface::server::handler::request::Register
 {
 public:
     Register(interface::UserStorage& user_storage);

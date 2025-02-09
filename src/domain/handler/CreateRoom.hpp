@@ -1,6 +1,6 @@
 #pragma once
 
-#include <RockPaperScissorsProtocol/interface/server/handler/CreateRoom.hpp>
+#include <RockPaperScissorsProtocol/interface/server/handler/request/CreateRoom.hpp>
 
 namespace rps::domain::interface
 {
@@ -10,7 +10,7 @@ class RoomStorage;
 namespace rps::domain::handler
 {
 
-class CreateRoom final : public protocol::interface::server::handler::CreateRoom
+class CreateRoom final : public protocol::interface::server::handler::request::CreateRoom
 {
 public:
     CreateRoom(interface::RoomStorage& room_storage);

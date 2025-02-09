@@ -2,7 +2,7 @@
 
 #include <memory>
 
-#include <RockPaperScissorsProtocol/interface/server/handler/StartGame.hpp>
+#include <RockPaperScissorsProtocol/interface/server/handler/request/StartGame.hpp>
 
 namespace rps::domain::interface
 {
@@ -13,7 +13,7 @@ class UserStorage;
 namespace rps::domain::handler
 {
 
-class StartGame final : public protocol::interface::server::handler::StartGame
+class StartGame final : public protocol::interface::server::handler::request::StartGame
 {
 public:
     StartGame(interface::RoomStorage& room_storage, interface::UserStorage& user_storage);
