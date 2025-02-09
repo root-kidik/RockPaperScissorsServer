@@ -10,10 +10,10 @@ Register::Register(interface::UserStorage& user_storage) : m_user_storage{user_s
 {
 }
 
-protocol::entity::server::RegisterResponse Register::handle(protocol::entity::server::RegisterRequest&& request,
-                                                            const std::shared_ptr<protocol::interface::Connection>& connection)
+protocol::entity::server::response::Register Register::handle(protocol::entity::server::request::Register&& request,
+                                                              const std::shared_ptr<protocol::interface::Connection>& connection)
 {
-    protocol::entity::server::RegisterResponse response;
+    protocol::entity::server::response::Register response;
 
     if (request.user_nickname.empty())
         return response;

@@ -16,8 +16,8 @@ class ConnectToRoom final : public protocol::interface::server::handler::Connect
 public:
     ConnectToRoom(interface::RoomStorage& room_storage, interface::UserStorage& user_storage);
 
-    protocol::entity::server::StatusResponse handle(protocol::entity::server::ConnectToRoomRequest&& request,
-                                                    const std::shared_ptr<protocol::interface::Connection>& connection) override;
+    protocol::entity::server::response::Status handle(protocol::entity::server::request::ConnectToRoom&& request,
+                                                      const std::shared_ptr<protocol::interface::Connection>& connection) override;
 
 private:
     interface::RoomStorage& m_room_storage;

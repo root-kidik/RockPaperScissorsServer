@@ -2,7 +2,7 @@
 
 #include <gtest/gtest.h>
 
-#include <RockPaperScissorsProtocol/entity/client/request/DealMissingCardRequest.hpp>
+#include <RockPaperScissorsProtocol/entity/client/request/DealMissingCard.hpp>
 
 using testing::Return;
 
@@ -21,7 +21,7 @@ TEST_F(DealMissingCardsPipeFixture, run_with_deck)
     deck.emplace_back(protocol::entity::Card::Paper);
     deck.emplace_back(back_card);
 
-    protocol::entity::client::DealMissingCardRequest request;
+    protocol::entity::client::request::DealMissingCard request;
     request.card = back_card;
 
     EXPECT_CALL(*connection, send(protocol::util::serialize_command(std::move(request)))).WillOnce(Return());

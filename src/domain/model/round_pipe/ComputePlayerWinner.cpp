@@ -3,7 +3,7 @@
 
 #include <domain/model/round_pipe/ComputePlayerWinner.hpp>
 
-#include <RockPaperScissorsProtocol/entity/client/request/RoundInfoRequest.hpp>
+#include <RockPaperScissorsProtocol/entity/client/request/RoundInfo.hpp>
 
 namespace rps::domain::model::round_pipe
 {
@@ -26,7 +26,7 @@ void ComputePlayerWinner::run(Room::RoundContext& context)
     bool is_rock_winned     = is_rock_raised && is_scissors_raised;
     bool is_scissors_winned = is_scissors_raised && is_paper_raised;
 
-    protocol::entity::client::RoundInfoRequest request;
+    protocol::entity::client::request::RoundInfo request;
 
     if (is_all_losed)
         request.is_winned = false;

@@ -2,7 +2,7 @@
 
 #include <gtest/gtest.h>
 
-#include <RockPaperScissorsProtocol/entity/client/request/CardRaisedRequest.hpp>
+#include <RockPaperScissorsProtocol/entity/client/request/CardRaised.hpp>
 
 using testing::Return;
 
@@ -13,7 +13,7 @@ TEST_F(RaisePlayerCardPipeFixture, run_raise_rock)
     player.nominated_card = raised_card;
     player.cards.emplace_back(raised_card);
 
-    protocol::entity::client::CardRaisedRequest request;
+    protocol::entity::client::request::CardRaised request;
     request.card = raised_card;
 
     EXPECT_CALL(*connection, send(protocol::util::serialize_command(std::move(request)))).WillOnce(Return());
@@ -34,7 +34,7 @@ TEST_F(RaisePlayerCardPipeFixture, run_raise_paper)
     player.nominated_card = raised_card;
     player.cards.emplace_back(raised_card);
 
-    protocol::entity::client::CardRaisedRequest request;
+    protocol::entity::client::request::CardRaised request;
     request.card = raised_card;
 
     EXPECT_CALL(*connection, send(protocol::util::serialize_command(std::move(request)))).WillOnce(Return());
@@ -55,7 +55,7 @@ TEST_F(RaisePlayerCardPipeFixture, run_raise_scissors)
     player.nominated_card = raised_card;
     player.cards.emplace_back(raised_card);
 
-    protocol::entity::client::CardRaisedRequest request;
+    protocol::entity::client::request::CardRaised request;
     request.card = raised_card;
 
     EXPECT_CALL(*connection, send(protocol::util::serialize_command(std::move(request)))).WillOnce(Return());

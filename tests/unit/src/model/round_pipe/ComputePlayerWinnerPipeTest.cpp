@@ -2,7 +2,7 @@
 
 #include <gtest/gtest.h>
 
-#include <RockPaperScissorsProtocol/entity/client/request/RoundInfoRequest.hpp>
+#include <RockPaperScissorsProtocol/entity/client/request/RoundInfo.hpp>
 
 using testing::Return;
 
@@ -14,7 +14,7 @@ TEST_F(ComputePlayerWinnerPipeFixture, run_with_rock_all_losed)
 
     player.nominated_card = protocol::entity::Card::Rock;
 
-    protocol::entity::client::RoundInfoRequest request;
+    protocol::entity::client::request::RoundInfo request;
     request.is_winned = false;
 
     EXPECT_CALL(*connection, send(protocol::util::serialize_command(std::move(request)))).WillOnce(Return());
@@ -34,7 +34,7 @@ TEST_F(ComputePlayerWinnerPipeFixture, run_with_paper_all_losed)
 
     player.nominated_card = protocol::entity::Card::Paper;
 
-    protocol::entity::client::RoundInfoRequest request;
+    protocol::entity::client::request::RoundInfo request;
     request.is_winned = false;
 
     EXPECT_CALL(*connection, send(protocol::util::serialize_command(std::move(request)))).WillOnce(Return());
@@ -54,7 +54,7 @@ TEST_F(ComputePlayerWinnerPipeFixture, run_with_scissors_all_losed)
 
     player.nominated_card = protocol::entity::Card::Scissors;
 
-    protocol::entity::client::RoundInfoRequest request;
+    protocol::entity::client::request::RoundInfo request;
     request.is_winned = false;
 
     EXPECT_CALL(*connection, send(protocol::util::serialize_command(std::move(request)))).WillOnce(Return());
@@ -73,7 +73,7 @@ TEST_F(ComputePlayerWinnerPipeFixture, run_with_rock_win)
 
     player.nominated_card = protocol::entity::Card::Rock;
 
-    protocol::entity::client::RoundInfoRequest request;
+    protocol::entity::client::request::RoundInfo request;
     request.is_winned = true;
 
     EXPECT_CALL(*connection, send(protocol::util::serialize_command(std::move(request)))).WillOnce(Return());
@@ -92,7 +92,7 @@ TEST_F(ComputePlayerWinnerPipeFixture, run_with_rock_lose)
 
     player.nominated_card = protocol::entity::Card::Rock;
 
-    protocol::entity::client::RoundInfoRequest request;
+    protocol::entity::client::request::RoundInfo request;
     request.is_winned = false;
 
     EXPECT_CALL(*connection, send(protocol::util::serialize_command(std::move(request)))).WillOnce(Return());
@@ -111,7 +111,7 @@ TEST_F(ComputePlayerWinnerPipeFixture, run_with_paper_win)
 
     player.nominated_card = protocol::entity::Card::Paper;
 
-    protocol::entity::client::RoundInfoRequest request;
+    protocol::entity::client::request::RoundInfo request;
     request.is_winned = true;
 
     EXPECT_CALL(*connection, send(protocol::util::serialize_command(std::move(request)))).WillOnce(Return());
@@ -130,7 +130,7 @@ TEST_F(ComputePlayerWinnerPipeFixture, run_with_paper_lose)
 
     player.nominated_card = protocol::entity::Card::Paper;
 
-    protocol::entity::client::RoundInfoRequest request;
+    protocol::entity::client::request::RoundInfo request;
     request.is_winned = false;
 
     EXPECT_CALL(*connection, send(protocol::util::serialize_command(std::move(request)))).WillOnce(Return());
@@ -149,7 +149,7 @@ TEST_F(ComputePlayerWinnerPipeFixture, run_with_scissors_win)
 
     player.nominated_card = protocol::entity::Card::Scissors;
 
-    protocol::entity::client::RoundInfoRequest request;
+    protocol::entity::client::request::RoundInfo request;
     request.is_winned = true;
 
     EXPECT_CALL(*connection, send(protocol::util::serialize_command(std::move(request)))).WillOnce(Return());
@@ -168,7 +168,7 @@ TEST_F(ComputePlayerWinnerPipeFixture, run_with_scissors_lose)
 
     player.nominated_card = protocol::entity::Card::Scissors;
 
-    protocol::entity::client::RoundInfoRequest request;
+    protocol::entity::client::request::RoundInfo request;
     request.is_winned = false;
 
     EXPECT_CALL(*connection, send(protocol::util::serialize_command(std::move(request)))).WillOnce(Return());

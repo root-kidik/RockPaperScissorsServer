@@ -6,7 +6,7 @@ using testing::Return;
 
 TEST_F(CreateRoomCommandFixture, room_name_and_user_uuid_are_empty)
 {
-    protocol::entity::server::CreateRoomRequest request;
+    protocol::entity::server::request::CreateRoom request;
 
     auto response = create_room_command_handler.handle(std::move(request), connection);
 
@@ -15,7 +15,7 @@ TEST_F(CreateRoomCommandFixture, room_name_and_user_uuid_are_empty)
 
 TEST_F(CreateRoomCommandFixture, name_is_empty)
 {
-    protocol::entity::server::CreateRoomRequest request;
+    protocol::entity::server::request::CreateRoom request;
     request.room_name = "";
     request.user_uuid = "user_uuid";
 
@@ -26,7 +26,7 @@ TEST_F(CreateRoomCommandFixture, name_is_empty)
 
 TEST_F(CreateRoomCommandFixture, owner_uuid_is_empty)
 {
-    protocol::entity::server::CreateRoomRequest request;
+    protocol::entity::server::request::CreateRoom request;
     request.room_name = "room_name";
     request.user_uuid = "";
 
@@ -37,7 +37,7 @@ TEST_F(CreateRoomCommandFixture, owner_uuid_is_empty)
 
 TEST_F(CreateRoomCommandFixture, room_not_exist)
 {
-    protocol::entity::server::CreateRoomRequest request;
+    protocol::entity::server::request::CreateRoom request;
     request.room_name = "user";
     request.user_uuid = "1234";
 
@@ -50,7 +50,7 @@ TEST_F(CreateRoomCommandFixture, room_not_exist)
 
 TEST_F(CreateRoomCommandFixture, room_exist)
 {
-    protocol::entity::server::CreateRoomRequest request;
+    protocol::entity::server::request::CreateRoom request;
     request.room_name = "user";
     request.user_uuid = "1234";
 

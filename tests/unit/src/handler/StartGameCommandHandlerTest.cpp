@@ -11,7 +11,7 @@ using testing::Return;
 
 TEST_F(StartGameCommandFixture, user_uuid_and_name_are_empty)
 {
-    protocol::entity::server::StartGameRequest request;
+    protocol::entity::server::request::StartGame request;
 
     auto response = start_game_command_handler.handle(std::move(request), connection);
 
@@ -20,7 +20,7 @@ TEST_F(StartGameCommandFixture, user_uuid_and_name_are_empty)
 
 TEST_F(StartGameCommandFixture, user_uuid_is_empty)
 {
-    protocol::entity::server::StartGameRequest request;
+    protocol::entity::server::request::StartGame request;
     request.user_uuid = "";
     request.room_name = "room_name";
 
@@ -31,7 +31,7 @@ TEST_F(StartGameCommandFixture, user_uuid_is_empty)
 
 TEST_F(StartGameCommandFixture, room_name_is_empty)
 {
-    protocol::entity::server::StartGameRequest request;
+    protocol::entity::server::request::StartGame request;
     request.user_uuid = "1234";
     request.room_name = "";
 
@@ -42,7 +42,7 @@ TEST_F(StartGameCommandFixture, room_name_is_empty)
 
 TEST_F(StartGameCommandFixture, room_is_not_exist)
 {
-    protocol::entity::server::StartGameRequest request;
+    protocol::entity::server::request::StartGame request;
     request.user_uuid = "1234";
     request.room_name = "some_name";
 
@@ -55,7 +55,7 @@ TEST_F(StartGameCommandFixture, room_is_not_exist)
 
 TEST_F(StartGameCommandFixture, user_uuid_is_not_owner_uuid)
 {
-    protocol::entity::server::StartGameRequest request;
+    protocol::entity::server::request::StartGame request;
     request.room_name = "room_name";
     request.user_uuid = "user_uuid";
 
@@ -73,7 +73,7 @@ TEST_F(StartGameCommandFixture, user_uuid_is_not_owner_uuid)
 
 TEST_F(StartGameCommandFixture, room_is_exist)
 {
-    protocol::entity::server::StartGameRequest request;
+    protocol::entity::server::request::StartGame request;
     request.room_name = "room_name";
     request.user_uuid = "user_uuid";
 

@@ -2,7 +2,7 @@
 
 #include <domain/model/round_pipe/ForceNominatePlayerCard.hpp>
 
-#include <RockPaperScissorsProtocol/entity/client/request/CardForcedNominatedRequest.hpp>
+#include <RockPaperScissorsProtocol/entity/client/request/CardForcedNominated.hpp>
 
 namespace rps::domain::model::round_pipe
 {
@@ -24,7 +24,7 @@ void ForceNominatePlayerCard::run(Room::RoundContext& context)
 
     player.nominated_card = player.cards.back();
 
-    protocol::entity::client::CardForcedNominatedRequest request;
+    protocol::entity::client::request::CardForcedNominated request;
     request.card = player.cards.back();
 
     m_command_sender.send(std::move(request), player.connection);

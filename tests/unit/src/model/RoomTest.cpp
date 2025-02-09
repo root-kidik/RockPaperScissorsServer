@@ -2,7 +2,7 @@
 
 #include <gtest/gtest.h>
 
-#include <RockPaperScissorsProtocol/entity/client/request/NewPlayerAddedRequest.hpp>
+#include <RockPaperScissorsProtocol/entity/client/request/NewPlayerAdded.hpp>
 
 using testing::Return;
 
@@ -56,7 +56,7 @@ TEST_F(RoomFixture, try_add_user_too_many_users)
 
         for (const auto& [player_uuid, player] : room.get_players())
         {
-            protocol::entity::client::NewPlayerAddedRequest request;
+            protocol::entity::client::request::NewPlayerAdded request;
             request.user_nickname = user_nickname;
 
             EXPECT_CALL(*std::dynamic_pointer_cast<ConnectionMock>(player.connection),
@@ -80,7 +80,7 @@ TEST_F(RoomFixture, try_add_user_wait_owner)
 
         for (const auto& [player_uuid, player] : room.get_players())
         {
-            protocol::entity::client::NewPlayerAddedRequest request;
+            protocol::entity::client::request::NewPlayerAdded request;
             request.user_nickname = user_nickname;
 
             EXPECT_CALL(*std::dynamic_pointer_cast<ConnectionMock>(player.connection),
@@ -97,7 +97,7 @@ TEST_F(RoomFixture, try_add_user_wait_owner)
 
     for (const auto& [player_uuid, player] : room.get_players())
     {
-        protocol::entity::client::NewPlayerAddedRequest request;
+        protocol::entity::client::request::NewPlayerAdded request;
         request.user_nickname = owner_nickname;
 
         EXPECT_CALL(*std::dynamic_pointer_cast<ConnectionMock>(player.connection),
@@ -137,7 +137,7 @@ TEST_F(RoomFixture, try_start_game_with_six_users)
 
         for (const auto& [player_uuid, player] : room.get_players())
         {
-            protocol::entity::client::NewPlayerAddedRequest request;
+            protocol::entity::client::request::NewPlayerAdded request;
             request.user_nickname = user_nickname;
 
             EXPECT_CALL(*std::dynamic_pointer_cast<ConnectionMock>(player.connection),

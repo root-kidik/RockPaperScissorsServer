@@ -14,10 +14,10 @@ m_user_storage{user_storage}
 {
 }
 
-protocol::entity::server::StatusResponse StartGame::handle(protocol::entity::server::StartGameRequest&& request,
-                                                           const std::shared_ptr<protocol::interface::Connection>& connection)
+protocol::entity::server::response::Status StartGame::handle(protocol::entity::server::request::StartGame&& request,
+                                                             const std::shared_ptr<protocol::interface::Connection>& connection)
 {
-    protocol::entity::server::StatusResponse response;
+    protocol::entity::server::response::Status response;
 
     if (request.room_name.empty() || request.user_uuid.empty())
     {

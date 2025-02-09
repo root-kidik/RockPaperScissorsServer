@@ -8,10 +8,11 @@ NominateCard::NominateCard(interface::RoomStorage& room_storage) : m_room_storag
 {
 }
 
-protocol::entity::server::StatusResponse NominateCard::handle(protocol::entity::server::NominateCardRequest&& request,
-                                                              const std::shared_ptr<protocol::interface::Connection>& connection)
+protocol::entity::server::response::Status NominateCard::handle(
+    protocol::entity::server::request::NominateCard&&       request,
+    const std::shared_ptr<protocol::interface::Connection>& connection)
 {
-    protocol::entity::server::StatusResponse response;
+    protocol::entity::server::response::Status response;
 
     if (request.room_name.empty() || request.user_uuid.empty() || !protocol::util::is_enum_has_valid_value(request.card))
     {

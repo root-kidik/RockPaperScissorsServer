@@ -7,7 +7,7 @@ using testing::Return;
 
 TEST_F(NominateCardCommandHandlerFixture, room_name_user_uuid_card_are_empty)
 {
-    protocol::entity::server::NominateCardRequest request;
+    protocol::entity::server::request::NominateCard request;
 
     auto response = nominate_card_command_handler.handle(std::move(request), connection);
 
@@ -16,7 +16,7 @@ TEST_F(NominateCardCommandHandlerFixture, room_name_user_uuid_card_are_empty)
 
 TEST_F(NominateCardCommandHandlerFixture, room_name_is_empty)
 {
-    protocol::entity::server::NominateCardRequest request;
+    protocol::entity::server::request::NominateCard request;
     request.user_uuid = "user_uuid";
 
     auto response = nominate_card_command_handler.handle(std::move(request), connection);
@@ -26,7 +26,7 @@ TEST_F(NominateCardCommandHandlerFixture, room_name_is_empty)
 
 TEST_F(NominateCardCommandHandlerFixture, user_uuid_is_empty)
 {
-    protocol::entity::server::NominateCardRequest request;
+    protocol::entity::server::request::NominateCard request;
     request.room_name = "user_room";
 
     auto response = nominate_card_command_handler.handle(std::move(request), connection);
@@ -36,7 +36,7 @@ TEST_F(NominateCardCommandHandlerFixture, user_uuid_is_empty)
 
 TEST_F(NominateCardCommandHandlerFixture, card_is_empty)
 {
-    protocol::entity::server::NominateCardRequest request;
+    protocol::entity::server::request::NominateCard request;
     request.room_name = "user_room";
     request.user_uuid = "user_uuid";
 
@@ -47,7 +47,7 @@ TEST_F(NominateCardCommandHandlerFixture, card_is_empty)
 
 TEST_F(NominateCardCommandHandlerFixture, room_name_user_uuid_card_have_value_but_room_not_finded)
 {
-    protocol::entity::server::NominateCardRequest request;
+    protocol::entity::server::request::NominateCard request;
     request.room_name = "user_room";
     request.user_uuid = "user_uuid";
     request.card      = protocol::entity::Card::Rock;
@@ -63,7 +63,7 @@ TEST_F(NominateCardCommandHandlerFixture, room_name_user_uuid_card_have_value_ro
 {
     RoomMock room;
 
-    protocol::entity::server::NominateCardRequest request;
+    protocol::entity::server::request::NominateCard request;
     request.room_name = "user_room";
     request.user_uuid = "user_uuid";
     request.card      = protocol::entity::Card::Rock;
@@ -81,7 +81,7 @@ TEST_F(NominateCardCommandHandlerFixture, room_name_user_uuid_card_have_value_ro
 {
     RoomMock room;
 
-    protocol::entity::server::NominateCardRequest request;
+    protocol::entity::server::request::NominateCard request;
     request.room_name = "user_room";
     request.user_uuid = "user_uuid";
     request.card      = protocol::entity::Card::Rock;

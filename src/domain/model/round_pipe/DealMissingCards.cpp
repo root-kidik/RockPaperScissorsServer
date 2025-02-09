@@ -2,13 +2,13 @@
 
 #include <domain/model/round_pipe/DealMissingCards.hpp>
 
-#include <RockPaperScissorsProtocol/entity/client/request/DealMissingCardRequest.hpp>
+#include <RockPaperScissorsProtocol/entity/client/request/DealMissingCard.hpp>
 
 namespace rps::domain::model::round_pipe
 {
 
 DealMissingCards::DealMissingCards(protocol::entity::CommandSender&     command_sender,
-                                           std::vector<protocol::entity::Card>& deck) :
+                                   std::vector<protocol::entity::Card>& deck) :
 m_command_sender{command_sender},
 m_deck{deck}
 {
@@ -29,7 +29,7 @@ void DealMissingCards::run(Room::RoundContext& context)
     player_cards.push_back(card);
     m_deck.pop_back();
 
-    protocol::entity::client::DealMissingCardRequest request;
+    protocol::entity::client::request::DealMissingCard request;
     request.card = card;
 
     m_command_sender.send(std::move(request), player.connection);

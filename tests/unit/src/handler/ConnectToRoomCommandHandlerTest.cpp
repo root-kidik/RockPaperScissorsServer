@@ -9,7 +9,7 @@ using testing::Return;
 
 TEST_F(ConnectToRoomCommandFixture, room_name_user_uuid_are_empty)
 {
-    protocol::entity::server::ConnectToRoomRequest request;
+    protocol::entity::server::request::ConnectToRoom request;
 
     auto response = connect_to_room_command_handler.handle(std::move(request), connection);
 
@@ -18,7 +18,7 @@ TEST_F(ConnectToRoomCommandFixture, room_name_user_uuid_are_empty)
 
 TEST_F(ConnectToRoomCommandFixture, room_name_is_empty)
 {
-    protocol::entity::server::ConnectToRoomRequest request;
+    protocol::entity::server::request::ConnectToRoom request;
     request.user_uuid = "user_uuid";
 
     auto response = connect_to_room_command_handler.handle(std::move(request), connection);
@@ -28,7 +28,7 @@ TEST_F(ConnectToRoomCommandFixture, room_name_is_empty)
 
 TEST_F(ConnectToRoomCommandFixture, user_uuid_is_empty)
 {
-    protocol::entity::server::ConnectToRoomRequest request;
+    protocol::entity::server::request::ConnectToRoom request;
     request.room_name = "user_room";
 
     auto response = connect_to_room_command_handler.handle(std::move(request), connection);
@@ -38,7 +38,7 @@ TEST_F(ConnectToRoomCommandFixture, user_uuid_is_empty)
 
 TEST_F(ConnectToRoomCommandFixture, user_uuid_wrong)
 {
-    protocol::entity::server::ConnectToRoomRequest request;
+    protocol::entity::server::request::ConnectToRoom request;
     request.room_name = "room_name";
     request.user_uuid = "user_uuid";
 
@@ -51,7 +51,7 @@ TEST_F(ConnectToRoomCommandFixture, user_uuid_wrong)
 
 TEST_F(ConnectToRoomCommandFixture, room_not_exist)
 {
-    protocol::entity::server::ConnectToRoomRequest request;
+    protocol::entity::server::request::ConnectToRoom request;
     request.room_name = "user_room";
     request.user_uuid = "user_uuid";
 
@@ -69,7 +69,7 @@ TEST_F(ConnectToRoomCommandFixture, can_not_add_user)
 {
     RoomMock room;
 
-    protocol::entity::server::ConnectToRoomRequest request;
+    protocol::entity::server::request::ConnectToRoom request;
     request.room_name = "user_room";
     request.user_uuid = "user_uuid";
 
@@ -93,7 +93,7 @@ TEST_F(ConnectToRoomCommandFixture, room_exist)
 {
     RoomMock room;
 
-    protocol::entity::server::ConnectToRoomRequest request;
+    protocol::entity::server::request::ConnectToRoom request;
     request.room_name = "user_room";
     request.user_uuid = "user_uuid";
 

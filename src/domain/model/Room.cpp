@@ -8,8 +8,8 @@
 #include <domain/util/Util.hpp>
 
 #include <RockPaperScissorsProtocol/entity/CommandSender.hpp>
-#include <RockPaperScissorsProtocol/entity/client/request/GameStartedRequest.hpp>
-#include <RockPaperScissorsProtocol/entity/client/request/NewPlayerAddedRequest.hpp>
+#include <RockPaperScissorsProtocol/entity/client/request/GameStarted.hpp>
+#include <RockPaperScissorsProtocol/entity/client/request/NewPlayerAdded.hpp>
 
 namespace rps::domain::model
 {
@@ -41,7 +41,7 @@ bool Room::try_add_user(const entity::Uuid&                                     
 
     for (auto& [player_uuid, player] : m_players)
     {
-        protocol::entity::client::NewPlayerAddedRequest new_request;
+        protocol::entity::client::request::NewPlayerAdded new_request;
         new_request.user_nickname = user_nickname;
 
         m_command_sender.send(std::move(new_request), player.connection);
@@ -61,7 +61,7 @@ bool Room::try_start_game(const entity::Uuid& user_uuid)
 
     for (auto& [player_uuid, player] : m_players)
     {
-        protocol::entity::client::GameStartedRequest new_request;
+        protocol::entity::client::request::GameStarted new_request;
 
         for (std::size_t i = 0; i < protocol::entity::kMaxCardsPerPlayer; i++)
         {

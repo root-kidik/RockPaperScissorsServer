@@ -3,13 +3,12 @@
 
 #include <domain/model/round_pipe/RaisePlayerCard.hpp>
 
-#include <RockPaperScissorsProtocol/entity/client/request/CardRaisedRequest.hpp>
+#include <RockPaperScissorsProtocol/entity/client/request/CardRaised.hpp>
 
 namespace rps::domain::model::round_pipe
 {
 
-RaisePlayerCard::RaisePlayerCard(protocol::entity::CommandSender& command_sender) :
-m_command_sender{command_sender}
+RaisePlayerCard::RaisePlayerCard(protocol::entity::CommandSender& command_sender) : m_command_sender{command_sender}
 {
 }
 
@@ -36,7 +35,7 @@ void RaisePlayerCard::run(Room::RoundContext& context)
 
     player.cards.erase(it);
 
-    protocol::entity::client::CardRaisedRequest request;
+    protocol::entity::client::request::CardRaised request;
     request.card = player.nominated_card.value();
 
     m_command_sender.send(std::move(request), player.connection);
