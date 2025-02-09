@@ -13,7 +13,7 @@ public:
     TcpSocketConnection(QTcpSocket* tcp_socket);
 
     bool is_connected() const override;
-    void send(const std::string& data) override;
+    void send(std::string&& data) override;
 
     void disconnect();
 

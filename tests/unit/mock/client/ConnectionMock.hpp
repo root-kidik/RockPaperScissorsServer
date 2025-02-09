@@ -10,5 +10,5 @@ class ConnectionMock final : public protocol::interface::Connection
 {
 public:
     MOCK_METHOD(bool, is_connected, (), (override, const));
-    MOCK_METHOD(void, send, (const std::string& data), (override));
+    MOCK_METHOD(void, send, (std::string && data), (override));
 };
