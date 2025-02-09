@@ -6,8 +6,8 @@
 
 #include <domain/entity/Uuid.hpp>
 
-#include <RockPaperScissorsProtocol/interface/Connection.hpp>
 #include <RockPaperScissorsProtocol/entity/Card.hpp>
+#include <RockPaperScissorsProtocol/interface/Connection.hpp>
 
 namespace rps::domain::interface
 {

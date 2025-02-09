@@ -18,8 +18,8 @@ set(SRC
     ${SRCROOT}/util/QtTimer.hpp
     ${SRCROOT}/util/QtTimer.cpp
 
-    ${SRCROOT}/Server.hpp
-    ${SRCROOT}/Server.cpp
+    ${SRCROOT}/RockPaperScissorsServer.hpp
+    ${SRCROOT}/RockPaperScissorsServer.cpp
 )
 
 add_library(${TARGET_NAME} ${SRC})

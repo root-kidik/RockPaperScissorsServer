@@ -1,5 +1,6 @@
 #pragma once
 
+#include <QCoreApplication>
 #include <QTcpServer>
 #include <QTcpSocket>
 
@@ -14,14 +15,18 @@
 namespace rps::infrastructure
 {
 
-class Server : public QTcpServer
+class RockPaperScissorsServer : public QTcpServer
 {
     Q_OBJECT
 
 public:
-    Server();
+    RockPaperScissorsServer(int argc, char* argv[]);
+
+    int run();
 
 private:
+    QCoreApplication m_app;
+
     generator::UuidGenerator        m_uuid_generator;
     protocol::entity::CommandSender m_command_sender;
 

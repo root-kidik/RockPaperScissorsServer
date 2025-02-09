@@ -2,9 +2,9 @@
 
 #include <domain/model/Room.hpp>
 #include <domain/model/round_pipe/ComputePlayerWinnerPipe.hpp>
+#include <domain/model/round_pipe/DealMissingCardsPipe.hpp>
 #include <domain/model/round_pipe/ForceNominatePlayerCardPipe.hpp>
 #include <domain/model/round_pipe/RaisePlayerCardPipe.hpp>
-#include <domain/model/round_pipe/DealMissingCardsPipe.hpp>
 #include <domain/util/Util.hpp>
 
 #include <RockPaperScissorsProtocol/entity/CommandSender.hpp>

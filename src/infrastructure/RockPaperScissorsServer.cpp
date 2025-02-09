@@ -1,17 +1,18 @@
-#include <sstream>
-
 #include <domain/handler/ConnectToRoomCommandHandler.hpp>
 #include <domain/handler/CreateRoomCommandHandler.hpp>
 #include <domain/handler/RegisterCommandHandler.hpp>
 #include <domain/handler/StartGameCommandHandler.hpp>
 
-#include <infrastructure/Server.hpp>
+#include <infrastructure/RockPaperScissorsServer.hpp>
 #include <infrastructure/client/TcpSocketConnection.hpp>
 
 namespace rps::infrastructure
 {
 
-Server::Server() : m_memory_user_storage{m_uuid_generator}, m_memory_room_storage{m_uuid_generator, m_command_sender}
+RockPaperScissorsServer::RockPaperScissorsServer(int argc, char* argv[]) :
+m_app{argc, argv},
+m_memory_user_storage{m_uuid_generator},
+m_memory_room_storage{m_uuid_generator, m_command_sender}
 {
     m_command_executor.register_command<domain::handler::RegisterCommandHandler>(m_memory_user_storage);
     m_command_executor.register_command<domain::handler::CreateRoomCommandHandler>(m_memory_room_storage);
@@ -39,6 +40,14 @@ Server::Server() : m_memory_user_storage{m_uuid_generator}, m_memory_room_storag
                         [connection, connection_wrapper, this]()
                         { m_command_executor.execute_command(connection->readAll().toStdString(), connection_wrapper); });
             });
+
+    auto is_started = listen(QHostAddress::Any, 1234);
+    assert(is_started && "Server not started");
+}
+
+int RockPaperScissorsServer::run()
+{
+    return m_app.exec();
 }
 
 } // namespace rps::infrastructure

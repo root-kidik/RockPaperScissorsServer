@@ -1,18 +1,11 @@
-#include <QCoreApplication>
 
-#include <infrastructure/Server.hpp>
+#include <infrastructure/RockPaperScissorsServer.hpp>
 
 int main(int argc, char* argv[])
 {
-    QCoreApplication a(argc, argv);
+    using namespace rps::infrastructure;
 
-    rps::infrastructure::Server server;
-    if (!server.listen(QHostAddress::Any, 1234))
-    {
-        qDebug() << "Server could not start! Choose another port";
-        return 1;
-    }
-    qDebug() << "Server started on port" << server.serverPort();
+    RockPaperScissorsServer server{argc, argv};
 
-    return a.exec();
+    return server.run();
 }
