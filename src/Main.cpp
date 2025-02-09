@@ -1,4 +1,3 @@
-
 #include <infrastructure/RockPaperScissorsServer.hpp>
 
 int main(int argc, char* argv[])
