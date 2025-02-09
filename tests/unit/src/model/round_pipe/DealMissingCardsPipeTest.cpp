@@ -24,7 +24,7 @@ TEST_F(DealMissingCardsPipeFixture, run_with_deck)
     protocol::entity::client::request::DealMissingCard request;
     request.card = back_card;
 
-    EXPECT_CALL(*connection, send(protocol::util::serialize_command(std::move(request)))).WillOnce(Return());
+    EXPECT_CALL(*connection, send(protocol::util::serialize_message(std::move(request)))).WillOnce(Return());
 
     pipe.run(context);
 

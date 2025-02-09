@@ -5,7 +5,7 @@
 
 #include <gtest/gtest.h>
 
-#include <RockPaperScissorsProtocol/entity/client/ClientCommandType.hpp>
+#include <RockPaperScissorsProtocol/entity/client/ClientMessageType.hpp>
 
 using testing::Return;
 

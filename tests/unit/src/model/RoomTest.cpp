@@ -60,7 +60,7 @@ TEST_F(RoomFixture, try_add_user_too_many_users)
             request.user_nickname = user_nickname;
 
             EXPECT_CALL(*std::dynamic_pointer_cast<ConnectionMock>(player.connection),
-                        send(protocol::util::serialize_command(std::move(request))))
+                        send(protocol::util::serialize_message(std::move(request))))
                 .WillOnce(Return());
         }
 
@@ -84,7 +84,7 @@ TEST_F(RoomFixture, try_add_user_wait_owner)
             request.user_nickname = user_nickname;
 
             EXPECT_CALL(*std::dynamic_pointer_cast<ConnectionMock>(player.connection),
-                        send(protocol::util::serialize_command(std::move(request))))
+                        send(protocol::util::serialize_message(std::move(request))))
                 .WillOnce(Return());
         }
 
@@ -101,7 +101,7 @@ TEST_F(RoomFixture, try_add_user_wait_owner)
         request.user_nickname = owner_nickname;
 
         EXPECT_CALL(*std::dynamic_pointer_cast<ConnectionMock>(player.connection),
-                    send(protocol::util::serialize_command(std::move(request))))
+                    send(protocol::util::serialize_message(std::move(request))))
             .WillOnce(Return());
     }
 
@@ -141,7 +141,7 @@ TEST_F(RoomFixture, try_start_game_with_six_users)
             request.user_nickname = user_nickname;
 
             EXPECT_CALL(*std::dynamic_pointer_cast<ConnectionMock>(player.connection),
-                        send(protocol::util::serialize_command(std::move(request))))
+                        send(protocol::util::serialize_message(std::move(request))))
                 .WillOnce(Return());
         }
 

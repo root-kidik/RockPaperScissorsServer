@@ -16,7 +16,7 @@ TEST_F(RaisePlayerCardPipeFixture, run_raise_rock)
     protocol::entity::client::request::CardRaised request;
     request.card = raised_card;
 
-    EXPECT_CALL(*connection, send(protocol::util::serialize_command(std::move(request)))).WillOnce(Return());
+    EXPECT_CALL(*connection, send(protocol::util::serialize_message(std::move(request)))).WillOnce(Return());
 
     pipe.run(context);
 
@@ -37,7 +37,7 @@ TEST_F(RaisePlayerCardPipeFixture, run_raise_paper)
     protocol::entity::client::request::CardRaised request;
     request.card = raised_card;
 
-    EXPECT_CALL(*connection, send(protocol::util::serialize_command(std::move(request)))).WillOnce(Return());
+    EXPECT_CALL(*connection, send(protocol::util::serialize_message(std::move(request)))).WillOnce(Return());
 
     pipe.run(context);
 
@@ -58,7 +58,7 @@ TEST_F(RaisePlayerCardPipeFixture, run_raise_scissors)
     protocol::entity::client::request::CardRaised request;
     request.card = raised_card;
 
-    EXPECT_CALL(*connection, send(protocol::util::serialize_command(std::move(request)))).WillOnce(Return());
+    EXPECT_CALL(*connection, send(protocol::util::serialize_message(std::move(request)))).WillOnce(Return());
 
     pipe.run(context);
 
