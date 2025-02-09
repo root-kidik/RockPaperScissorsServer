@@ -1,5 +1,3 @@
-#include "MemoryUserStorage.hpp"
-
 #include <domain/interface/UuidGenerator.hpp>
 
 #include <infrastructure/storage/MemoryUserStorage.hpp>
@@ -14,7 +12,7 @@ m_uuid_generator{uuid_generator}
 
 std::optional<domain::entity::Uuid> MemoryUserStorage::try_add_user(const std::string& nickname)
 {
-    if (m_users.find(nickname) != m_users.end())
+    if (m_nickname_to_uuid.find(nickname) != m_nickname_to_uuid.end())
         return std::nullopt;
 
     const auto uuid = m_uuid_generator.generate();
