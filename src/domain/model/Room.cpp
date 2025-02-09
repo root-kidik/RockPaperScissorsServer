@@ -21,12 +21,12 @@ Room::Room(const std::string&                       name,
 m_name{name},
 m_owner_uuid{owner_uuid},
 m_timer{timer},
-m_command_sender{command_sender}
+m_message_sender{command_sender}
 {
-    m_round_pipeline.add<round_pipe::ForceNominatePlayerCard>(m_command_sender);
-    m_round_pipeline.add<round_pipe::RaisePlayerCard>(m_command_sender);
-    m_round_pipeline.add<round_pipe::ComputePlayerWinner>(m_command_sender);
-    m_round_pipeline.add<round_pipe::DealMissingCards>(m_command_sender, m_cards);
+    m_round_pipeline.add<round_pipe::ForceNominatePlayerCard>(m_message_sender);
+    m_round_pipeline.add<round_pipe::RaisePlayerCard>(m_message_sender);
+    m_round_pipeline.add<round_pipe::ComputePlayerWinner>(m_message_sender);
+    m_round_pipeline.add<round_pipe::DealMissingCards>(m_message_sender, m_cards);
 }
 
 bool Room::try_add_user(const entity::Uuid&                                     user_uuid,
@@ -44,7 +44,7 @@ bool Room::try_add_user(const entity::Uuid&                                     
         protocol::entity::client::request::NewPlayerAdded new_request;
         new_request.user_nickname = user_nickname;
 
-        m_command_sender.send(std::move(new_request), player.connection);
+        m_message_sender.send(std::move(new_request), player.connection);
     }
 
     m_players.emplace(user_uuid, model::Room::Player{user_nickname, std::nullopt, {}, connection, 0});
@@ -73,7 +73,7 @@ bool Room::try_start_game(const entity::Uuid& user_uuid)
             m_cards.pop_back();
         }
 
-        m_command_sender.send(std::move(new_request), player.connection);
+        m_message_sender.send(std::move(new_request), player.connection);
     }
 
     m_is_game_started = true;

@@ -13,7 +13,7 @@ public:
     void run(Room::RoundContext& context);
 
 private:
-    protocol::entity::MessageSender&     m_command_sender;
+    protocol::entity::MessageSender&     m_message_sender;
     std::vector<protocol::entity::Card>& m_deck;
 };
 

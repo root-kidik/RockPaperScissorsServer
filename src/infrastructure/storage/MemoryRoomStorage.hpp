@@ -26,7 +26,7 @@ public:
 
 private:
     const domain::interface::UuidGenerator& m_uuid_generator;
-    protocol::entity::MessageSender&        m_command_sender;
+    protocol::entity::MessageSender&        m_message_sender;
 
     std::unordered_map<std::string, domain::model::Room> m_rooms;
 };

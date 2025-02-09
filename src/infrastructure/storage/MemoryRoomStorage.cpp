@@ -11,7 +11,7 @@ namespace rps::infrastructure::storage
 MemoryRoomStorage::MemoryRoomStorage(const domain::interface::UuidGenerator& uuid_generator,
                                      protocol::entity::MessageSender&        command_sender) :
 m_uuid_generator{uuid_generator},
-m_command_sender{command_sender}
+m_message_sender{command_sender}
 {
 }
 
@@ -20,7 +20,7 @@ bool MemoryRoomStorage::try_add_room(const std::string& name, const domain::enti
     if (m_rooms.find(name) != m_rooms.end())
         return false;
 
-    m_rooms.emplace(name, domain::model::Room{name, owner_uuid, std::make_shared<util::QtTimer>(), m_command_sender});
+    m_rooms.emplace(name, domain::model::Room{name, owner_uuid, std::make_shared<util::QtTimer>(), m_message_sender});
 
     return true;
 }

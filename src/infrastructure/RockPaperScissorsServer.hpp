@@ -28,7 +28,7 @@ private:
     QCoreApplication m_app;
 
     generator::UuidGenerator        m_uuid_generator;
-    protocol::entity::MessageSender m_command_sender;
+    protocol::entity::MessageSender m_message_sender;
 
     storage::MemoryUserStorage m_memory_user_storage;
     storage::MemoryRoomStorage m_memory_room_storage;

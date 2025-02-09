@@ -8,7 +8,7 @@
 namespace rps::domain::model::round_pipe
 {
 
-RaisePlayerCard::RaisePlayerCard(protocol::entity::MessageSender& command_sender) : m_command_sender{command_sender}
+RaisePlayerCard::RaisePlayerCard(protocol::entity::MessageSender& command_sender) : m_message_sender{command_sender}
 {
 }
 
@@ -38,7 +38,7 @@ void RaisePlayerCard::run(Room::RoundContext& context)
     protocol::entity::client::request::CardRaised request;
     request.card = player.nominated_card.value();
 
-    m_command_sender.send(std::move(request), player.connection);
+    m_message_sender.send(std::move(request), player.connection);
 }
 
 } // namespace rps::domain::model::round_pipe

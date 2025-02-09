@@ -69,7 +69,7 @@ private:
     std::unordered_map<entity::Uuid, Player> m_players;
     std::vector<protocol::entity::Card>      m_cards;
 
-    protocol::entity::MessageSender& m_command_sender;
+    protocol::entity::MessageSender& m_message_sender;
 
     RoundPipeline                                            m_round_pipeline;
     std::unordered_map<entity::Uuid, protocol::entity::Card> play_table;
