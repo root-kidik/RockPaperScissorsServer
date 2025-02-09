@@ -5,10 +5,10 @@
 namespace rps::domain::model::round_pipe
 {
 
-class RaisePlayerCardPipe : public Room::RoundPipeline::Pipe
+class RaisePlayerCard : public Room::RoundPipeline::Pipe
 {
 public:
-    RaisePlayerCardPipe(protocol::entity::CommandSender& command_sender);
+    RaisePlayerCard(protocol::entity::CommandSender& command_sender);
 
     // assert(player.nominated_card && "Card must be nominated");
     // assert(m_play_table.find(player_uuid) == m_play_table.end() && "Play table must not have yet raised by player card");

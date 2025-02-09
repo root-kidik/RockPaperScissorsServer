@@ -1,18 +1,18 @@
 #include <cassert>
 
-#include <domain/model/round_pipe/ForceNominatePlayerCardPipe.hpp>
+#include <domain/model/round_pipe/ForceNominatePlayerCard.hpp>
 
 #include <RockPaperScissorsProtocol/entity/client/request/CardForcedNominatedRequest.hpp>
 
 namespace rps::domain::model::round_pipe
 {
 
-ForceNominatePlayerCardPipe::ForceNominatePlayerCardPipe(protocol::entity::CommandSender& command_sender) :
+ForceNominatePlayerCard::ForceNominatePlayerCard(protocol::entity::CommandSender& command_sender) :
 m_command_sender{command_sender}
 {
 }
 
-void ForceNominatePlayerCardPipe::run(Room::RoundContext& context)
+void ForceNominatePlayerCard::run(Room::RoundContext& context)
 {
     auto& player      = context.player;
     auto& player_uuid = context.player_uuid;

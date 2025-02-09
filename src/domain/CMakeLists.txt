@@ -10,14 +10,14 @@ set(SRC
     ${SRCROOT}/model/Room.hpp
     ${SRCROOT}/model/Room.cpp
     
-    ${SRCROOT}/model/round_pipe/ForceNominatePlayerCardPipe.hpp
-    ${SRCROOT}/model/round_pipe/ForceNominatePlayerCardPipe.cpp
-    ${SRCROOT}/model/round_pipe/RaisePlayerCardPipe.hpp
-    ${SRCROOT}/model/round_pipe/RaisePlayerCardPipe.cpp
-    ${SRCROOT}/model/round_pipe/ComputePlayerWinnerPipe.hpp
-    ${SRCROOT}/model/round_pipe/ComputePlayerWinnerPipe.cpp
-    ${SRCROOT}/model/round_pipe/DealMissingCardsPipe.hpp
-    ${SRCROOT}/model/round_pipe/DealMissingCardsPipe.cpp
+    ${SRCROOT}/model/round_pipe/ForceNominatePlayerCard.hpp
+    ${SRCROOT}/model/round_pipe/ForceNominatePlayerCard.cpp
+    ${SRCROOT}/model/round_pipe/RaisePlayerCard.hpp
+    ${SRCROOT}/model/round_pipe/RaisePlayerCard.cpp
+    ${SRCROOT}/model/round_pipe/ComputePlayerWinner.hpp
+    ${SRCROOT}/model/round_pipe/ComputePlayerWinner.cpp
+    ${SRCROOT}/model/round_pipe/DealMissingCards.hpp
+    ${SRCROOT}/model/round_pipe/DealMissingCards.cpp
 
     ${SRCROOT}/interface/UserStorage.hpp
     ${SRCROOT}/interface/RoomStorage.hpp

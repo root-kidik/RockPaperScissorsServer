@@ -5,10 +5,10 @@
 namespace rps::domain::model::round_pipe
 {
 
-class ForceNominatePlayerCardPipe : public Room::RoundPipeline::Pipe
+class ForceNominatePlayerCard : public Room::RoundPipeline::Pipe
 {
 public:
-    ForceNominatePlayerCardPipe(protocol::entity::CommandSender& command_sender);
+    ForceNominatePlayerCard(protocol::entity::CommandSender& command_sender);
 
     // assert(!player.cards.empty() && "Player must have cards");
     void run(Room::RoundContext& context);

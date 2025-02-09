@@ -1,20 +1,20 @@
 #include <cassert>
 
-#include <domain/model/round_pipe/DealMissingCardsPipe.hpp>
+#include <domain/model/round_pipe/DealMissingCards.hpp>
 
 #include <RockPaperScissorsProtocol/entity/client/request/DealMissingCardRequest.hpp>
 
 namespace rps::domain::model::round_pipe
 {
 
-DealMissingCardsPipe::DealMissingCardsPipe(protocol::entity::CommandSender&     command_sender,
+DealMissingCards::DealMissingCards(protocol::entity::CommandSender&     command_sender,
                                            std::vector<protocol::entity::Card>& deck) :
 m_command_sender{command_sender},
 m_deck{deck}
 {
 }
 
-void DealMissingCardsPipe::run(Room::RoundContext& context)
+void DealMissingCards::run(Room::RoundContext& context)
 {
     if (m_deck.empty())
         return;

@@ -2,7 +2,7 @@
 #include <mock/client/ConnectionMock.hpp>
 #include <mock/util/TimerMock.hpp>
 
-#include <domain/model/round_pipe/ForceNominatePlayerCardPipe.hpp>
+#include <domain/model/round_pipe/ForceNominatePlayerCard.hpp>
 
 class ForceNominatePlayerCardPipeFixture : public testing::Test
 {
@@ -17,5 +17,5 @@ public:
     domain::entity::Uuid                                   uuid;
     domain::model::Room::RoundContext                      context{player, uuid};
     protocol::entity::CommandSender                        command_sender;
-    domain::model::round_pipe::ForceNominatePlayerCardPipe pipe{command_sender};
+    domain::model::round_pipe::ForceNominatePlayerCard pipe{command_sender};
 };

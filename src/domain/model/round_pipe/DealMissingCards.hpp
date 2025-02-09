@@ -5,10 +5,10 @@
 namespace rps::domain::model::round_pipe
 {
 
-class DealMissingCardsPipe : public Room::RoundPipeline::Pipe
+class DealMissingCards : public Room::RoundPipeline::Pipe
 {
 public:
-    DealMissingCardsPipe(protocol::entity::CommandSender& command_sender, std::vector<protocol::entity::Card>& deck);
+    DealMissingCards(protocol::entity::CommandSender& command_sender, std::vector<protocol::entity::Card>& deck);
 
     void run(Room::RoundContext& context);
 

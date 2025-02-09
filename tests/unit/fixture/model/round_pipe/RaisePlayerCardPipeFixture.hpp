@@ -2,7 +2,7 @@
 #include <mock/client/ConnectionMock.hpp>
 #include <mock/util/TimerMock.hpp>
 
-#include <domain/model/round_pipe/RaisePlayerCardPipe.hpp>
+#include <domain/model/round_pipe/RaisePlayerCard.hpp>
 
 class RaisePlayerCardPipeFixture : public testing::Test
 {
@@ -17,5 +17,5 @@ public:
     domain::entity::Uuid                           uuid;
     domain::model::Room::RoundContext              context{player, uuid};
     protocol::entity::CommandSender                command_sender;
-    domain::model::round_pipe::RaisePlayerCardPipe pipe{command_sender};
+    domain::model::round_pipe::RaisePlayerCard pipe{command_sender};
 };

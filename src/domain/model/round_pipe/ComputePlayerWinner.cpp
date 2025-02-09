@@ -1,19 +1,19 @@
 #include <algorithm>
 #include <cassert>
 
-#include <domain/model/round_pipe/ComputePlayerWinnerPipe.hpp>
+#include <domain/model/round_pipe/ComputePlayerWinner.hpp>
 
 #include <RockPaperScissorsProtocol/entity/client/request/RoundInfoRequest.hpp>
 
 namespace rps::domain::model::round_pipe
 {
 
-ComputePlayerWinnerPipe::ComputePlayerWinnerPipe(protocol::entity::CommandSender& command_sender) :
+ComputePlayerWinner::ComputePlayerWinner(protocol::entity::CommandSender& command_sender) :
 m_command_sender{command_sender}
 {
 }
 
-void ComputePlayerWinnerPipe::run(Room::RoundContext& context)
+void ComputePlayerWinner::run(Room::RoundContext& context)
 {
     auto& [player, player_uuid, is_rock_raised, is_paper_raised, is_scissors_raised] = context;
 

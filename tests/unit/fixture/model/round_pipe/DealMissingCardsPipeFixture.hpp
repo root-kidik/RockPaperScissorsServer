@@ -2,7 +2,7 @@
 #include <mock/client/ConnectionMock.hpp>
 #include <mock/util/TimerMock.hpp>
 
-#include <domain/model/round_pipe/DealMissingCardsPipe.hpp>
+#include <domain/model/round_pipe/DealMissingCards.hpp>
 
 class DealMissingCardsPipeFixture : public testing::Test
 {
@@ -18,5 +18,5 @@ public:
     domain::model::Room::RoundContext               context{player, uuid};
     protocol::entity::CommandSender                 command_sender;
     std::vector<protocol::entity::Card>             deck;
-    domain::model::round_pipe::DealMissingCardsPipe pipe{command_sender, deck};
+    domain::model::round_pipe::DealMissingCards pipe{command_sender, deck};
 };

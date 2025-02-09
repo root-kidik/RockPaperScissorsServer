@@ -1,19 +1,19 @@
 #include <algorithm>
 #include <cassert>
 
-#include <domain/model/round_pipe/RaisePlayerCardPipe.hpp>
+#include <domain/model/round_pipe/RaisePlayerCard.hpp>
 
 #include <RockPaperScissorsProtocol/entity/client/request/CardRaisedRequest.hpp>
 
 namespace rps::domain::model::round_pipe
 {
 
-RaisePlayerCardPipe::RaisePlayerCardPipe(protocol::entity::CommandSender& command_sender) :
+RaisePlayerCard::RaisePlayerCard(protocol::entity::CommandSender& command_sender) :
 m_command_sender{command_sender}
 {
 }
 
-void RaisePlayerCardPipe::run(Room::RoundContext& context)
+void RaisePlayerCard::run(Room::RoundContext& context)
 {
     auto& [player, player_uuid, is_rock_raised, is_paper_raised, is_scissors_raised] = context;
 

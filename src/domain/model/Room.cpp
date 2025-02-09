@@ -1,10 +1,10 @@
 #include <cassert>
 
 #include <domain/model/Room.hpp>
-#include <domain/model/round_pipe/ComputePlayerWinnerPipe.hpp>
-#include <domain/model/round_pipe/DealMissingCardsPipe.hpp>
-#include <domain/model/round_pipe/ForceNominatePlayerCardPipe.hpp>
-#include <domain/model/round_pipe/RaisePlayerCardPipe.hpp>
+#include <domain/model/round_pipe/ComputePlayerWinner.hpp>
+#include <domain/model/round_pipe/DealMissingCards.hpp>
+#include <domain/model/round_pipe/ForceNominatePlayerCard.hpp>
+#include <domain/model/round_pipe/RaisePlayerCard.hpp>
 #include <domain/util/Util.hpp>
 
 #include <RockPaperScissorsProtocol/entity/CommandSender.hpp>
@@ -23,10 +23,10 @@ m_owner_uuid{owner_uuid},
 m_timer{timer},
 m_command_sender{command_sender}
 {
-    m_round_pipeline.add<round_pipe::ForceNominatePlayerCardPipe>(m_command_sender);
-    m_round_pipeline.add<round_pipe::RaisePlayerCardPipe>(m_command_sender);
-    m_round_pipeline.add<round_pipe::ComputePlayerWinnerPipe>(m_command_sender);
-    m_round_pipeline.add<round_pipe::DealMissingCardsPipe>(m_command_sender, m_cards);
+    m_round_pipeline.add<round_pipe::ForceNominatePlayerCard>(m_command_sender);
+    m_round_pipeline.add<round_pipe::RaisePlayerCard>(m_command_sender);
+    m_round_pipeline.add<round_pipe::ComputePlayerWinner>(m_command_sender);
+    m_round_pipeline.add<round_pipe::DealMissingCards>(m_command_sender, m_cards);
 }
 
 bool Room::try_add_user(const entity::Uuid&                                     user_uuid,
