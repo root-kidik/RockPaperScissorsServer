@@ -14,10 +14,10 @@ m_app{argc, argv},
 m_memory_user_storage{m_uuid_generator},
 m_memory_room_storage{m_uuid_generator, m_command_sender}
 {
-    m_command_executor.register_command<domain::handler::Register>(m_memory_user_storage);
-    m_command_executor.register_command<domain::handler::CreateRoom>(m_memory_room_storage);
-    m_command_executor.register_command<domain::handler::ConnectToRoom>(m_memory_room_storage, m_memory_user_storage);
-    m_command_executor.register_command<domain::handler::StartGame>(m_memory_room_storage, m_memory_user_storage);
+    m_message_executor.register_command<domain::handler::Register>(m_memory_user_storage);
+    m_message_executor.register_command<domain::handler::CreateRoom>(m_memory_room_storage);
+    m_message_executor.register_command<domain::handler::ConnectToRoom>(m_memory_room_storage, m_memory_user_storage);
+    m_message_executor.register_command<domain::handler::StartGame>(m_memory_room_storage, m_memory_user_storage);
 
     connect(this,
             &QTcpServer::newConnection,
@@ -37,7 +37,7 @@ m_memory_room_storage{m_uuid_generator, m_command_sender}
                         &QTcpSocket::readyRead,
                         this,
                         [connection, connection_wrapper, this]()
-                        { m_command_executor.execute_command(connection->readAll().toStdString(), connection_wrapper); });
+                        { m_message_executor.execute_message(connection->readAll().toStdString(), connection_wrapper); });
             });
 
     auto is_started = listen(QHostAddress::Any, 1234);

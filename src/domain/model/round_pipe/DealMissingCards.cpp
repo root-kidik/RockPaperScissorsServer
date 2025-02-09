@@ -7,7 +7,7 @@
 namespace rps::domain::model::round_pipe
 {
 
-DealMissingCards::DealMissingCards(protocol::entity::CommandSender&     command_sender,
+DealMissingCards::DealMissingCards(protocol::entity::MessageSender&     command_sender,
                                    std::vector<protocol::entity::Card>& deck) :
 m_command_sender{command_sender},
 m_deck{deck}

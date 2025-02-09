@@ -8,7 +8,7 @@
 namespace rps::domain::model::round_pipe
 {
 
-ComputePlayerWinner::ComputePlayerWinner(protocol::entity::CommandSender& command_sender) :
+ComputePlayerWinner::ComputePlayerWinner(protocol::entity::MessageSender& command_sender) :
 m_command_sender{command_sender}
 {
 }

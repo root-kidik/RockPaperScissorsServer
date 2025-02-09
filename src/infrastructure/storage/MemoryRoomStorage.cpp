@@ -9,7 +9,7 @@ namespace rps::infrastructure::storage
 {
 
 MemoryRoomStorage::MemoryRoomStorage(const domain::interface::UuidGenerator& uuid_generator,
-                                     protocol::entity::CommandSender&        command_sender) :
+                                     protocol::entity::MessageSender&        command_sender) :
 m_uuid_generator{uuid_generator},
 m_command_sender{command_sender}
 {

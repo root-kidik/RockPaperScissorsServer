@@ -7,7 +7,7 @@
 #include <domain/model/round_pipe/RaisePlayerCard.hpp>
 #include <domain/util/Util.hpp>
 
-#include <RockPaperScissorsProtocol/entity/CommandSender.hpp>
+#include <RockPaperScissorsProtocol/entity/MessageSender.hpp>
 #include <RockPaperScissorsProtocol/entity/client/request/GameStarted.hpp>
 #include <RockPaperScissorsProtocol/entity/client/request/NewPlayerAdded.hpp>
 
@@ -17,7 +17,7 @@ namespace rps::domain::model
 Room::Room(const std::string&                       name,
            const entity::Uuid&                      owner_uuid,
            const std::shared_ptr<interface::Timer>& timer,
-           protocol::entity::CommandSender&         command_sender) :
+           protocol::entity::MessageSender&         command_sender) :
 m_name{name},
 m_owner_uuid{owner_uuid},
 m_timer{timer},

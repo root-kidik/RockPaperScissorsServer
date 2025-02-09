@@ -13,7 +13,7 @@
 #include <domain/util/Pipeline.hpp>
 
 #include <RockPaperScissorsProtocol/entity/Card.hpp>
-#include <RockPaperScissorsProtocol/entity/CommandSender.hpp>
+#include <RockPaperScissorsProtocol/entity/MessageSender.hpp>
 #include <RockPaperScissorsProtocol/interface/Connection.hpp>
 
 namespace rps::domain::model
@@ -46,7 +46,7 @@ public:
     Room(const std::string&                       name,
          const entity::Uuid&                      owner_uuid,
          const std::shared_ptr<interface::Timer>& timer,
-         protocol::entity::CommandSender&         command_sender);
+         protocol::entity::MessageSender&         command_sender);
 
     bool try_add_user(const entity::Uuid&                                     user_uuid,
                       const std::string&                                      user_nickname,
@@ -69,7 +69,7 @@ private:
     std::unordered_map<entity::Uuid, Player> m_players;
     std::vector<protocol::entity::Card>      m_cards;
 
-    protocol::entity::CommandSender& m_command_sender;
+    protocol::entity::MessageSender& m_command_sender;
 
     RoundPipeline                                            m_round_pipeline;
     std::unordered_map<entity::Uuid, protocol::entity::Card> play_table;

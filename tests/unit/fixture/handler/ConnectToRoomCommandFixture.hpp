@@ -4,7 +4,7 @@
 
 #include <domain/handler/ConnectToRoom.hpp>
 
-#include <RockPaperScissorsProtocol/entity/CommandSender.hpp>
+#include <RockPaperScissorsProtocol/entity/MessageSender.hpp>
 
 class ConnectToRoomCommandFixture : public testing::Test
 {

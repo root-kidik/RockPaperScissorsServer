@@ -58,5 +58,5 @@ Cmake › Options: Status Bar Visibility -> visible
 ## TODO:
 
 - [ ] `LoginCommand`
-- [x] `SingleCommandSender`
+- [x] `SingleMessageSender`
 - [ ] `EndGame`

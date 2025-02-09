@@ -16,7 +16,7 @@ public:
     domain::model::Room::Player                 player;
     domain::entity::Uuid                        uuid;
     domain::model::Room::RoundContext           context{player, uuid};
-    protocol::entity::CommandSender             command_sender;
+    protocol::entity::MessageSender             command_sender;
     std::vector<protocol::entity::Card>         deck;
     domain::model::round_pipe::DealMissingCards pipe{command_sender, deck};
 };

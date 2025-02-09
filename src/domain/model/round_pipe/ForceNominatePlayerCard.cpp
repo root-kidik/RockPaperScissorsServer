@@ -7,7 +7,7 @@
 namespace rps::domain::model::round_pipe
 {
 
-ForceNominatePlayerCard::ForceNominatePlayerCard(protocol::entity::CommandSender& command_sender) :
+ForceNominatePlayerCard::ForceNominatePlayerCard(protocol::entity::MessageSender& command_sender) :
 m_command_sender{command_sender}
 {
 }
