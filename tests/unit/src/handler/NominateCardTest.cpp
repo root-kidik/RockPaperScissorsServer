@@ -1,11 +1,11 @@
-#include <fixture/handler/NominateCardCommandHandlerFixture.hpp>
+#include <fixture/handler/NominateCardTest.hpp>
 #include <mock/model/RoomMock.hpp>
 
 #include <gtest/gtest.h>
 
 using testing::Return;
 
-TEST_F(NominateCardCommandHandlerFixture, room_name_user_uuid_card_are_empty)
+TEST_F(NominateCardTest, room_name_user_uuid_card_are_empty)
 {
     protocol::entity::server::request::NominateCard request;
 
@@ -14,7 +14,7 @@ TEST_F(NominateCardCommandHandlerFixture, room_name_user_uuid_card_are_empty)
     EXPECT_FALSE(response.is_ok);
 }
 
-TEST_F(NominateCardCommandHandlerFixture, room_name_is_empty)
+TEST_F(NominateCardTest, room_name_is_empty)
 {
     protocol::entity::server::request::NominateCard request;
     request.user_uuid = "user_uuid";
@@ -24,7 +24,7 @@ TEST_F(NominateCardCommandHandlerFixture, room_name_is_empty)
     EXPECT_FALSE(response.is_ok);
 }
 
-TEST_F(NominateCardCommandHandlerFixture, user_uuid_is_empty)
+TEST_F(NominateCardTest, user_uuid_is_empty)
 {
     protocol::entity::server::request::NominateCard request;
     request.room_name = "user_room";
@@ -34,7 +34,7 @@ TEST_F(NominateCardCommandHandlerFixture, user_uuid_is_empty)
     EXPECT_FALSE(response.is_ok);
 }
 
-TEST_F(NominateCardCommandHandlerFixture, card_is_empty)
+TEST_F(NominateCardTest, card_is_empty)
 {
     protocol::entity::server::request::NominateCard request;
     request.room_name = "user_room";
@@ -45,7 +45,7 @@ TEST_F(NominateCardCommandHandlerFixture, card_is_empty)
     EXPECT_FALSE(response.is_ok);
 }
 
-TEST_F(NominateCardCommandHandlerFixture, room_name_user_uuid_card_have_value_but_room_not_finded)
+TEST_F(NominateCardTest, room_name_user_uuid_card_have_value_but_room_not_finded)
 {
     protocol::entity::server::request::NominateCard request;
     request.room_name = "user_room";
@@ -59,7 +59,7 @@ TEST_F(NominateCardCommandHandlerFixture, room_name_user_uuid_card_have_value_bu
     EXPECT_FALSE(response.is_ok);
 }
 
-TEST_F(NominateCardCommandHandlerFixture, room_name_user_uuid_card_have_value_room_finded_but_card_not_nominated)
+TEST_F(NominateCardTest, room_name_user_uuid_card_have_value_room_finded_but_card_not_nominated)
 {
     RoomMock room;
 
@@ -77,7 +77,7 @@ TEST_F(NominateCardCommandHandlerFixture, room_name_user_uuid_card_have_value_ro
     EXPECT_FALSE(response.is_ok);
 }
 
-TEST_F(NominateCardCommandHandlerFixture, room_name_user_uuid_card_have_value_room_finded_but_card_nominated)
+TEST_F(NominateCardTest, room_name_user_uuid_card_have_value_room_finded_but_card_nominated)
 {
     RoomMock room;
 

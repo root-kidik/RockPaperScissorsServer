@@ -4,7 +4,7 @@
 
 #include <domain/model/Room.hpp>
 
-class RoomFixture : public testing::Test
+class RoomTest : public testing::Test
 {
 public:
     std::string                     name       = "room_name";

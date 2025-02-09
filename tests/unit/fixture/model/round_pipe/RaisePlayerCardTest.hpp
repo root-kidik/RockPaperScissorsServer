@@ -4,10 +4,10 @@
 
 #include <domain/model/round_pipe/RaisePlayerCard.hpp>
 
-class RaisePlayerCardPipeFixture : public testing::Test
+class RaisePlayerCardTest : public testing::Test
 {
 public:
-    RaisePlayerCardPipeFixture()
+    RaisePlayerCardTest()
     {
         player.connection = connection;
     }

@@ -1,4 +1,4 @@
-#include <fixture/handler/ConnectToRoomCommandFixture.hpp>
+#include <fixture/handler/ConnectToRoomTest.hpp>
 #include <mock/model/RoomMock.hpp>
 
 #include <gtest/gtest.h>
@@ -7,7 +7,7 @@
 
 using testing::Return;
 
-TEST_F(ConnectToRoomCommandFixture, room_name_user_uuid_are_empty)
+TEST_F(ConnectToRoomTest, room_name_user_uuid_are_empty)
 {
     protocol::entity::server::request::ConnectToRoom request;
 
@@ -16,7 +16,7 @@ TEST_F(ConnectToRoomCommandFixture, room_name_user_uuid_are_empty)
     EXPECT_FALSE(response.is_ok);
 }
 
-TEST_F(ConnectToRoomCommandFixture, room_name_is_empty)
+TEST_F(ConnectToRoomTest, room_name_is_empty)
 {
     protocol::entity::server::request::ConnectToRoom request;
     request.user_uuid = "user_uuid";
@@ -26,7 +26,7 @@ TEST_F(ConnectToRoomCommandFixture, room_name_is_empty)
     EXPECT_FALSE(response.is_ok);
 }
 
-TEST_F(ConnectToRoomCommandFixture, user_uuid_is_empty)
+TEST_F(ConnectToRoomTest, user_uuid_is_empty)
 {
     protocol::entity::server::request::ConnectToRoom request;
     request.room_name = "user_room";
@@ -36,7 +36,7 @@ TEST_F(ConnectToRoomCommandFixture, user_uuid_is_empty)
     EXPECT_FALSE(response.is_ok);
 }
 
-TEST_F(ConnectToRoomCommandFixture, user_uuid_wrong)
+TEST_F(ConnectToRoomTest, user_uuid_wrong)
 {
     protocol::entity::server::request::ConnectToRoom request;
     request.room_name = "room_name";
@@ -49,7 +49,7 @@ TEST_F(ConnectToRoomCommandFixture, user_uuid_wrong)
     EXPECT_FALSE(response.is_ok);
 }
 
-TEST_F(ConnectToRoomCommandFixture, room_not_exist)
+TEST_F(ConnectToRoomTest, room_not_exist)
 {
     protocol::entity::server::request::ConnectToRoom request;
     request.room_name = "user_room";
@@ -65,7 +65,7 @@ TEST_F(ConnectToRoomCommandFixture, room_not_exist)
     EXPECT_FALSE(response.is_ok);
 }
 
-TEST_F(ConnectToRoomCommandFixture, can_not_add_user)
+TEST_F(ConnectToRoomTest, can_not_add_user)
 {
     RoomMock room;
 
@@ -89,7 +89,7 @@ TEST_F(ConnectToRoomCommandFixture, can_not_add_user)
     EXPECT_FALSE(response.is_ok);
 }
 
-TEST_F(ConnectToRoomCommandFixture, room_exist)
+TEST_F(ConnectToRoomTest, room_exist)
 {
     RoomMock room;
 

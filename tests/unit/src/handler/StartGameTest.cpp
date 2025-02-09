@@ -1,4 +1,4 @@
-#include <fixture/handler/StartGameCommandFixture.hpp>
+#include <fixture/handler/StartGameTest.hpp>
 #include <mock/model/RoomMock.hpp>
 
 #include <domain/model/Room.hpp>
@@ -9,7 +9,7 @@
 
 using testing::Return;
 
-TEST_F(StartGameCommandFixture, user_uuid_and_name_are_empty)
+TEST_F(StartGameTest, user_uuid_and_name_are_empty)
 {
     protocol::entity::server::request::StartGame request;
 
@@ -18,7 +18,7 @@ TEST_F(StartGameCommandFixture, user_uuid_and_name_are_empty)
     EXPECT_FALSE(response.is_ok);
 }
 
-TEST_F(StartGameCommandFixture, user_uuid_is_empty)
+TEST_F(StartGameTest, user_uuid_is_empty)
 {
     protocol::entity::server::request::StartGame request;
     request.user_uuid = "";
@@ -29,7 +29,7 @@ TEST_F(StartGameCommandFixture, user_uuid_is_empty)
     EXPECT_FALSE(response.is_ok);
 }
 
-TEST_F(StartGameCommandFixture, room_name_is_empty)
+TEST_F(StartGameTest, room_name_is_empty)
 {
     protocol::entity::server::request::StartGame request;
     request.user_uuid = "1234";
@@ -40,7 +40,7 @@ TEST_F(StartGameCommandFixture, room_name_is_empty)
     EXPECT_FALSE(response.is_ok);
 }
 
-TEST_F(StartGameCommandFixture, room_is_not_exist)
+TEST_F(StartGameTest, room_is_not_exist)
 {
     protocol::entity::server::request::StartGame request;
     request.user_uuid = "1234";
@@ -53,7 +53,7 @@ TEST_F(StartGameCommandFixture, room_is_not_exist)
     EXPECT_FALSE(response.is_ok);
 }
 
-TEST_F(StartGameCommandFixture, user_uuid_is_not_owner_uuid)
+TEST_F(StartGameTest, user_uuid_is_not_owner_uuid)
 {
     protocol::entity::server::request::StartGame request;
     request.room_name = "room_name";
@@ -71,7 +71,7 @@ TEST_F(StartGameCommandFixture, user_uuid_is_not_owner_uuid)
     EXPECT_FALSE(response.is_ok);
 }
 
-TEST_F(StartGameCommandFixture, room_is_exist)
+TEST_F(StartGameTest, room_is_exist)
 {
     protocol::entity::server::request::StartGame request;
     request.room_name = "room_name";

@@ -1,4 +1,4 @@
-#include <fixture/model/round_pipe/RaisePlayerCardPipeFixture.hpp>
+#include <fixture/model/round_pipe/RaisePlayerCardTest.hpp>
 
 #include <gtest/gtest.h>
 
@@ -6,7 +6,7 @@
 
 using testing::Return;
 
-TEST_F(RaisePlayerCardPipeFixture, run_raise_rock)
+TEST_F(RaisePlayerCardTest, run_raise_rock)
 {
     auto raised_card = protocol::entity::Card::Rock;
 
@@ -27,7 +27,7 @@ TEST_F(RaisePlayerCardPipeFixture, run_raise_rock)
     EXPECT_FALSE(context.is_scissors_raised);
 }
 
-TEST_F(RaisePlayerCardPipeFixture, run_raise_paper)
+TEST_F(RaisePlayerCardTest, run_raise_paper)
 {
     auto raised_card = protocol::entity::Card::Paper;
 
@@ -48,7 +48,7 @@ TEST_F(RaisePlayerCardPipeFixture, run_raise_paper)
     EXPECT_FALSE(context.is_scissors_raised);
 }
 
-TEST_F(RaisePlayerCardPipeFixture, run_raise_scissors)
+TEST_F(RaisePlayerCardTest, run_raise_scissors)
 {
     auto raised_card = protocol::entity::Card::Scissors;
 

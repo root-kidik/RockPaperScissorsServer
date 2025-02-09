@@ -3,7 +3,7 @@
 
 #include <domain/handler/Register.hpp>
 
-class RegisterCommandFixture : public testing::Test
+class RegisterTest : public testing::Test
 {
 public:
     UserStorageMock                 user_storage;

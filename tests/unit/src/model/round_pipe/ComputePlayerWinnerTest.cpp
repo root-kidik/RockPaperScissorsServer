@@ -1,4 +1,4 @@
-#include <fixture/model/round_pipe/ComputePlayerWinnerPipeFixture.hpp>
+#include <fixture/model/round_pipe/ComputePlayerWinnerTest.hpp>
 
 #include <gtest/gtest.h>
 
@@ -6,7 +6,7 @@
 
 using testing::Return;
 
-TEST_F(ComputePlayerWinnerPipeFixture, run_with_rock_all_losed)
+TEST_F(ComputePlayerWinnerTest, run_with_rock_all_losed)
 {
     context.is_paper_raised    = true;
     context.is_rock_raised     = true;
@@ -26,7 +26,7 @@ TEST_F(ComputePlayerWinnerPipeFixture, run_with_rock_all_losed)
     EXPECT_FALSE(player.nominated_card);
 }
 
-TEST_F(ComputePlayerWinnerPipeFixture, run_with_paper_all_losed)
+TEST_F(ComputePlayerWinnerTest, run_with_paper_all_losed)
 {
     context.is_paper_raised    = true;
     context.is_rock_raised     = true;
@@ -46,7 +46,7 @@ TEST_F(ComputePlayerWinnerPipeFixture, run_with_paper_all_losed)
     EXPECT_FALSE(player.nominated_card);
 }
 
-TEST_F(ComputePlayerWinnerPipeFixture, run_with_scissors_all_losed)
+TEST_F(ComputePlayerWinnerTest, run_with_scissors_all_losed)
 {
     context.is_paper_raised    = true;
     context.is_rock_raised     = true;
@@ -66,7 +66,7 @@ TEST_F(ComputePlayerWinnerPipeFixture, run_with_scissors_all_losed)
     EXPECT_FALSE(player.nominated_card);
 }
 
-TEST_F(ComputePlayerWinnerPipeFixture, run_with_rock_win)
+TEST_F(ComputePlayerWinnerTest, run_with_rock_win)
 {
     context.is_rock_raised     = true;
     context.is_scissors_raised = true;
@@ -85,7 +85,7 @@ TEST_F(ComputePlayerWinnerPipeFixture, run_with_rock_win)
     EXPECT_FALSE(player.nominated_card);
 }
 
-TEST_F(ComputePlayerWinnerPipeFixture, run_with_rock_lose)
+TEST_F(ComputePlayerWinnerTest, run_with_rock_lose)
 {
     context.is_paper_raised = true;
     context.is_rock_raised  = true;
@@ -104,7 +104,7 @@ TEST_F(ComputePlayerWinnerPipeFixture, run_with_rock_lose)
     EXPECT_FALSE(player.nominated_card);
 }
 
-TEST_F(ComputePlayerWinnerPipeFixture, run_with_paper_win)
+TEST_F(ComputePlayerWinnerTest, run_with_paper_win)
 {
     context.is_paper_raised = true;
     context.is_rock_raised  = true;
@@ -123,7 +123,7 @@ TEST_F(ComputePlayerWinnerPipeFixture, run_with_paper_win)
     EXPECT_FALSE(player.nominated_card);
 }
 
-TEST_F(ComputePlayerWinnerPipeFixture, run_with_paper_lose)
+TEST_F(ComputePlayerWinnerTest, run_with_paper_lose)
 {
     context.is_paper_raised    = true;
     context.is_scissors_raised = true;
@@ -142,7 +142,7 @@ TEST_F(ComputePlayerWinnerPipeFixture, run_with_paper_lose)
     EXPECT_FALSE(player.nominated_card);
 }
 
-TEST_F(ComputePlayerWinnerPipeFixture, run_with_scissors_win)
+TEST_F(ComputePlayerWinnerTest, run_with_scissors_win)
 {
     context.is_scissors_raised = true;
     context.is_paper_raised    = true;
@@ -161,7 +161,7 @@ TEST_F(ComputePlayerWinnerPipeFixture, run_with_scissors_win)
     EXPECT_FALSE(player.nominated_card);
 }
 
-TEST_F(ComputePlayerWinnerPipeFixture, run_with_scissors_lose)
+TEST_F(ComputePlayerWinnerTest, run_with_scissors_lose)
 {
     context.is_scissors_raised = true;
     context.is_rock_raised     = true;

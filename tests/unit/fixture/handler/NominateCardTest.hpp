@@ -3,7 +3,7 @@
 
 #include <domain/handler/NominateCard.hpp>
 
-class NominateCardCommandHandlerFixture : public testing::Test
+class NominateCardTest : public testing::Test
 {
 public:
     RoomStorageMock                 room_storage;

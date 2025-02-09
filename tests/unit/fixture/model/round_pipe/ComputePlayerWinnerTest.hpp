@@ -4,10 +4,10 @@
 
 #include <domain/model/round_pipe/ComputePlayerWinner.hpp>
 
-class ComputePlayerWinnerPipeFixture : public testing::Test
+class ComputePlayerWinnerTest : public testing::Test
 {
 public:
-    ComputePlayerWinnerPipeFixture()
+    ComputePlayerWinnerTest()
     {
         player.connection = connection;
     }

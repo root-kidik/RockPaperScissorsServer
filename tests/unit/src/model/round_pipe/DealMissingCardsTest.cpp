@@ -1,4 +1,4 @@
-#include <fixture/model/round_pipe/DealMissingCardsPipeFixture.hpp>
+#include <fixture/model/round_pipe/DealMissingCardsTest.hpp>
 
 #include <gtest/gtest.h>
 
@@ -6,14 +6,14 @@
 
 using testing::Return;
 
-TEST_F(DealMissingCardsPipeFixture, run_with_empty_deck)
+TEST_F(DealMissingCardsTest, run_with_empty_deck)
 {
     pipe.run(context);
 
     EXPECT_TRUE(player.cards.empty());
 }
 
-TEST_F(DealMissingCardsPipeFixture, run_with_deck)
+TEST_F(DealMissingCardsTest, run_with_deck)
 {
     auto back_card = protocol::entity::Card::Scissors;
 

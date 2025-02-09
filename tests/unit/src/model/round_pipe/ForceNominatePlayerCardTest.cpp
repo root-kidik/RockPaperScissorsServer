@@ -1,4 +1,4 @@
-#include <fixture/model/round_pipe/ForceNominatePlayerCardPipeFixture.hpp>
+#include <fixture/model/round_pipe/ForceNominatePlayerCardTest.hpp>
 
 #include <gtest/gtest.h>
 
@@ -6,14 +6,14 @@
 
 using testing::Return;
 
-TEST_F(ForceNominatePlayerCardPipeFixture, run_with_nominated_card)
+TEST_F(ForceNominatePlayerCardTest, run_with_nominated_card)
 {
     player.nominated_card = protocol::entity::Card::Paper;
 
     pipe.run(context);
 }
 
-TEST_F(ForceNominatePlayerCardPipeFixture, run_without_nominated_card_check_back_card_nominated)
+TEST_F(ForceNominatePlayerCardTest, run_without_nominated_card_check_back_card_nominated)
 {
     player.cards.push_back(protocol::entity::Card::Paper);
     player.cards.push_back(protocol::entity::Card::Rock);

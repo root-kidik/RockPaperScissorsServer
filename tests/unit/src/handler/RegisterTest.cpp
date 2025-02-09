@@ -1,10 +1,10 @@
-#include <fixture/handler/RegisterCommandFixture.hpp>
+#include <fixture/handler/RegisterTest.hpp>
 
 #include <gtest/gtest.h>
 
 using testing::Return;
 
-TEST_F(RegisterCommandFixture, name_is_empty)
+TEST_F(RegisterTest, name_is_empty)
 {
     protocol::entity::server::request::Register request;
 
@@ -13,7 +13,7 @@ TEST_F(RegisterCommandFixture, name_is_empty)
     EXPECT_TRUE(response.user_uuid.empty());
 }
 
-TEST_F(RegisterCommandFixture, name_already_exist)
+TEST_F(RegisterTest, name_already_exist)
 {
     protocol::entity::server::request::Register request;
     request.user_nickname = "user";
@@ -25,7 +25,7 @@ TEST_F(RegisterCommandFixture, name_already_exist)
     EXPECT_TRUE(response.user_uuid.empty());
 }
 
-TEST_F(RegisterCommandFixture, name_is_unqiue)
+TEST_F(RegisterTest, name_is_unqiue)
 {
     protocol::entity::server::request::Register request;
     request.user_nickname = "user";

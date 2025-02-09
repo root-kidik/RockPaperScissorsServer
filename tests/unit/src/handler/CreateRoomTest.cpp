@@ -1,10 +1,10 @@
-#include <fixture/handler/CreateRoomCommandFixture.hpp>
+#include <fixture/handler/CreateRoomTest.hpp>
 
 #include <gtest/gtest.h>
 
 using testing::Return;
 
-TEST_F(CreateRoomCommandFixture, room_name_and_user_uuid_are_empty)
+TEST_F(CreateRoomTest, room_name_and_user_uuid_are_empty)
 {
     protocol::entity::server::request::CreateRoom request;
 
@@ -13,7 +13,7 @@ TEST_F(CreateRoomCommandFixture, room_name_and_user_uuid_are_empty)
     EXPECT_FALSE(response.is_ok);
 }
 
-TEST_F(CreateRoomCommandFixture, name_is_empty)
+TEST_F(CreateRoomTest, name_is_empty)
 {
     protocol::entity::server::request::CreateRoom request;
     request.room_name = "";
@@ -24,7 +24,7 @@ TEST_F(CreateRoomCommandFixture, name_is_empty)
     EXPECT_FALSE(response.is_ok);
 }
 
-TEST_F(CreateRoomCommandFixture, owner_uuid_is_empty)
+TEST_F(CreateRoomTest, owner_uuid_is_empty)
 {
     protocol::entity::server::request::CreateRoom request;
     request.room_name = "room_name";
@@ -35,7 +35,7 @@ TEST_F(CreateRoomCommandFixture, owner_uuid_is_empty)
     EXPECT_FALSE(response.is_ok);
 }
 
-TEST_F(CreateRoomCommandFixture, room_not_exist)
+TEST_F(CreateRoomTest, room_not_exist)
 {
     protocol::entity::server::request::CreateRoom request;
     request.room_name = "user";
@@ -48,7 +48,7 @@ TEST_F(CreateRoomCommandFixture, room_not_exist)
     EXPECT_FALSE(response.is_ok);
 }
 
-TEST_F(CreateRoomCommandFixture, room_exist)
+TEST_F(CreateRoomTest, room_exist)
 {
     protocol::entity::server::request::CreateRoom request;
     request.room_name = "user";

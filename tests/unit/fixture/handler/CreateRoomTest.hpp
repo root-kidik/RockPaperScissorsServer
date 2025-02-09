@@ -3,7 +3,7 @@
 
 #include <domain/handler/CreateRoom.hpp>
 
-class CreateRoomCommandFixture : public testing::Test
+class CreateRoomTest : public testing::Test
 {
 public:
     RoomStorageMock                 room_storage;

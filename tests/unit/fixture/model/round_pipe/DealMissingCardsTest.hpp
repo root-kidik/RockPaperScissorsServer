@@ -4,10 +4,10 @@
 
 #include <domain/model/round_pipe/DealMissingCards.hpp>
 
-class DealMissingCardsPipeFixture : public testing::Test
+class DealMissingCardsTest : public testing::Test
 {
 public:
-    DealMissingCardsPipeFixture()
+    DealMissingCardsTest()
     {
         player.connection = connection;
     }

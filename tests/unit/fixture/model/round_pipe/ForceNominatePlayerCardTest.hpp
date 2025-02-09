@@ -4,10 +4,10 @@
 
 #include <domain/model/round_pipe/ForceNominatePlayerCard.hpp>
 
-class ForceNominatePlayerCardPipeFixture : public testing::Test
+class ForceNominatePlayerCardTest : public testing::Test
 {
 public:
-    ForceNominatePlayerCardPipeFixture()
+    ForceNominatePlayerCardTest()
     {
         player.connection = connection;
     }
