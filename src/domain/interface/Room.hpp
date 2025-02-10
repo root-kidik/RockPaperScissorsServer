@@ -15,7 +15,7 @@ namespace rps::domain::interface
 class Room
 {
 public:
-    static constexpr std::uint8_t         kMaxPlayers{6};
+    static constexpr std::uint8_t         kMaxPlayers{4};
     static constexpr std::chrono::seconds kTurnTime{10};
 
     virtual ~Room() = default;
