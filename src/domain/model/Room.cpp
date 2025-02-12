@@ -33,9 +33,10 @@ bool Room::try_add_user(const entity::Uuid&                                     
                         const std::string&                                      user_nickname,
                         const std::shared_ptr<protocol::interface::Connection>& connection)
 {
+
     if (m_is_game_started || m_players.find(user_uuid) != m_players.end() ||
-        m_players.size() == interface::Room::kMaxPlayers ||
-        (m_players.size() == model::Room::kMaxPlayers - 1 && user_uuid != m_owner_uuid &&
+        m_players.size() == protocol::entity::kMaxPlayersPerRoom ||
+        (m_players.size() == protocol::entity::kMaxPlayersPerRoom - 1 && user_uuid != m_owner_uuid &&
          m_players.find(m_owner_uuid) == m_players.end()))
         return false;
 
@@ -79,7 +80,7 @@ bool Room::try_start_game(const entity::Uuid& user_uuid)
     m_is_game_started = true;
 
     m_timer->start(
-        interface::Room::kTurnTime,
+        protocol::entity::kTurnTime,
         [this]()
         {
             for (auto& [uuid, player] : m_players)

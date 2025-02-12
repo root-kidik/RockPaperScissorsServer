@@ -15,9 +15,6 @@ namespace rps::domain::interface
 class Room
 {
 public:
-    static constexpr std::uint8_t         kMaxPlayers{4};
-    static constexpr std::chrono::seconds kTurnTime{10};
-
     virtual ~Room() = default;
 
     virtual bool try_add_user(const entity::Uuid&                                     user_uuid,
