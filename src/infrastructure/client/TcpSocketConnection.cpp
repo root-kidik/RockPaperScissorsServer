@@ -16,8 +16,6 @@ bool TcpSocketConnection::is_connected() const
 
 void TcpSocketConnection::send(std::string&& data)
 {
-    assert(m_tcp_socket != nullptr && "Connection is failed!");
-
     if (m_tcp_socket != nullptr)
         m_tcp_socket->write(data.c_str());
 }
