@@ -114,6 +114,20 @@ bool Room::try_nominate_user_card(const entity::Uuid& user_uuid, protocol::entit
     return true;
 }
 
+std::array<std::string, protocol::entity::kMaxPlayersPerRoom> Room::get_player_nicknames() const
+{
+    std::array<std::string, protocol::entity::kMaxPlayersPerRoom> nicknames;
+
+    std::uint8_t i = 0;
+    for (const auto& [uuid, player] : m_players)
+    {
+        assert(i < protocol::entity::kMaxPlayersPerRoom && "Too many players inside room");
+        nicknames[i++] = player.nickname;
+    }
+
+    return nicknames;
+}
+
 const std::unordered_map<entity::Uuid, Room::Player>& Room::get_players()
 {
     return m_players;

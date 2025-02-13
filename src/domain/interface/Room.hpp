@@ -3,6 +3,7 @@
 #include <chrono>
 #include <cstdint>
 #include <memory>
+#include <array>
 
 #include <domain/entity/Uuid.hpp>
 
@@ -24,6 +25,8 @@ public:
     virtual bool try_start_game(const entity::Uuid& user_uuid) = 0;
 
     virtual bool try_nominate_user_card(const entity::Uuid& user_uuid, protocol::entity::Card card) = 0;
+
+    virtual std::array<std::string, protocol::entity::kMaxPlayersPerRoom> get_player_nicknames() const = 0;
 };
 
 } // namespace rps::domain::interface

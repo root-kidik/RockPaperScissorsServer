@@ -17,4 +17,5 @@ public:
                 (override));
     MOCK_METHOD(bool, try_start_game, (const domain::entity::Uuid& user_uuid), (override));
     MOCK_METHOD(bool, try_nominate_user_card, (const domain::entity::Uuid& user_uuid, protocol::entity::Card card), (override));
+    MOCK_METHOD((std::array<std::string, protocol::entity::kMaxPlayersPerRoom>), get_player_nicknames, (), (override, const));
 };

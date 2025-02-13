@@ -38,7 +38,21 @@ ConnectToRoom::Response ConnectToRoom::handle(Request&&                         
         return response;
     }
 
-    response.is_ok = room.value().get().try_add_user(request.user_uuid, user_nickname.value(), connection);
+    auto& room_ref = room.value().get();
+
+    if (!room_ref.try_add_user(request.user_uuid, user_nickname.value(), connection))
+    {
+        response.is_ok = false;
+        return response;
+    }
+
+    auto nicknames = room_ref.get_player_nicknames();
+    
+    for (std::uint8_t i = 0; i < protocol::entity::kMaxPlayersPerRoom; i++)
+        if (const auto& nickname = nicknames[i]; nickname != user_nickname && !nickname.empty())
+            response.existed_players[i] = nickname;
+
+    response.is_ok = true;
     return response;
 }
 

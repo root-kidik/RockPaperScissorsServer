@@ -56,6 +56,8 @@ public:
 
     bool try_nominate_user_card(const entity::Uuid& user_uuid, protocol::entity::Card card) override;
 
+    std::array<std::string, protocol::entity::kMaxPlayersPerRoom> get_player_nicknames() const override;
+
     const std::unordered_map<entity::Uuid, Player>& get_players();
 
 private:

@@ -107,6 +107,7 @@ TEST_F(ConnectToRoomTest, room_exist)
                              user_nickname,
                              std::static_pointer_cast<protocol::interface::Connection>(connection)))
         .WillOnce(Return(true));
+    EXPECT_CALL(room, get_player_nicknames()).WillOnce(Return(std::array<std::string, protocol::entity::kMaxPlayersPerRoom>{}));
 
     auto response = connect_to_room_command_handler.handle(std::move(request), connection);
 
