@@ -46,11 +46,13 @@ ConnectToRoom::Response ConnectToRoom::handle(Request&&                         
         return response;
     }
 
-    auto nicknames = room_ref.get_player_nicknames();
-    
-    for (std::uint8_t i = 0; i < protocol::entity::kMaxPlayersPerRoom; i++)
-        if (const auto& nickname = nicknames[i]; nickname != user_nickname && !nickname.empty())
-            response.existed_players[i] = nickname;
+    std::uint8_t i = 0;
+    for (const auto& nickname : room_ref.get_player_nicknames())
+        if (nickname != user_nickname && !nickname.empty())
+        {
+            assert(i < protocol::entity::kMaxPlayersPerRoom && "Too many players inside room already existed");
+            response.existed_players[i++] = nickname;
+        }
 
     response.is_ok = true;
     return response;
