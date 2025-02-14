@@ -21,7 +21,8 @@ Room::Room(const std::string&                       name,
 m_name{name},
 m_owner_uuid{owner_uuid},
 m_timer{timer},
-m_message_sender{command_sender}
+m_message_sender{command_sender},
+m_cards{util::gen_cards()}
 {
     m_round_pipeline.add<round_pipe::ForceNominatePlayerCard>(m_message_sender);
     m_round_pipeline.add<round_pipe::RaisePlayerCard>(m_message_sender);
@@ -57,8 +58,6 @@ bool Room::try_start_game(const entity::Uuid& user_uuid)
 {
     if (user_uuid != m_owner_uuid || m_is_game_started)
         return false;
-
-    m_cards = util::gen_cards();
 
     for (auto& [player_uuid, player] : m_players)
     {

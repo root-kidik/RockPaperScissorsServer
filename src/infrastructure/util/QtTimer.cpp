@@ -8,7 +8,7 @@ void QtTimer::start(std::chrono::milliseconds timeout, std::function<void()> cal
     timer.setSingleShot(fire_once);
     timer.start(timeout);
 
-    QObject::connect(&timer, &QTimer::timeout, [&callback]() { callback(); });
+    QObject::connect(&timer, &QTimer::timeout, [cb = std::move(callback)]() { cb(); });
 }
 
 void QtTimer::stop()
