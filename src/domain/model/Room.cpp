@@ -87,7 +87,7 @@ bool Room::try_start_game(const entity::Uuid& user_uuid)
                 if (player.cards.empty())
                     continue;
 
-                RoundContext context{player, uuid};
+                RoundContext context{player, uuid, m_cards};
                 m_round_pipeline.run(context);
             }
         },

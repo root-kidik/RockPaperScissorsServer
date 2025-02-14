@@ -15,7 +15,7 @@ m_message_sender{command_sender}
 
 void ComputePlayerWinner::run(Room::RoundContext& context)
 {
-    auto& [player, player_uuid, is_rock_raised, is_paper_raised, is_scissors_raised] = context;
+    auto& [player, player_uuid, cards, is_rock_raised, is_paper_raised, is_scissors_raised] = context;
 
     assert(player.nominated_card && "player must have nominated card");
 

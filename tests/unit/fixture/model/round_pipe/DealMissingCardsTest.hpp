@@ -15,8 +15,8 @@ public:
     std::shared_ptr<ConnectionMock>             connection = std::make_shared<ConnectionMock>();
     domain::model::Room::Player                 player;
     domain::entity::Uuid                        uuid;
-    domain::model::Room::RoundContext           context{player, uuid};
-    protocol::entity::MessageSender             command_sender;
     std::vector<protocol::entity::Card>         deck;
-    domain::model::round_pipe::DealMissingCards pipe{command_sender, deck};
+    domain::model::Room::RoundContext           context{player, uuid, deck};
+    protocol::entity::MessageSender             command_sender;
+    domain::model::round_pipe::DealMissingCards pipe{command_sender};
 };

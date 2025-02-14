@@ -17,8 +17,7 @@ TEST_F(RoomTest, try_start_game_but_already_started)
 {
     domain::entity::Uuid user_uuid = "user_uuid";
 
-    EXPECT_CALL(*timer, start(std::chrono::milliseconds{protocol::entity::kTurnTime}, testing::_, false))
-        .WillOnce(Return());
+    EXPECT_CALL(*timer, start(std::chrono::milliseconds{protocol::entity::kTurnTime}, testing::_, false)).WillOnce(Return());
 
     EXPECT_TRUE(room.try_start_game(owner_uuid));
     EXPECT_FALSE(room.try_start_game(user_uuid));
@@ -26,8 +25,7 @@ TEST_F(RoomTest, try_start_game_but_already_started)
 
 TEST_F(RoomTest, try_start_game_started)
 {
-    EXPECT_CALL(*timer, start(std::chrono::milliseconds{protocol::entity::kTurnTime}, testing::_, false))
-        .WillOnce(Return());
+    EXPECT_CALL(*timer, start(std::chrono::milliseconds{protocol::entity::kTurnTime}, testing::_, false)).WillOnce(Return());
 
     EXPECT_TRUE(room.try_start_game(owner_uuid));
 }
@@ -37,8 +35,7 @@ TEST_F(RoomTest, try_add_user_game_already_started_not_added)
     domain::entity::Uuid user_uuid     = "user_uuid";
     std::string          user_nickname = "user_nickname";
 
-    EXPECT_CALL(*timer, start(std::chrono::milliseconds{protocol::entity::kTurnTime}, testing::_, false))
-        .WillOnce(Return());
+    EXPECT_CALL(*timer, start(std::chrono::milliseconds{protocol::entity::kTurnTime}, testing::_, false)).WillOnce(Return());
 
     EXPECT_TRUE(room.try_start_game(owner_uuid));
     EXPECT_FALSE(room.try_add_user(user_uuid, user_nickname, connection));
@@ -151,8 +148,7 @@ TEST_F(RoomTest, try_start_game_with_six_users)
     for (auto& [uuid, player] : room.get_players())
         EXPECT_CALL(*std::dynamic_pointer_cast<ConnectionMock>(player.connection), send(testing::_)).WillOnce(Return());
 
-    EXPECT_CALL(*timer, start(std::chrono::milliseconds{protocol::entity::kTurnTime}, testing::_, false))
-        .WillOnce(Return());
+    EXPECT_CALL(*timer, start(std::chrono::milliseconds{protocol::entity::kTurnTime}, testing::_, false)).WillOnce(Return());
 
     EXPECT_TRUE(room.try_start_game(owner_uuid));
 }
@@ -186,8 +182,7 @@ TEST_F(RoomTest, try_nominate_user_card_success)
     EXPECT_TRUE(room.try_add_user(user_uuid, user_nickname, connection));
 
     EXPECT_CALL(*connection, send(testing::_)).WillOnce(Return());
-    EXPECT_CALL(*timer, start(std::chrono::milliseconds{protocol::entity::kTurnTime}, testing::_, false))
-        .WillOnce(Return());
+    EXPECT_CALL(*timer, start(std::chrono::milliseconds{protocol::entity::kTurnTime}, testing::_, false)).WillOnce(Return());
 
     EXPECT_TRUE(room.try_start_game(owner_uuid));
 

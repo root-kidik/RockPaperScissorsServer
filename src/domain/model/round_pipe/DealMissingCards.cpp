@@ -7,16 +7,13 @@
 namespace rps::domain::model::round_pipe
 {
 
-DealMissingCards::DealMissingCards(protocol::entity::MessageSender&     command_sender,
-                                   std::vector<protocol::entity::Card>& deck) :
-m_message_sender{command_sender},
-m_deck{deck}
+DealMissingCards::DealMissingCards(protocol::entity::MessageSender& command_sender) : m_message_sender{command_sender}
 {
 }
 
 void DealMissingCards::run(Room::RoundContext& context)
 {
-    if (m_deck.empty())
+    if (context.cards.empty())
         return;
 
     auto& player       = context.player;
@@ -24,10 +21,10 @@ void DealMissingCards::run(Room::RoundContext& context)
 
     assert(player_cards.size() < protocol::entity::kMaxCardsPerPlayer && "Player cards can not be max");
 
-    auto card = m_deck.back();
+    auto card = context.cards.back();
 
     player_cards.push_back(card);
-    m_deck.pop_back();
+    context.cards.pop_back();
 
     protocol::entity::client::request::DealMissingCard request;
     request.card = card;

@@ -33,8 +33,9 @@ public:
 
     struct RoundContext
     {
-        Player&             player;
-        const entity::Uuid& player_uuid;
+        Player&                              player;
+        const entity::Uuid&                  player_uuid;
+        std::vector<protocol::entity::Card>& cards;
 
         bool is_rock_raised{};
         bool is_paper_raised{};

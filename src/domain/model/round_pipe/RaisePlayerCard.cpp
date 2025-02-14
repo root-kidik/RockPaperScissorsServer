@@ -14,7 +14,7 @@ RaisePlayerCard::RaisePlayerCard(protocol::entity::MessageSender& command_sender
 
 void RaisePlayerCard::run(Room::RoundContext& context)
 {
-    auto& [player, player_uuid, is_rock_raised, is_paper_raised, is_scissors_raised] = context;
+    auto& [player, player_uuid, cards, is_rock_raised, is_paper_raised, is_scissors_raised] = context;
 
     assert(player.nominated_card && "Card must be nominated");
 

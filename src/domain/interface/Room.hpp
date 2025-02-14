@@ -1,9 +1,9 @@
 #pragma once
 
+#include <array>
 #include <chrono>
 #include <cstdint>
 #include <memory>
-#include <array>
 
 #include <domain/entity/Uuid.hpp>
 
