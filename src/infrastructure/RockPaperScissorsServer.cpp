@@ -12,13 +12,14 @@ namespace rps::infrastructure
 RockPaperScissorsServer::RockPaperScissorsServer(int argc, char* argv[]) :
 m_app{argc, argv},
 m_memory_user_storage{m_uuid_generator},
-m_memory_room_storage{m_uuid_generator, m_message_sender}
+m_memory_room_storage{m_uuid_generator, m_message_sender},
+m_message_executor{m_message_sender}
 {
-    m_message_executor.register_request_handler<domain::handler::request::Register>(m_memory_user_storage);
-    m_message_executor.register_request_handler<domain::handler::request::CreateRoom>(m_memory_room_storage);
-    m_message_executor.register_request_handler<domain::handler::request::ConnectToRoom>(m_memory_room_storage,
+    m_message_executor.register_request_handler<domain::handler::request::Register>(m_message_sender, m_memory_user_storage);
+    m_message_executor.register_request_handler<domain::handler::request::CreateRoom>(m_message_sender, m_memory_room_storage);
+    m_message_executor.register_request_handler<domain::handler::request::ConnectToRoom>(m_message_sender, m_memory_room_storage,
                                                                                          m_memory_user_storage);
-    m_message_executor.register_request_handler<domain::handler::request::StartGame>(m_memory_room_storage,
+    m_message_executor.register_request_handler<domain::handler::request::StartGame>(m_message_sender, m_memory_room_storage,
                                                                                      m_memory_user_storage);
 
     connect(this,

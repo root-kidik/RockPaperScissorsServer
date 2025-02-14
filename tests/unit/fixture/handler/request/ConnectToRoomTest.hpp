@@ -4,8 +4,6 @@
 
 #include <domain/handler/request/ConnectToRoom.hpp>
 
-#include <RockPaperScissorsProtocol/entity/MessageSender.hpp>
-
 class ConnectToRoomTest : public testing::Test
 {
 public:
