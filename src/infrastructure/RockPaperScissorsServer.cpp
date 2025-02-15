@@ -39,7 +39,7 @@ m_memory_room_storage{m_uuid_generator, m_message_sender}
                         &QTcpSocket::readyRead,
                         this,
                         [connection, connection_wrapper, this]()
-                        { m_message_executor.execute_message(connection->readAll().toStdString(), connection_wrapper); });
+                        { m_message_executor.process_data(connection->readAll().toStdString(), connection_wrapper); });
             });
 
     auto is_started = listen(QHostAddress::Any, 1234);

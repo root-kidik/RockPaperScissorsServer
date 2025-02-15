@@ -1,5 +1,11 @@
 #include <QTcpSocket>
 
+#ifndef NDEGUB
+#include <iostream>
+#endif
+
+#include <thread>
+
 #include <infrastructure/client/TcpSocketConnection.hpp>
 
 namespace rps::infrastructure::client
@@ -16,11 +22,16 @@ bool TcpSocketConnection::is_connected() const
 
 void TcpSocketConnection::send(std::string&& data)
 {
-    if (!m_tcp_socket)
+    if (!m_tcp_socket || m_tcp_socket->state() != QAbstractSocket::ConnectedState)
         return;
 
+    data += '\n';
+
+#ifndef NDEGUB
+    std::cout << "send: " << data;
+#endif
+
     m_tcp_socket->write(data.c_str());
-    m_tcp_socket->waitForBytesWritten();
 }
 
 void TcpSocketConnection::disconnect()
