@@ -27,7 +27,7 @@ m_cards{util::gen_cards()}
     m_round_pipeline.add<round_pipe::ForceNominatePlayerCard>(m_message_sender);
     m_round_pipeline.add<round_pipe::RaisePlayerCard>(m_message_sender);
     m_round_pipeline.add<round_pipe::ComputePlayerWinner>(m_message_sender);
-    m_round_pipeline.add<round_pipe::DealMissingCards>(m_message_sender, m_cards);
+    m_round_pipeline.add<round_pipe::DealMissingCards>(m_message_sender);
 }
 
 bool Room::try_add_user(const entity::Uuid&                                     user_uuid,
