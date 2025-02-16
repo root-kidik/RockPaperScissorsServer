@@ -1,5 +1,6 @@
 # Vscode
-.vscode
+.vscode/*
+!.vscode/settings.json
 
 # Python
 env
