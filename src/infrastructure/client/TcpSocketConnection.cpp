@@ -1,10 +1,8 @@
 #include <QTcpSocket>
 
-#ifndef NDEGUB
+#ifndef NDEBUG
 #include <iostream>
 #endif
-
-#include <thread>
 
 #include <infrastructure/client/TcpSocketConnection.hpp>
 
