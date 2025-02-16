@@ -27,7 +27,7 @@ void TcpSocketConnection::send(std::string&& data)
 
     data += '\n';
 
-#ifndef NDEGUB
+#ifndef NDEBUG
     std::cout << "send: " << data;
 #endif
 
