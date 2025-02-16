@@ -2,6 +2,7 @@
 #include <domain/handler/request/CreateRoom.hpp>
 #include <domain/handler/request/Register.hpp>
 #include <domain/handler/request/StartGame.hpp>
+#include <domain/handler/request/NominateCard.hpp>
 
 #include <infrastructure/RockPaperScissorsServer.hpp>
 #include <infrastructure/client/TcpSocketConnection.hpp>
@@ -20,6 +21,7 @@ m_memory_room_storage{m_uuid_generator, m_message_sender}
                                                                                          m_memory_user_storage);
     m_message_executor.register_request_handler<domain::handler::request::StartGame>(m_memory_room_storage,
                                                                                      m_memory_user_storage);
+    m_message_executor.register_request_handler<domain::handler::request::NominateCard>(m_memory_room_storage);
 
     connect(this,
             &QTcpServer::newConnection,
