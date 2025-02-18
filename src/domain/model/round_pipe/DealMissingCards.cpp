@@ -16,20 +16,23 @@ void DealMissingCards::run(Room::RoundContext& context)
     if (context.cards.empty())
         return;
 
-    auto& player       = context.player;
-    auto& player_cards = player.cards;
+    for (auto& player_ref : context.players)
+    {
+        auto& player       = player_ref.get();
+        auto& player_cards = player.cards;
 
-    assert(player_cards.size() < protocol::entity::kMaxCardsPerPlayer && "Player cards can not be max");
+        assert(player_cards.size() < protocol::entity::kMaxCardsPerPlayer && "Player cards can not be max");
 
-    auto card = context.cards.back();
+        auto card = context.cards.back();
 
-    player_cards.push_back(card);
-    context.cards.pop_back();
+        player_cards.push_back(card);
+        context.cards.pop_back();
 
-    protocol::entity::client::request::DealMissingCard request;
-    request.card = card;
+        protocol::entity::client::request::DealMissingCard request;
+        request.card = card;
 
-    m_message_sender.send(std::move(request), player.connection);
+        m_message_sender.send(std::move(request), player.connection);
+    }
 }
 
 } // namespace rps::domain::model::round_pipe

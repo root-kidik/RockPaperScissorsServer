@@ -21,10 +21,6 @@ TEST_F(RaisePlayerCardTest, run_raise_rock)
     pipe.run(context);
 
     EXPECT_TRUE(player.cards.empty());
-
-    EXPECT_TRUE(context.is_rock_raised);
-    EXPECT_FALSE(context.is_paper_raised);
-    EXPECT_FALSE(context.is_scissors_raised);
 }
 
 TEST_F(RaisePlayerCardTest, run_raise_paper)
@@ -42,10 +38,6 @@ TEST_F(RaisePlayerCardTest, run_raise_paper)
     pipe.run(context);
 
     EXPECT_TRUE(player.cards.empty());
-
-    EXPECT_FALSE(context.is_rock_raised);
-    EXPECT_TRUE(context.is_paper_raised);
-    EXPECT_FALSE(context.is_scissors_raised);
 }
 
 TEST_F(RaisePlayerCardTest, run_raise_scissors)
@@ -63,8 +55,4 @@ TEST_F(RaisePlayerCardTest, run_raise_scissors)
     pipe.run(context);
 
     EXPECT_TRUE(player.cards.empty());
-
-    EXPECT_FALSE(context.is_rock_raised);
-    EXPECT_FALSE(context.is_paper_raised);
-    EXPECT_TRUE(context.is_scissors_raised);
 }

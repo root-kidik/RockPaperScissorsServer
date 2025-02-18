@@ -1,10 +1,7 @@
 #pragma once
 
-#include <chrono>
-#include <cstdint>
 #include <memory>
 #include <optional>
-#include <unordered_set>
 #include <vector>
 
 #include <RockPaperScissorsProtocol/entity/Card.hpp>
@@ -36,13 +33,8 @@ public:
 
     struct RoundContext
     {
-        Player&                              player;
-        const entity::Uuid&                  player_uuid;
-        std::vector<protocol::entity::Card>& cards;
-
-        bool is_rock_raised{};
-        bool is_paper_raised{};
-        bool is_scissors_raised{};
+        std::vector<std::reference_wrapper<Player>>& players;
+        std::vector<protocol::entity::Card>&         cards;
     };
 
     using RoundPipeline = util::Pipeline<RoundContext>;

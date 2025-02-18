@@ -83,14 +83,18 @@ bool Room::try_start_game(const entity::Uuid& user_uuid)
         protocol::entity::kTurnTime,
         [this]()
         {
+            std::vector<std::reference_wrapper<Player>> players;
+
             for (auto& [uuid, player] : m_players)
             {
                 if (player.cards.empty())
                     continue;
 
-                RoundContext context{player, uuid, m_cards};
-                m_round_pipeline.run(context);
+                players.emplace_back(player);
             }
+
+            RoundContext context{players, m_cards};
+            m_round_pipeline.run(context);
         },
         false);
 
