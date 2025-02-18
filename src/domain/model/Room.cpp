@@ -1,15 +1,16 @@
 #include <cassert>
 
+#include <RockPaperScissorsProtocol/entity/MessageSender.hpp>
+#include <RockPaperScissorsProtocol/entity/client/request/GameStarted.hpp>
+#include <RockPaperScissorsProtocol/entity/client/request/NewPlayerAdded.hpp>
+
 #include <domain/model/Room.hpp>
 #include <domain/model/round_pipe/ComputePlayerWinner.hpp>
 #include <domain/model/round_pipe/DealMissingCards.hpp>
 #include <domain/model/round_pipe/ForceNominatePlayerCard.hpp>
 #include <domain/model/round_pipe/RaisePlayerCard.hpp>
-#include <domain/util/Util.hpp>
 
-#include <RockPaperScissorsProtocol/entity/MessageSender.hpp>
-#include <RockPaperScissorsProtocol/entity/client/request/GameStarted.hpp>
-#include <RockPaperScissorsProtocol/entity/client/request/NewPlayerAdded.hpp>
+#include <domain/util/Util.hpp>
 
 namespace rps::domain::model
 {

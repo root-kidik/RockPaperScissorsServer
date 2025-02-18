@@ -1,11 +1,11 @@
 #include <fixture/handler/request/StartGameTest.hpp>
 #include <mock/model/RoomMock.hpp>
 
+#include <RockPaperScissorsProtocol/entity/client/ClientMessageType.hpp>
+
 #include <domain/model/Room.hpp>
 
 #include <gtest/gtest.h>
-
-#include <RockPaperScissorsProtocol/entity/client/ClientMessageType.hpp>
 
 using testing::Return;
 

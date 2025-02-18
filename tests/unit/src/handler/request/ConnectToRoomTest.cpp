@@ -1,9 +1,9 @@
 #include <fixture/handler/request/ConnectToRoomTest.hpp>
 #include <mock/model/RoomMock.hpp>
 
-#include <gtest/gtest.h>
-
 #include <RockPaperScissorsProtocol/entity/client/ClientMessageType.hpp>
+
+#include <gtest/gtest.h>
 
 using testing::Return;
 

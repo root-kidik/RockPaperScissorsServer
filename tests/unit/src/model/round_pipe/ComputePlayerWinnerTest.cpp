@@ -1,8 +1,8 @@
 #include <fixture/model/round_pipe/ComputePlayerWinnerTest.hpp>
 
-#include <gtest/gtest.h>
-
 #include <RockPaperScissorsProtocol/entity/client/request/RoundInfo.hpp>
+
+#include <gtest/gtest.h>
 
 using testing::Return;
 

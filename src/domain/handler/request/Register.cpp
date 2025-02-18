@@ -1,7 +1,8 @@
 #include <sstream>
 
-#include <domain/handler/request/Register.hpp>
 #include <domain/interface/UserStorage.hpp>
+
+#include <domain/handler/request/Register.hpp>
 
 namespace rps::domain::handler::request
 {

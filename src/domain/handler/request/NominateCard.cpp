@@ -1,5 +1,6 @@
-#include <domain/handler/request/NominateCard.hpp>
 #include <domain/interface/RoomStorage.hpp>
+
+#include <domain/handler/request/NominateCard.hpp>
 
 namespace rps::domain::handler::request
 {

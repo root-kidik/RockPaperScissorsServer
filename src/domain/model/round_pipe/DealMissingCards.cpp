@@ -1,8 +1,8 @@
 #include <cassert>
 
-#include <domain/model/round_pipe/DealMissingCards.hpp>
-
 #include <RockPaperScissorsProtocol/entity/client/request/DealMissingCard.hpp>
+
+#include <domain/model/round_pipe/DealMissingCards.hpp>
 
 namespace rps::domain::model::round_pipe
 {

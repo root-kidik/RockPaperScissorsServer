@@ -1,11 +1,12 @@
-#include <domain/handler/request/ConnectToRoom.hpp>
-#include <domain/handler/request/CreateRoom.hpp>
-#include <domain/handler/request/Register.hpp>
-#include <domain/handler/request/StartGame.hpp>
-#include <domain/handler/request/NominateCard.hpp>
+#include <infrastructure/client/TcpSocketConnection.hpp>
 
 #include <infrastructure/RockPaperScissorsServer.hpp>
-#include <infrastructure/client/TcpSocketConnection.hpp>
+
+#include <domain/handler/request/ConnectToRoom.hpp>
+#include <domain/handler/request/CreateRoom.hpp>
+#include <domain/handler/request/NominateCard.hpp>
+#include <domain/handler/request/Register.hpp>
+#include <domain/handler/request/StartGame.hpp>
 
 namespace rps::infrastructure
 {

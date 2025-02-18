@@ -1,8 +1,8 @@
 #include <cassert>
 
-#include <domain/model/round_pipe/ForceNominatePlayerCard.hpp>
-
 #include <RockPaperScissorsProtocol/entity/client/request/CardForcedNominated.hpp>
+
+#include <domain/model/round_pipe/ForceNominatePlayerCard.hpp>
 
 namespace rps::domain::model::round_pipe
 {

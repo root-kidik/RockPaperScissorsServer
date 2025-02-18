@@ -1,9 +1,10 @@
 #include <cassert>
 #include <sstream>
 
-#include <domain/handler/request/StartGame.hpp>
 #include <domain/interface/RoomStorage.hpp>
 #include <domain/interface/UserStorage.hpp>
+
+#include <domain/handler/request/StartGame.hpp>
 
 namespace rps::domain::handler::request
 {

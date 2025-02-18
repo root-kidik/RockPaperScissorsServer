@@ -1,7 +1,8 @@
 #include <sstream>
 
-#include <domain/handler/request/CreateRoom.hpp>
 #include <domain/interface/RoomStorage.hpp>
+
+#include <domain/handler/request/CreateRoom.hpp>
 
 namespace rps::domain::handler::request
 {

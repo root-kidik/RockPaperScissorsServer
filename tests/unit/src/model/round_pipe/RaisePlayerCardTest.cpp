@@ -1,8 +1,8 @@
 #include <fixture/model/round_pipe/RaisePlayerCardTest.hpp>
 
-#include <gtest/gtest.h>
-
 #include <RockPaperScissorsProtocol/entity/client/request/CardRaised.hpp>
+
+#include <gtest/gtest.h>
 
 using testing::Return;
 

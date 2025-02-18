@@ -1,8 +1,8 @@
 #include <fixture/model/round_pipe/DealMissingCardsTest.hpp>
 
-#include <gtest/gtest.h>
-
 #include <RockPaperScissorsProtocol/entity/client/request/DealMissingCard.hpp>
+
+#include <gtest/gtest.h>
 
 using testing::Return;
 

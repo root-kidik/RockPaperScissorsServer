@@ -1,9 +1,9 @@
 #include <algorithm>
 #include <cassert>
 
-#include <domain/model/round_pipe/ComputePlayerWinner.hpp>
-
 #include <RockPaperScissorsProtocol/entity/client/request/RoundInfo.hpp>
+
+#include <domain/model/round_pipe/ComputePlayerWinner.hpp>
 
 namespace rps::domain::model::round_pipe
 {

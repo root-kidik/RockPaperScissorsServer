@@ -94,19 +94,43 @@ MaxEmptyLinesToKeep: 2
 # Sorting
 IncludeBlocks: Regroup
 IncludeCategories:
-  - Priority: 101
-    Regex: "^<domain(.+)>$"
-  - Priority: 102
-    Regex: "^<infrastructure(.+)>$"
-  - Priority: 104
-    Regex: "^<RockPaperScissorsProtocol(.+)>$"
-  - Priority: 103
-    Regex: "^<gtest(.+)>$"
-  - Priority: 99
-    Regex: "^<Q(.+)>$"
   - Priority: 100
+    Regex: "^<Q(.+)>$"
+  - Priority: 101
+    Regex: "^<RockPaperScissorsProtocol/entity(.+)>$"
+  - Priority: 102
+    Regex: "^<RockPaperScissorsProtocol/interface(.+)>$"
+  - Priority: 103
+    Regex: "^<RockPaperScissorsProtocol(.+)>$"
+  - Priority: 104
+    Regex: "^<infrastructure/widget(.+)>$"
+  - Priority: 105
+    Regex: "^<infrastructure/storage(.+)>$"
+  - Priority: 106
+    Regex: "^<infrastructure/client(.+)>$"
+  - Priority: 107
+    Regex: "^<infrastructure/util(.+)>$"
+  - Priority: 108
+    Regex: "^<infrastructure(.+)>$"
+  - Priority: 109
+    Regex: "^<domain/entity/(.+)>$"
+  - Priority: 110
+    Regex: "^<domain/interface/(.+)>$"
+  - Priority: 111
+    Regex: "^<domain/model/(.+)>$"
+  - Priority: 112
+    Regex: "^<domain/usecase/(.+)>$"
+  - Priority: 113
+    Regex: "^<domain/handler/(.+)>$"
+  - Priority: 114
+    Regex: "^<domain/util/(.+)>$"
+  - Priority: 115
+    Regex: "^<domain(.+)>$"
+  - Priority: 116
+    Regex: "^<gtest(.+)>$"
+  - Priority: 0
     Regex: "^<(.+)>$"
-  - Priority: 200
+  - Priority: 1000
     Regex: '^\"(.+)\"$'
 SortIncludes: true
 SortUsingDeclarations: true

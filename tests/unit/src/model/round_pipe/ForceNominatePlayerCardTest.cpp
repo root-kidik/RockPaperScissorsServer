@@ -1,8 +1,8 @@
 #include <fixture/model/round_pipe/ForceNominatePlayerCardTest.hpp>
 
-#include <gtest/gtest.h>
-
 #include <RockPaperScissorsProtocol/entity/client/request/CardForcedNominated.hpp>
+
+#include <gtest/gtest.h>
 
 using testing::Return;
 

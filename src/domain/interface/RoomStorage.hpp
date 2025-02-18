@@ -4,6 +4,7 @@
 #include <optional>
 
 #include <domain/entity/Uuid.hpp>
+
 #include <domain/interface/Room.hpp>
 
 namespace rps::domain::interface

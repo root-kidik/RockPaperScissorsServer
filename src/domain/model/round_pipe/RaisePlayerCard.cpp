@@ -1,9 +1,9 @@
 #include <algorithm>
 #include <cassert>
 
-#include <domain/model/round_pipe/RaisePlayerCard.hpp>
-
 #include <RockPaperScissorsProtocol/entity/client/request/CardRaised.hpp>
+
+#include <domain/model/round_pipe/RaisePlayerCard.hpp>
 
 namespace rps::domain::model::round_pipe
 {

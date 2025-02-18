@@ -2,10 +2,11 @@
 
 #include <unordered_map>
 
-#include <domain/interface/RoomStorage.hpp>
-#include <domain/model/Room.hpp>
-
 #include <RockPaperScissorsProtocol/entity/MessageSender.hpp>
+
+#include <domain/interface/RoomStorage.hpp>
+
+#include <domain/model/Room.hpp>
 
 namespace rps::domain::interface
 {

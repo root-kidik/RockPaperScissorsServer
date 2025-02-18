@@ -1,6 +1,6 @@
-#include <domain/interface/UuidGenerator.hpp>
-
 #include <infrastructure/storage/MemoryUserStorage.hpp>
+
+#include <domain/interface/UuidGenerator.hpp>
 
 namespace rps::infrastructure::storage
 {

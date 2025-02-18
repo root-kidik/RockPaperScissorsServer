@@ -1,8 +1,8 @@
 #include <fixture/model/RoomTest.hpp>
 
-#include <gtest/gtest.h>
-
 #include <RockPaperScissorsProtocol/entity/client/request/NewPlayerAdded.hpp>
+
+#include <gtest/gtest.h>
 
 using testing::Return;
 

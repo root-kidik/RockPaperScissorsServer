@@ -5,10 +5,11 @@
 #include <cstdint>
 #include <memory>
 
-#include <domain/entity/Uuid.hpp>
-
 #include <RockPaperScissorsProtocol/entity/Card.hpp>
+
 #include <RockPaperScissorsProtocol/interface/Connection.hpp>
+
+#include <domain/entity/Uuid.hpp>
 
 namespace rps::domain::interface
 {

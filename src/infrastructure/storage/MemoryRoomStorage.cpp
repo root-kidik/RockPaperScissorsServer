@@ -1,9 +1,10 @@
-#include <domain/interface/UuidGenerator.hpp>
+#include <RockPaperScissorsProtocol/entity/Card.hpp>
 
 #include <infrastructure/storage/MemoryRoomStorage.hpp>
+
 #include <infrastructure/util/QtTimer.hpp>
 
-#include <RockPaperScissorsProtocol/entity/Card.hpp>
+#include <domain/interface/UuidGenerator.hpp>
 
 namespace rps::infrastructure::storage
 {

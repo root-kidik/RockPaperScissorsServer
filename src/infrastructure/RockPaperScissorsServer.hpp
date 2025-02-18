@@ -4,13 +4,15 @@
 #include <QTcpServer>
 #include <QTcpSocket>
 
-#include <infrastructure/generator/UuidGenerator.hpp>
+#include <RockPaperScissorsProtocol/entity/MessageSender.hpp>
+#include <RockPaperScissorsProtocol/entity/server/ServerMessageExecutor.hpp>
+
+#include <RockPaperScissorsProtocol/interface/Connection.hpp>
+
 #include <infrastructure/storage/MemoryRoomStorage.hpp>
 #include <infrastructure/storage/MemoryUserStorage.hpp>
 
-#include <RockPaperScissorsProtocol/entity/MessageSender.hpp>
-#include <RockPaperScissorsProtocol/entity/server/ServerMessageExecutor.hpp>
-#include <RockPaperScissorsProtocol/interface/Connection.hpp>
+#include <infrastructure/generator/UuidGenerator.hpp>
 
 namespace rps::infrastructure
 {

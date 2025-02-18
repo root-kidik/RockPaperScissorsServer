@@ -7,14 +7,17 @@
 #include <unordered_set>
 #include <vector>
 
-#include <domain/entity/Uuid.hpp>
-#include <domain/interface/Room.hpp>
-#include <domain/interface/Timer.hpp>
-#include <domain/util/Pipeline.hpp>
-
 #include <RockPaperScissorsProtocol/entity/Card.hpp>
 #include <RockPaperScissorsProtocol/entity/MessageSender.hpp>
+
 #include <RockPaperScissorsProtocol/interface/Connection.hpp>
+
+#include <domain/entity/Uuid.hpp>
+
+#include <domain/interface/Room.hpp>
+#include <domain/interface/Timer.hpp>
+
+#include <domain/util/Pipeline.hpp>
 
 namespace rps::domain::model
 {

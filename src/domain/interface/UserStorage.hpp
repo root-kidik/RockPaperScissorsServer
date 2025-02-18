@@ -3,10 +3,10 @@
 #include <memory>
 #include <optional>
 
+#include <RockPaperScissorsProtocol/interface/Connection.hpp>
+
 #include <domain/entity/User.hpp>
 #include <domain/entity/Uuid.hpp>
-
-#include <RockPaperScissorsProtocol/interface/Connection.hpp>
 
 namespace rps::domain::interface
 {

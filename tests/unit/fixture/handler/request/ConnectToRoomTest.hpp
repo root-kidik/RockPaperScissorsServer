@@ -2,9 +2,9 @@
 #include <mock/storage/RoomStorageMock.hpp>
 #include <mock/storage/UserStorageMock.hpp>
 
-#include <domain/handler/request/ConnectToRoom.hpp>
-
 #include <RockPaperScissorsProtocol/entity/MessageSender.hpp>
+
+#include <domain/handler/request/ConnectToRoom.hpp>
 
 class ConnectToRoomTest : public testing::Test
 {
