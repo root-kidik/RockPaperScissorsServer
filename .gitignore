@@ -10,3 +10,4 @@ CMakeUserPresets.json
 
 # Other
 build*
+!build_and_run_linux.sh
