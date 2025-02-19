@@ -11,7 +11,11 @@ TEST_F(ComputePlayerWinnerTest, run_with_rock_all_losed)
     player.nominated_card = protocol::entity::Card::Rock;
 
     protocol::entity::client::request::RoundInfo request;
-    request.is_winned = false;
+    request.is_winned    = false;
+    request.raised_cards = {player.nominated_card.value(),
+                            protocol::entity::Card::Backface,
+                            protocol::entity::Card::Backface,
+                            protocol::entity::Card::Backface};
 
     EXPECT_CALL(*connection, send(protocol::util::serialize_message(std::move(request)))).WillOnce(Return());
 
@@ -27,7 +31,11 @@ TEST_F(ComputePlayerWinnerTest, run_with_paper_all_losed)
     player.nominated_card = protocol::entity::Card::Paper;
 
     protocol::entity::client::request::RoundInfo request;
-    request.is_winned = false;
+    request.is_winned    = false;
+    request.raised_cards = {player.nominated_card.value(),
+                            protocol::entity::Card::Backface,
+                            protocol::entity::Card::Backface,
+                            protocol::entity::Card::Backface};
 
     EXPECT_CALL(*connection, send(protocol::util::serialize_message(std::move(request)))).WillOnce(Return());
 
@@ -43,7 +51,11 @@ TEST_F(ComputePlayerWinnerTest, run_with_scissors_all_losed)
     player.nominated_card = protocol::entity::Card::Scissors;
 
     protocol::entity::client::request::RoundInfo request;
-    request.is_winned = false;
+    request.is_winned    = false;
+    request.raised_cards = {player.nominated_card.value(),
+                            protocol::entity::Card::Backface,
+                            protocol::entity::Card::Backface,
+                            protocol::entity::Card::Backface};
 
     EXPECT_CALL(*connection, send(protocol::util::serialize_message(std::move(request)))).WillOnce(Return());
 
@@ -56,6 +68,8 @@ TEST_F(ComputePlayerWinnerTest, run_with_scissors_all_losed)
 
 TEST_F(ComputePlayerWinnerTest, run_with_rock_win)
 {
+    player.nominated_card = protocol::entity::Card::Rock;
+
     auto second_connection = std::make_shared<ConnectionMock>();
 
     domain::model::Room::Player second_player;
@@ -63,16 +77,22 @@ TEST_F(ComputePlayerWinnerTest, run_with_rock_win)
     second_player.connection     = second_connection;
 
     protocol::entity::client::request::RoundInfo second_request;
-    second_request.is_winned = false;
+    second_request.is_winned    = false;
+    second_request.raised_cards = {player.nominated_card.value(),
+                                   second_player.nominated_card.value(),
+                                   protocol::entity::Card::Backface,
+                                   protocol::entity::Card::Backface};
 
     players.emplace_back(second_player);
 
     EXPECT_CALL(*second_connection, send(protocol::util::serialize_message(std::move(second_request)))).WillOnce(Return());
 
-    player.nominated_card = protocol::entity::Card::Rock;
-
     protocol::entity::client::request::RoundInfo request;
-    request.is_winned = true;
+    request.is_winned    = true;
+    request.raised_cards = {player.nominated_card.value(),
+                            second_player.nominated_card.value(),
+                            protocol::entity::Card::Backface,
+                            protocol::entity::Card::Backface};
 
     EXPECT_CALL(*connection, send(protocol::util::serialize_message(std::move(request)))).WillOnce(Return());
 
@@ -90,7 +110,11 @@ TEST_F(ComputePlayerWinnerTest, run_with_rock_lose)
     player.nominated_card = protocol::entity::Card::Rock;
 
     protocol::entity::client::request::RoundInfo request;
-    request.is_winned = false;
+    request.is_winned    = false;
+    request.raised_cards = {player.nominated_card.value(),
+                            protocol::entity::Card::Backface,
+                            protocol::entity::Card::Backface,
+                            protocol::entity::Card::Backface};
 
     EXPECT_CALL(*connection, send(protocol::util::serialize_message(std::move(request)))).WillOnce(Return());
 
@@ -103,6 +127,8 @@ TEST_F(ComputePlayerWinnerTest, run_with_rock_lose)
 
 TEST_F(ComputePlayerWinnerTest, run_with_paper_win)
 {
+    player.nominated_card = protocol::entity::Card::Paper;
+
     auto second_connection = std::make_shared<ConnectionMock>();
 
     domain::model::Room::Player second_player;
@@ -110,16 +136,23 @@ TEST_F(ComputePlayerWinnerTest, run_with_paper_win)
     second_player.connection     = second_connection;
 
     protocol::entity::client::request::RoundInfo second_request;
-    second_request.is_winned = false;
+    second_request.is_winned    = false;
+    second_request.raised_cards = {player.nominated_card.value(),
+                                   second_player.nominated_card.value(),
+                                   protocol::entity::Card::Backface,
+                                   protocol::entity::Card::Backface};
 
     players.emplace_back(second_player);
 
     EXPECT_CALL(*second_connection, send(protocol::util::serialize_message(std::move(second_request)))).WillOnce(Return());
 
-    player.nominated_card = protocol::entity::Card::Paper;
 
     protocol::entity::client::request::RoundInfo request;
-    request.is_winned = true;
+    request.is_winned    = true;
+    request.raised_cards = {player.nominated_card.value(),
+                            second_player.nominated_card.value(),
+                            protocol::entity::Card::Backface,
+                            protocol::entity::Card::Backface};
 
     EXPECT_CALL(*connection, send(protocol::util::serialize_message(std::move(request)))).WillOnce(Return());
 
@@ -137,7 +170,11 @@ TEST_F(ComputePlayerWinnerTest, run_with_paper_lose)
     player.nominated_card = protocol::entity::Card::Paper;
 
     protocol::entity::client::request::RoundInfo request;
-    request.is_winned = false;
+    request.is_winned    = false;
+    request.raised_cards = {player.nominated_card.value(),
+                            protocol::entity::Card::Backface,
+                            protocol::entity::Card::Backface,
+                            protocol::entity::Card::Backface};
 
     EXPECT_CALL(*connection, send(protocol::util::serialize_message(std::move(request)))).WillOnce(Return());
 
@@ -150,6 +187,8 @@ TEST_F(ComputePlayerWinnerTest, run_with_paper_lose)
 
 TEST_F(ComputePlayerWinnerTest, run_with_scissors_win)
 {
+    player.nominated_card = protocol::entity::Card::Scissors;
+
     auto second_connection = std::make_shared<ConnectionMock>();
 
     domain::model::Room::Player second_player;
@@ -157,16 +196,22 @@ TEST_F(ComputePlayerWinnerTest, run_with_scissors_win)
     second_player.connection     = second_connection;
 
     protocol::entity::client::request::RoundInfo second_request;
-    second_request.is_winned = false;
+    second_request.is_winned    = false;
+    second_request.raised_cards = {player.nominated_card.value(),
+                                   second_player.nominated_card.value(),
+                                   protocol::entity::Card::Backface,
+                                   protocol::entity::Card::Backface};
 
     players.emplace_back(second_player);
 
     EXPECT_CALL(*second_connection, send(protocol::util::serialize_message(std::move(second_request)))).WillOnce(Return());
 
-    player.nominated_card = protocol::entity::Card::Scissors;
-
     protocol::entity::client::request::RoundInfo request;
-    request.is_winned = true;
+    request.is_winned    = true;
+    request.raised_cards = {player.nominated_card.value(),
+                            second_player.nominated_card.value(),
+                            protocol::entity::Card::Backface,
+                            protocol::entity::Card::Backface};
 
     EXPECT_CALL(*connection, send(protocol::util::serialize_message(std::move(request)))).WillOnce(Return());
 
@@ -184,7 +229,11 @@ TEST_F(ComputePlayerWinnerTest, run_with_scissors_lose)
     player.nominated_card = protocol::entity::Card::Scissors;
 
     protocol::entity::client::request::RoundInfo request;
-    request.is_winned = false;
+    request.is_winned    = false;
+    request.raised_cards = {player.nominated_card.value(),
+                            protocol::entity::Card::Backface,
+                            protocol::entity::Card::Backface,
+                            protocol::entity::Card::Backface};
 
     EXPECT_CALL(*connection, send(protocol::util::serialize_message(std::move(request)))).WillOnce(Return());
 

@@ -18,11 +18,15 @@ void ComputePlayerWinner::run(Room::RoundContext& context)
     bool is_paper_raised{};
     bool is_scissors_raised{};
 
+    std::array<protocol::entity::Card, protocol::entity::kMaxPlayersPerRoom> raised_cards;
+    std::uint8_t                                                             i{};
+
     for (auto& player_ref : context.players)
     {
         assert(player_ref.get().nominated_card && "player must have nominated card");
 
-        auto card = player_ref.get().nominated_card.value();
+        auto card         = player_ref.get().nominated_card.value();
+        raised_cards[i++] = card;
 
         if (card == protocol::entity::Card::Rock)
             is_rock_raised = true;
@@ -33,6 +37,9 @@ void ComputePlayerWinner::run(Room::RoundContext& context)
         else
             assert(false && "Raised some strange card");
     }
+
+    while (i < protocol::entity::kMaxPlayersPerRoom)
+        raised_cards[i++] = protocol::entity::Card::Backface;
 
     bool is_all_losed       = is_rock_raised && is_paper_raised && is_scissors_raised;
     bool is_paper_winned    = is_rock_raised && is_paper_raised;
@@ -60,6 +67,8 @@ void ComputePlayerWinner::run(Room::RoundContext& context)
 
         if (request.is_winned)
             player.wins_count++;
+
+        request.raised_cards = raised_cards;
 
         m_message_sender.send(std::move(request), player.connection);
 
