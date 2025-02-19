@@ -16,7 +16,7 @@ std::vector<protocol::entity::Card> gen_cards()
     for (auto card : {protocol::entity::Card::Rock, protocol::entity::Card::Paper, protocol::entity::Card::Scissors})
         for (std::size_t i = 0;
              i < protocol::entity::kMaxCardsPerRoom /
-                     (static_cast<protocol::entity::CardRepresentation>(protocol::entity::Card::End) - 1);
+                     (static_cast<protocol::entity::CardRepresentation>(protocol::entity::Card::End) - 2);
              i++)
             cards.emplace_back(card);
 

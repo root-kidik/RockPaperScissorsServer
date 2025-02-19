@@ -13,11 +13,11 @@ DealMissingCards::DealMissingCards(protocol::entity::MessageSender& command_send
 
 void DealMissingCards::run(Room::RoundContext& context)
 {
-    if (context.cards.empty())
-        return;
-
     for (auto& player_ref : context.players)
     {
+        if (context.cards.empty())
+            return;
+
         auto& player       = player_ref.get();
         auto& player_cards = player.cards;
 
