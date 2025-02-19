@@ -67,5 +67,4 @@ conan install . --build=missing --settings:all compiler.cppstd=17 --settings:all
 cmake --preset conan-release
 cmake --build --preset conan-release
 
-echo "Runned"
-./build/Release/bin/RockPaperScissorsServer
+./run_linux.sh
