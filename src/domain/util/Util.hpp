@@ -1,6 +1,7 @@
 #pragma once
 
 #include <algorithm>
+#include <cassert>
 #include <chrono>
 #include <random>
 
@@ -12,6 +13,10 @@ namespace rps::domain::util
 std::vector<protocol::entity::Card> gen_cards()
 {
     std::vector<protocol::entity::Card> cards;
+
+    assert(static_cast<protocol::entity::Card>(
+               static_cast<protocol::entity::CardRepresentation>(protocol::entity::Card::End) - 1) ==
+           protocol::entity::Card::Backface);
 
     for (auto card : {protocol::entity::Card::Rock, protocol::entity::Card::Paper, protocol::entity::Card::Scissors})
         for (std::size_t i = 0;
