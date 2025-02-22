@@ -11,7 +11,7 @@
 namespace rps::infrastructure
 {
 
-RockPaperScissorsServer::RockPaperScissorsServer(int argc, char* argv[]) :
+RockPaperScissorsServer::RockPaperScissorsServer(int& argc, char* argv[]) :
 m_app{argc, argv},
 m_memory_user_storage{m_uuid_generator},
 m_memory_room_storage{m_uuid_generator, m_message_sender}

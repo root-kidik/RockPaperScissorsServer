@@ -22,7 +22,7 @@ class RockPaperScissorsServer : public QTcpServer
     Q_OBJECT
 
 public:
-    RockPaperScissorsServer(int argc, char* argv[]);
+    RockPaperScissorsServer(int& argc, char* argv[]);
 
     int run();
 
