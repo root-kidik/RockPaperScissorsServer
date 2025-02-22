@@ -60,7 +60,9 @@ private:
     std::string  m_name;
     entity::Uuid m_owner_uuid;
 
-    bool m_is_game_started{};
+    bool        m_is_game_started;
+    std::size_t m_round_number;
+    std::size_t m_end_round_number;
 
     std::shared_ptr<interface::Timer> m_timer;
 

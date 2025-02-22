@@ -1,5 +1,6 @@
 #include <fixture/model/RoomTest.hpp>
 
+#include <RockPaperScissorsProtocol/entity/client/request/GameStarted.hpp>
 #include <RockPaperScissorsProtocol/entity/client/request/NewPlayerAdded.hpp>
 
 #include <gtest/gtest.h>
@@ -15,7 +16,15 @@ TEST_F(RoomTest, try_start_game_user_uuid_is_not_owner_uuid)
 
 TEST_F(RoomTest, try_start_game_but_already_started)
 {
-    domain::entity::Uuid user_uuid = "user_uuid";
+    domain::entity::Uuid user_uuid       = "user_uuid";
+    std::string          user_nickname   = "user_nickname";
+    auto                 user_connection = std::make_shared<ConnectionMock>();
+
+    EXPECT_TRUE(room.try_add_user(user_uuid, user_nickname, user_connection));
+
+    // send: GameStarted. TODO: separate RandomGenerator
+    EXPECT_CALL(*std::dynamic_pointer_cast<ConnectionMock>(user_connection),
+                send(testing::_));
 
     EXPECT_CALL(*timer, start(std::chrono::milliseconds{protocol::entity::kTurnTime}, testing::_, false)).WillOnce(Return());
 
@@ -25,6 +34,16 @@ TEST_F(RoomTest, try_start_game_but_already_started)
 
 TEST_F(RoomTest, try_start_game_started)
 {
+    domain::entity::Uuid user_uuid       = "user_uuid";
+    std::string          user_nickname   = "user_nickname";
+    auto                 user_connection = std::make_shared<ConnectionMock>();
+
+    EXPECT_TRUE(room.try_add_user(user_uuid, user_nickname, user_connection));
+
+    // send: GameStarted. TODO: separate RandomGenerator
+    EXPECT_CALL(*std::dynamic_pointer_cast<ConnectionMock>(user_connection),
+                send(testing::_));
+
     EXPECT_CALL(*timer, start(std::chrono::milliseconds{protocol::entity::kTurnTime}, testing::_, false)).WillOnce(Return());
 
     EXPECT_TRUE(room.try_start_game(owner_uuid));
@@ -32,12 +51,23 @@ TEST_F(RoomTest, try_start_game_started)
 
 TEST_F(RoomTest, try_add_user_game_already_started_not_added)
 {
-    domain::entity::Uuid user_uuid     = "user_uuid";
-    std::string          user_nickname = "user_nickname";
+    domain::entity::Uuid user_uuid       = "user_uuid";
+    std::string          user_nickname   = "user_nickname";
+    auto                 user_connection = std::make_shared<ConnectionMock>();
+
+    EXPECT_TRUE(room.try_add_user(user_uuid, user_nickname, user_connection));
+
+    // send: GameStarted. TODO: separate RandomGenerator
+    EXPECT_CALL(*std::dynamic_pointer_cast<ConnectionMock>(user_connection),
+    send(testing::_));
 
     EXPECT_CALL(*timer, start(std::chrono::milliseconds{protocol::entity::kTurnTime}, testing::_, false)).WillOnce(Return());
 
     EXPECT_TRUE(room.try_start_game(owner_uuid));
+
+    domain::entity::Uuid user_uuid_2     = "user_uuid_2";
+    std::string          user_nickname_2 = "user_nickname_2";
+
     EXPECT_FALSE(room.try_add_user(user_uuid, user_nickname, connection));
 }
 

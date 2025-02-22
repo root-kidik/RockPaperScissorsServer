@@ -1,6 +1,7 @@
 #include <cassert>
 
 #include <RockPaperScissorsProtocol/entity/MessageSender.hpp>
+#include <RockPaperScissorsProtocol/entity/client/request/GameResult.hpp>
 #include <RockPaperScissorsProtocol/entity/client/request/GameStarted.hpp>
 #include <RockPaperScissorsProtocol/entity/client/request/NewPlayerAdded.hpp>
 
@@ -21,6 +22,9 @@ Room::Room(const std::string&                       name,
            protocol::entity::MessageSender&         command_sender) :
 m_name{name},
 m_owner_uuid{owner_uuid},
+m_is_game_started{},
+m_round_number{},
+m_end_round_number{},
 m_timer{timer},
 m_message_sender{command_sender},
 m_cards{util::gen_cards()}
@@ -77,12 +81,33 @@ bool Room::try_start_game(const entity::Uuid& user_uuid)
         m_message_sender.send(std::move(new_request), player.connection);
     }
 
-    m_is_game_started = true;
+    assert(m_players.size() != 0 && "must exist at once player");
+
+    m_is_game_started  = true;
+    m_end_round_number = protocol::entity::kMaxCardsPerRoom / m_players.size();
 
     m_timer->start(
         protocol::entity::kTurnTime,
         [this]()
         {
+            if (m_round_number == m_end_round_number)
+            {
+                std::size_t max_wins{};
+                for (auto& [uuid, player] : m_players)
+                    max_wins = std::max(max_wins, player.wins_count);
+
+                for (auto& [uuid, player] : m_players)
+                {
+                    protocol::entity::client::request::GameResult request;
+                    request.is_winned = player.wins_count == max_wins;
+
+                    m_message_sender.send(std::move(request), player.connection);
+                }
+
+                m_timer->stop();
+                return;
+            }
+
             std::vector<std::reference_wrapper<Player>> players;
 
             for (auto& [uuid, player] : m_players)
@@ -95,6 +120,8 @@ bool Room::try_start_game(const entity::Uuid& user_uuid)
 
             RoundContext context{players, m_cards};
             m_round_pipeline.run(context);
+
+            m_round_number++;
         },
         false);
 
