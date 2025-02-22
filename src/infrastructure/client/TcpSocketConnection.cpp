@@ -34,7 +34,6 @@ void TcpSocketConnection::send(std::string&& data)
 
 void TcpSocketConnection::disconnect()
 {
-    delete m_tcp_socket;
     m_tcp_socket = nullptr;
 }
 
