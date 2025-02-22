@@ -20,6 +20,9 @@ std::vector<protocol::entity::Card> gen_cards()
              i++)
             cards.emplace_back(card);
 
+    cards.emplace_back(static_cast<protocol::entity::Card>(
+        std::rand() % (static_cast<protocol::entity::CardRepresentation>(protocol::entity::Card::End) - 2) + 1));
+
     auto seed = std::chrono::system_clock::now().time_since_epoch().count();
     std::shuffle(cards.begin(), cards.end(), std::default_random_engine{static_cast<std::uint32_t>(seed)});
 
